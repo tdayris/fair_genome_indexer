@@ -88,7 +88,7 @@ def get_targets(
 
     # Public blacklist are not available for all genomes
     blacklist: Dict[str, str] = expand(
-        "reference/blacklist/{genome_property}.bed",
+        "reference/blacklist/{genome_property}.merged.bed",
         genome_property=[
             genome_property
             for genome_property in genomes_properties
