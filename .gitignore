@@ -1,0 +1,6 @@
+tests/config
+tests/linter_info.txt
+tests/format.txt
+tests/.snakemake
+tests/logs
+tests/resources
