@@ -1,0 +1,11 @@
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - black=23.9.1
+  - pandas=2.1.1
+  - pytest=7.4.2
+  - snakefmt=0.8.5
+  - snakemake=7.32.4
+  - singularity=3.8.6

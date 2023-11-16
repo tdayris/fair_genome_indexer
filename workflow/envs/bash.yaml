@@ -1,0 +1,8 @@
+channels:
+  - bioconda
+  - conda-forge
+  - nodefaults
+dependencies:
+  - wget=1.20.3
+  - gzip=1.13
+  - pbgzip=2016.08.04

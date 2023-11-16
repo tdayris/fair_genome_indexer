@@ -1,0 +1,22 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+description: genome property file
+
+type: object
+
+species:
+  type: string
+  description: Ensembl-style species names
+
+build:
+  type: string
+  description: Ensembl-style build names
+
+release:
+  type: string
+  description: Ensembl release tag
+
+required:
+  - species
+  - build
+  - release

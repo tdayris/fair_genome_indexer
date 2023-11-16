@@ -1,0 +1,12 @@
+include: "rules/common.smk"
+include: "rules/raw_data/genome_sequence.smk"
+include: "rules/raw_data/genome_annotation.smk"
+include: "rules/gatk/picard_dict.smk"
+include: "rules/samtools/faidx.smk"
+include: "rules/raw_data/blacklist.smk"
+include: "rules/bedtools/merge_blacklist.smk"
+
+
+rule target:
+    input:
+        unpack(get_targets),
