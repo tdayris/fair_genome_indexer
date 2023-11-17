@@ -5,10 +5,12 @@ rule create_dict:
         "reference/{species}.{build}.{release}.{datatype}.dict",
     log:
         "logs/picard/create_dict/{species}.{build}.{release}.{datatype}.log",
+    benchmark:
+        "benchmark/picard/create_dict/{species}.{build}.{release}.{datatype}.tsv"
     params:
         extra="",
     cache: "omit-software"
     resources:
         mem_mb=1024,
     wrapper:
-        "v2.6.0/bio/picard/createsequencedictionary"
+        f"{snakemake_wrappers_version}/bio/picard/createsequencedictionary"

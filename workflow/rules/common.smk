@@ -11,6 +11,7 @@ snakemake.utils.min_version("6.0")
 # containerized: "docker://mambaorg/micromamba:git-8440cec-jammy-cuda-12.2.0"
 # containerized: "docker://condaforge/mambaforge:23.3.1-1"
 
+
 # Load and check configuration file
 configfile: "config/config.yaml"
 

@@ -6,6 +6,8 @@ rule bedtools_merge_blacklist:
     threads: 1
     log:
         "logs/bedtools/merge/blacklist/{species}.{build}.{release}.log",
+    benchmark:
+        "benchmark/bedtools/merge/{species}.{build}.{release}.tsv",
     params:
         extra="-d 5",
     wrapper:

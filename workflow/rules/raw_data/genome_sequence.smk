@@ -3,6 +3,8 @@ rule get_genome_fasta_sequence:
         "reference/{species}.{build}.{release}.{datatype}.fasta",
     log:
         "logs/get_genome/fasta_sequence/{species}.{build}.{release}.{datatype}.log",
+    benchmark:
+        "benchmark/reference/ensembl-annotation/{species}.{build}.{release}.{datatype}.tsv"
     params:
         species="{species}",
         datatype="{datatype}",
