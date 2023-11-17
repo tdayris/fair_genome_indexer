@@ -6,3 +6,4 @@ tests/reference
 tests/.snakemake
 tests/logs
 tests/resources
+tests/benchmark
