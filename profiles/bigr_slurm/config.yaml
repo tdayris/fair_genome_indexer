@@ -1,0 +1,33 @@
+# General options
+cluster-sidecar: "slurm-sidecar.py"
+cluster-cancel: "scancel"
+restart-times: "0"
+jobscript: "slurm-jobscript.sh"
+cluster: "slurm-submit.py"
+cluster-status: "slurm-status.py"
+max-jobs-per-second: "1"
+max-status-checks-per-second: "1"
+local-cores: 1
+latency-wait: "5"
+use-conda: "True"
+use-singularity: "True"
+jobs: "60"
+printshellcmds: "True"
+
+# Default job resources
+default-resources:
+  time: 1h30
+  mem: 500MB
+  partition: shortq
+
+# Special job resources
+set-threads:
+  bedtools_merge_blacklist: 2
+
+set-resources:
+  bedtools_merge_blacklist:
+    time: 10m
+    mem: 3GB
+  samtools_index:
+    time: 10m
+    mem: 1GB
