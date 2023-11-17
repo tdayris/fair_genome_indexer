@@ -19,11 +19,11 @@ rule blacklist_grch38:
 # WARNING: 67 < release <= 102
 use rule blacklist_grch38 as blacklist_mm10 with:
     output:
-        "reference/blacklist/mus_musculus.GRCm38.102.bed.gz",
+        "reference/blacklist/mus_musculus.GRCm38.{release}.bed.gz",
     log:
-        "logs/ftp/blacklist/mus_musculus.GRCm38.102.log",
+        "logs/ftp/blacklist/mus_musculus.GRCm38.{release}.log",
     benchmark:
-        "benchmark/wget/blacklist/mus_musculus.GRCm38.102.tsv",
+        "benchmark/wget/blacklist/mus_musculus.GRCm38.{release}.tsv",
     params:
         address="https://github.com/Boyle-Lab/Blacklist/raw/master/lists/Blacklist_v1/mm10-blacklist.bed.gz",
         extra="--verbose",

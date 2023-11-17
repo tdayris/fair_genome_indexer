@@ -93,7 +93,10 @@ def get_targets(
         genome_property=[
             genome_property
             for genome_property in genomes_properties
-            if genome_property.startswith(("homo_sapiens", "mus_musculus"))
+            if any(
+                genome_build in genome_property
+                for genome_build in ["GRCh38", "GRCh37", "GRCm38", "NCBIM37"]
+            )
         ],
     )
 
