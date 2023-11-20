@@ -11,7 +11,5 @@ rule create_dict:
     params:
         extra="",
     cache: "omit-software"
-    resources:
-        mem_mb=1024,
     wrapper:
         f"{snakemake_wrappers_version}/bio/picard/createsequencedictionary"

@@ -24,7 +24,7 @@ all: pipeline.txt
 
 pipeline.txt: config linter_info.txt format.txt
 	mamba activate test-snakemake-wrappers && \
-	snakemake -s ../workflow/Snakefile --cores 1 --use-conda --use-singularity 2>&1 | tee pipeline.txt
+	snakemake -s ../workflow/Snakefile --cores 1 --use-conda --use-singularity --workflow-profile profiles 2>&1 | tee pipeline.txt
 
 format.txt: config
 	mamba activate test-snakemake-wrappers && \
