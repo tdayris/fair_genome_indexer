@@ -4,7 +4,7 @@ import snakemake.utils
 
 from typing import Dict, List, Union
 
-snakemake.utils.min_version("6.0")
+snakemake.utils.min_version("7.29.0")
 
 
 # containerized: "docker://snakemake/snakemake:v7.32.4"

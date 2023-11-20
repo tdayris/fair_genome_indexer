@@ -9,6 +9,7 @@ Features:
 * add benchmark directory
 * add workflow profile (requires snakemake >= 7.29.0)
 * tests directories are now included in `.gitignore`
+* Snakemake-workflow-catalog compliance
 
 Fixes:
 
