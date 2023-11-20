@@ -34,7 +34,7 @@ genomes: pandas.DataFrame = pandas.read_csv(
 )
 snakemake.utils.validate(genomes, "../schemas/genomes.schema.yaml")
 
-snakemake_wrappers_version: str = "v2.8.0"
+snakemake_wrappers_version: str = "v2.13.0"
 
 
 release_list: List[str] = list(set(genomes.release.tolist()))
