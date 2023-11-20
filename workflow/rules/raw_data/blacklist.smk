@@ -6,7 +6,7 @@ rule blacklist_grch38:
     log:
         "logs/ftp/blacklist/homo_sapiens.GRCh38.{release}.log",
     benchmark:
-        "benchmark/wget/blacklist/homo_sapiens.GRCh38.{release}.tsv",
+        "benchmark/wget/blacklist/homo_sapiens.GRCh38.{release}.tsv"
     cache: "omit-software"
     params:
         address="https://github.com/Boyle-Lab/Blacklist/raw/master/lists/Blacklist_v1/hg38-blacklist.bed.gz",
@@ -24,7 +24,7 @@ use rule blacklist_grch38 as blacklist_mm10 with:
     log:
         "logs/ftp/blacklist/mus_musculus.GRCm38.{release}.log",
     benchmark:
-        "benchmark/wget/blacklist/mus_musculus.GRCm38.{release}.tsv",
+        "benchmark/wget/blacklist/mus_musculus.GRCm38.{release}.tsv"
     params:
         address="https://github.com/Boyle-Lab/Blacklist/raw/master/lists/Blacklist_v1/mm10-blacklist.bed.gz",
         extra="--verbose",
@@ -35,7 +35,7 @@ use rule blacklist_grch38 as blacklist_grch37 with:
     output:
         "reference/blacklist/homo_sapiens.GRCh37.{release}.bed.gz",
     benchmark:
-        "benchmark/wget/blacklist/homo_sapiens.GRCh37.{release}.tsv",
+        "benchmark/wget/blacklist/homo_sapiens.GRCh37.{release}.tsv"
     log:
         "logs/ftp/blacklist/homo_sapiens.GRCh37.{release}.log",
     params:
@@ -50,7 +50,7 @@ use rule blacklist_grch38 as blacklist_mm9 with:
     log:
         "logs/ftp/blacklist/mus_musculus.NCBIM37.{release}.log",
     benchmark:
-        "benchmark/wget/blacklist/mus_musculus.NCBIM37.{release}.tsv",
+        "benchmark/wget/blacklist/mus_musculus.NCBIM37.{release}.tsv"
     params:
         address="https://github.com/Boyle-Lab/Blacklist/blob/master/lists/Blacklist_v1/mm9-blacklist.bed.gz",
         extra="--verbose",

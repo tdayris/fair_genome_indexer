@@ -7,7 +7,7 @@ rule bedtools_merge_blacklist:
     log:
         "logs/bedtools/merge/blacklist/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/bedtools/merge/{species}.{build}.{release}.tsv",
+        "benchmark/bedtools/merge/{species}.{build}.{release}.tsv"
     params:
         extra="-d 5",
     wrapper:
