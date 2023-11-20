@@ -12,7 +12,7 @@ latency-wait: 5
 jobs: 60
 use-conda: true
 use-singularity: true
-use-env-modules: true
+use-envmodules: true
 printshellcmds: true
 
 # Absolute paths to shared BiGR@Flamingo cluster
