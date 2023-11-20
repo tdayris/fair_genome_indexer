@@ -11,3 +11,6 @@ set-resources:
   samtools_index:
     mem_mb: 1024
     runtime: 10
+  picard_create_dict:
+    mem_mb: 4096
+    runtime: 10

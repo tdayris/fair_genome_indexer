@@ -1,4 +1,4 @@
-rule create_dict:
+rule picard_create_dict:
     input:
         "reference/{species}.{build}.{release}.{datatype}.fasta",
     output:
