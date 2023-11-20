@@ -2,6 +2,7 @@
 rule blacklist_grch38:
     output:
         "reference/blacklist/homo_sapiens.GRCh38.{release}.bed.gz",
+    threads: 1
     log:
         "logs/ftp/blacklist/homo_sapiens.GRCh38.{release}.log",
     benchmark:

@@ -24,11 +24,9 @@ default-resources:
   - runtime=90
   - mem_mb=512
   - partition=shortq
+  - tmpdir=tmp
 
 # Special job resources
-set-threads:
-  - bedtools_merge_blacklist=2
-
 set-resources:
   - bedtools_merge_blacklist:
     - runtime=10

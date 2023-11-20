@@ -3,6 +3,7 @@ rule create_dict:
         "reference/{species}.{build}.{release}.{datatype}.fasta",
     output:
         "reference/{species}.{build}.{release}.{datatype}.dict",
+    threads: 1
     log:
         "logs/picard/create_dict/{species}.{build}.{release}.{datatype}.log",
     benchmark:

@@ -1,6 +1,7 @@
 rule get_genome_gtf_annotation:
     output:
         "reference/{species}.{build}.{release}.gtf",
+    threads: 1
     log:
         "logs/get_genome/gtf_annotation/{species}.{build}.{release}.log",
     benchmark:

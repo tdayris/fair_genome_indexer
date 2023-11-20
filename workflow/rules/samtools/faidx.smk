@@ -3,6 +3,7 @@ rule samtools_index:
         "reference/{species}.{build}.{release}.{datatype}.fasta",
     output:
         "reference/{species}.{build}.{release}.{datatype}.fasta.fai",
+    threads: 1
     log:
         "logs/samtools/faidx/{species}.{build}.{release}.{datatype}.log",
     benchmark:

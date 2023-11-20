@@ -1,5 +1,5 @@
 {
     "SBATCH_DEFAULTS": "",
-    "CLUSTER_NAME": "flamingo",
+    "CLUSTER_NAME": "",
     "CLUSTER_CONFIG": ""
 }
