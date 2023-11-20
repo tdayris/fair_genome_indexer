@@ -9,11 +9,11 @@ max-jobs-per-second: 1
 max-status-checks-per-second: 1
 local-cores: 1
 latency-wait: 5
-use-conda: "True"
-use-singularity: "True"
-use-env-modules: "True"
 jobs: 60
-printshellcmds: "True"
+use-conda: true
+use-singularity: true
+use-env-modules: true
+printshellcmds: true
 
 # Absolute paths to shared BiGR@Flamingo cluster
 conda-prefix: /mnt/beegfs/pipelines/unofficial-snakemake-wrappers/shared_install/
