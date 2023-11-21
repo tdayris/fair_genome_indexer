@@ -10,3 +10,7 @@ include: "rules/bedtools/merge_blacklist.smk"
 rule target:
     input:
         unpack(get_targets),
+    log:
+        "logs/targets.log"
+    benchmark:
+        "benchmark/targets.tsv"

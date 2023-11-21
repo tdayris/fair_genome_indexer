@@ -1,3 +1,16 @@
+# 2.0.2:
+
+Features:
+
+* linter: add log/benchmark to target rule
+
+# 2.0.1:
+
+Features:
+
+* Removed useless files and links
+* Moved `tests` to `.test` accordingly to snakemake-workflow practices.
+
 # 2.0.0: Benchmark & workflow-profile
 
 Important:
