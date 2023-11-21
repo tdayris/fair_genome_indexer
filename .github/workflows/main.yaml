@@ -44,7 +44,7 @@ jobs:
       with:
         directory: .test
         snakefile: workflow/Snakefile
-        args: "--use-conda --show-failed-logs --cores 1 --conda-cleanup-pkgs cache --all-temp"
+        args: "--use-conda --show-failed-logs --cores 1 --conda-cleanup-pkgs cache --all-temp --workflow-profile profiles"
 
     - name: Test report
       uses: snakemake/snakemake-github-action@v1.24.0
