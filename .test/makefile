@@ -11,6 +11,7 @@ snakefiles := \
 	"../workflow/rules/gatk/picard_dict.smk" \
 	"../workflow/rules/raw_data/genome_annotation.smk" \
 	"../workflow/rules/raw_data/genome_sequence.smk" \
+	"../workflow/rules/raw_data/genome_variation.smk" \
 	"../workflow/rules/samtools/faidx.smk" \
 	"../workflow/rules/common.smk" \
 	"../workflow/Snakefile"

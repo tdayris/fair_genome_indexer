@@ -85,6 +85,11 @@ def get_targets(
             "reference/{genomes_property}.gtf",
             genomes_property=genomes_properties,
         ),
+        "gtf": expand(
+            "reference/{genomes_property}.{datatype}.vcf",
+            genomes_property=genomes_properties,
+            datatype=["all"],
+        ),
     }
 
     # Public blacklist are not available for all genomes

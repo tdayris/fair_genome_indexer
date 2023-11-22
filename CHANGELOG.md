@@ -1,3 +1,13 @@
+# 2.1.0:
+
+Features:
+
+* Download ensembl-variations
+
+Fix: 
+
+* Snakemake workflow compliance
+
 # 2.0.2:
 
 Features:
