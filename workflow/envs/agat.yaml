@@ -1,0 +1,6 @@
+channels:
+  - bioconda
+  - conda-forge
+  - nodefaults
+dependencies:
+  - agat=1.2.0
