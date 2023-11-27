@@ -8,17 +8,15 @@ Snakemake.
 
 ## Usage
 
-The usage of this workflow is described in the [Snakemake workflow catalog](https://snakemake.github.io/snakemake-workflow-catalog?usage=tdayris/fair_genome_indexer), it is also available [locally]() on a single page.
+The usage of this workflow is described in the [Snakemake workflow catalog](https://snakemake.github.io/snakemake-workflow-catalog?usage=tdayris/fair_genome_indexer), it is also available [locally](https://github.com/tdayris/fair_genome_indexer/blob/main/workflow/reports/usage.rst) on a single page.
 
 ## Results
 
-The expected results of this pipeline are described [here](). An example of report can be found in [.test](https://github.com/tdayris/fair_genome_indexer/blob/main/.test/report.html) directory.
+The expected results of this pipeline are described [here](https://github.com/tdayris/fair_genome_indexer/blob/main/workflow/reports/results.rst). An example of report can be found in [.test](https://github.com/tdayris/fair_genome_indexer/blob/main/.test/report.html) directory.
 
 ## Material and methods
 
-The tools used in this pipeline are described [here]() textually. Web-links are available below.
-
-## Content
+The tools used in this pipeline are described [here](https://github.com/tdayris/fair_genome_indexer/blob/main/workflow/reports/workflow.rst) textually. Web-links are available below:
 
 | Step                          | Wrapper - Script                                                                                                                              |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
