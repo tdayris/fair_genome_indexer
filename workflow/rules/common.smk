@@ -34,7 +34,10 @@ genomes: pandas.DataFrame = pandas.read_csv(
 )
 snakemake.utils.validate(genomes, "../schemas/genomes.schema.yaml")
 
-snakemake_wrappers_version: str = "v2.13.0"
+snakemake_wrappers_version: str = "v3.0.0"
+
+
+report: "../reports/workflow.rst"
 
 
 release_list: List[str] = list(set(genomes.release.tolist()))
@@ -85,7 +88,7 @@ def get_targets(
             "reference/{genomes_property}.gtf",
             genomes_property=genomes_properties,
         ),
-        "gtf": expand(
+        "vcf": expand(
             "reference/{genomes_property}.{datatype}.vcf",
             genomes_property=genomes_properties,
             datatype=["all"],
@@ -109,4 +112,5 @@ def get_targets(
     if len(blacklist) > 0:
         genome_data["blacklist"] = blacklist
 
+    print(genome_data)
     return genome_data

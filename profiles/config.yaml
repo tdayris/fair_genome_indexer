@@ -14,3 +14,6 @@ set-resources:
   picard_create_dict:
     mem_mb: 4096
     runtime: 10
+  agat_gff2gtf:
+    mem_mb: 2048
+    runtime: 15

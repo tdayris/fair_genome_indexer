@@ -1,6 +1,7 @@
 include: "rules/common.smk"
 include: "rules/raw_data/genome_sequence.smk"
 include: "rules/raw_data/genome_annotation.smk"
+include: "rules/agat/gff2gtf.smk"
 include: "rules/raw_data/genome_variation.smk"
 include: "rules/gatk/picard_dict.smk"
 include: "rules/samtools/faidx.smk"
