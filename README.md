@@ -14,10 +14,10 @@ The usage of this workflow is described in the [Snakemake workflow catalog](http
 
 | Step                       | Wrapper                                                                                                                              |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Download DNA fasta         | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v2.13.0/wrappers/reference/ensembl-sequence.html)                     |
-| Download cDNA fasta        | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v2.13.0/wrappers/reference/ensembl-sequence.html)                     |
-| Download GTF annotation    | [ensembl-annotation](https://snakemake-wrappers.readthedocs.io/en/v2.13.0/wrappers/reference/ensembl-annotation.html)                 |
-| Samtools index fasta       | [samtools-faidx](https://snakemake-wrappers.readthedocs.io/en/v2.13.0/wrappers/samtools/faidx.html)                                   |
-| Picard sequence dictionary | [picard-createsequencedictionary](https://snakemake-wrappers.readthedocs.io/en/v2.13.0/wrappers/picard/createsequencedictionary.html) |
-| Download VCF variation     | [ensembl-variation](https://snakemake-wrappers.readthedocs.io/en/v2.13.0/wrappers/reference/ensembl-variation.html) |
+| Download DNA fasta         | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-sequence.html)                     |
+| Download cDNA fasta        | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-sequence.html)                     |
+| Download GTF annotation    | [ensembl-annotation](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-annotation.html)                 |
+| Samtools index fasta       | [samtools-faidx](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/samtools/faidx.html)                                   |
+| Picard sequence dictionary | [picard-createsequencedictionary](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/picard/createsequencedictionary.html) |
+| Download VCF variation     | [ensembl-variation](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-variation.html) |
 

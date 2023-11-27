@@ -3,10 +3,14 @@
 Features:
 
 * Download ensembl-variations
+* Fix common ensembl format errors in GTF files
+* Update to Snakemake-Wrappers version 3.0.0
+* General report available
 
 Fix: 
 
 * Snakemake workflow compliance
+* fix target rules not returning GTF correctly
 
 # 2.0.2:
 
