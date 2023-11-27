@@ -8,16 +8,26 @@ Snakemake.
 
 ## Usage
 
-The usage of this workflow is described in the [Snakemake workflow catalog](https://snakemake.github.io/snakemake-workflow-catalog?usage=tdayris/fair_genome_indexer)
+The usage of this workflow is described in the [Snakemake workflow catalog](https://snakemake.github.io/snakemake-workflow-catalog?usage=tdayris/fair_genome_indexer), it is also available [locally]() on a single page.
+
+## Results
+
+The expected results of this pipeline are described [here](). An example of report can be found in [.test](https://github.com/tdayris/fair_genome_indexer/blob/main/.test/report.html) directory.
+
+## Material and methods
+
+The tools used in this pipeline are described [here]() textually. Web-links are available below.
 
 ## Content
 
-| Step                       | Wrapper                                                                                                                              |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Download DNA fasta         | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-sequence.html)                     |
-| Download cDNA fasta        | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-sequence.html)                     |
-| Download GTF annotation    | [ensembl-annotation](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-annotation.html)                 |
-| Samtools index fasta       | [samtools-faidx](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/samtools/faidx.html)                                   |
-| Picard sequence dictionary | [picard-createsequencedictionary](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/picard/createsequencedictionary.html) |
-| Download VCF variation     | [ensembl-variation](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-variation.html) |
+| Step                          | Wrapper - Script                                                                                                                              |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Download DNA fasta            | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-sequence.html)                     |
+| Download cDNA fasta           | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-sequence.html)                     |
+| Download GTF annotation       | [ensembl-annotation](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-annotation.html)                 |
+| Samtools index fasta          | [samtools-faidx](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/samtools/faidx.html)                                   |
+| Picard sequence dictionary    | [picard-createsequencedictionary](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/picard/createsequencedictionary.html) |
+| Download VCF variation        | [ensembl-variation](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-variation.html)                   |
+| Fix Ensembl GTF common errors | [Agat](https://agat.readthedocs.io/en/latest/tools/agat_convert_sp_gff2gtf.html)                                                     |
+| Download known blacklist      | [Github source](https://github.com/Boyle-Lab/Blacklist/tree/master/lists) |
 
