@@ -6,3 +6,5 @@
 .test/logs
 .test/resources
 .test/benchmark
+.test/black.txt
+.test/report.txt
