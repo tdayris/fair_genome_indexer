@@ -9,6 +9,6 @@ rule pyroe_id_to_name:
     benchmark:
         "benchmark/pyroe/id2name/{species}.{build}.{release}.tsv"
     params:
-        extra="type='salmon'",
+        extra="",
     wrapper:
         f"{snakemake_wrappers_version}/bio/pyroe/idtoname"
