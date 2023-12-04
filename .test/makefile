@@ -15,6 +15,7 @@ snakefiles := \
 	"../workflow/rules/raw_data/genome_variation.smk" \
 	"../workflow/rules/samtools/faidx.smk" \
 	"../workflow/rules/common.smk" \
+	"../workflow/rules/pyroe/id_to_name.smk" \
 	"../workflow/Snakefile"
 
 python_scripts := \
