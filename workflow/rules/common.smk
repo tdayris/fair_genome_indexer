@@ -93,6 +93,10 @@ def get_targets(
             genomes_property=genomes_properties,
             datatype=["all"],
         ),
+        "id2name": expand(
+            "resources/{genomes_property}/tx2gene.tsv",
+            genomes_property=genomes_properties,
+        ),
     }
 
     # Public blacklist are not available for all genomes

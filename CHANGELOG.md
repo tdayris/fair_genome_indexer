@@ -1,44 +1,54 @@
+# 2.3.0:
+
+## Feature:
+
+* Pyroe id-to-name
+
+## Fix: 
+
+* Report main page too large
+
 # 2.2.0:
 
-Features:
+## Features:
 
 * Download ensembl-variations
 * Fix common ensembl format errors in GTF files
 * Update to Snakemake-Wrappers version 3.0.0
 * General report available
 
-Fix: 
+## Fix: 
 
 * Snakemake workflow compliance
 * fix target rules not returning GTF correctly
 
 # 2.0.2:
 
-Features:
+## Features:
 
 * linter: add log/benchmark to target rule
 
 # 2.0.1:
 
-Features:
+## Features:
 
 * Removed useless files and links
 * Moved `tests` to `.test` accordingly to snakemake-workflow practices.
 
 # 2.0.0: Benchmark & workflow-profile
 
-Important:
+## Important:
 
 * pipeline now requires snakemake >= 7.29.0
 
-Features:
+## Features:
 
 * add benchmark directory
 * add workflow profile (requires snakemake >= 7.29.0)
 * tests directories are now included in `.gitignore`
 * Snakemake-workflow-catalog compliance
 
-Fixes:
+## Fix:
 
 * KeyError in blacklists while requesting wrong combination of genome build and releases
 

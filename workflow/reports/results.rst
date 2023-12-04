@@ -15,6 +15,7 @@ files are present:
     ├── XXX.dna.dict
     ├── XXX.dna.fasta
     ├── XXX.dna.fasta.fai
+    ├── XXX.tsv
     └── XXX.gtf
 
 
@@ -22,6 +23,8 @@ files are present:
 | Extension     | Content                     |
 +===============+=============================+
 | `.gtf`        | Genome annotation           |
++---------------+-----------------------------+
+| `.tsv`        | Genome id-to-name           |
 +---------------+-----------------------------+
 | `.fasta`      | Genome sequences            |
 +---------------+-----------------------------+
