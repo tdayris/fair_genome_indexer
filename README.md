@@ -18,7 +18,7 @@ The expected results of this pipeline are described [here](https://github.com/td
 
 The tools used in this pipeline are described [here](https://github.com/tdayris/fair_genome_indexer/blob/main/workflow/reports/workflow.rst) textually. Web-links are available below:
 
-| Step                          | Wrapper - Script                                                                                                                              |
+| Step                          | Wrapper - Script                                                                                                                     |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | Download DNA fasta            | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-sequence.html)                     |
 | Download cDNA fasta           | [ensembl-sequence](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-sequence.html)                     |
@@ -27,5 +27,6 @@ The tools used in this pipeline are described [here](https://github.com/tdayris/
 | Picard sequence dictionary    | [picard-createsequencedictionary](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/picard/createsequencedictionary.html) |
 | Download VCF variation        | [ensembl-variation](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/reference/ensembl-variation.html)                   |
 | Fix Ensembl GTF common errors | [Agat](https://agat.readthedocs.io/en/latest/tools/agat_convert_sp_gff2gtf.html)                                                     |
-| Download known blacklist      | [Github source](https://github.com/Boyle-Lab/Blacklist/tree/master/lists) |
+| Download known blacklist      | [Github source](https://github.com/Boyle-Lab/Blacklist/tree/master/lists)                                                            |
+| pyroe                         | [pyroe id-to-name](https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/pyroe/idtoname.html) |
 

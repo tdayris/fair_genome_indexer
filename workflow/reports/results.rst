@@ -15,7 +15,7 @@ files are present:
     ├── XXX.dna.dict
     ├── XXX.dna.fasta
     ├── XXX.dna.fasta.fai
-    ├── XXX.tsv
+    ├── XXX.id_to_gene.tsv
     └── XXX.gtf
 
 

@@ -5,8 +5,8 @@ Genome information was download from Ensembl. Samtools_ [#samtoolspaper]_
 and Picard_ [#gatkpaper]_ were used to index genome sequences.
 Agat_ [#agatpaper]_ was used to correct common issues found in Ensembl
 genome annotation files. The  whole pipeline was powered by 
-Snakemake_ [#snakemakepaper]_. Pyroe_ [#pyroepaper] was used to
-extract gene-id yo gene-name correspondancy table.
+Snakemake_ [#snakemakepaper]_. Pyroe_ [#pyroepaper]_ [#pyrangespaper]_ 
+was used to extract gene-id yo gene-name correspondancy table.
 
 This pipeline is freely available on Github_, details about installation
 usage, and resutls can be found on the `Snakemake workflow`_ page.
@@ -16,6 +16,7 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 .. [#samtoolspaper] Li, Heng, et al. "The sequence alignment/map format and SAMtools." bioinformatics 25.16 (2009): 2078-2079.
 .. [#agatpaper] Dainat J. AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.  (Version v0.7.0). Zenodo. https://www.doi.org/10.5281/zenodo.3552717
 .. [#pyroepaper] He, Dongze, et al. "Alevin-fry unlocks rapid, accurate and memory-frugal quantification of single-cell RNA-seq data." Nature Methods 19.3 (2022): 316-322.
+.. [#pyrangespaper] Stovner EB, Sætrom P. PyRanges: efficient comparison of genomic intervals in Python. Bioinformatics. 2020 Feb 1;36(3):918-919. doi: 10.1093/bioinformatics/btz615. PMID: 31373614.
 
 .. _Snakemake: https://snakemake.readthedocs.io
 .. _Github: https://github.com/tdayris/fair_genome_indexer

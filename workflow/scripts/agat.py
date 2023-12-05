@@ -14,7 +14,7 @@ extra: str = snakemake.params.get("extra", "")
 log: str = snakemake.log_fmt_shell(stdout=True, stderr=True, append=True)
 
 tmplog: str = basename(snakemake.input[0])[: -len(".gtf")]
-outlog: Optional[str] = snakemake.output.get("log")
+outlog: Optional[str] = snakemake.output.get("outlog")
 
 # Required arguments
 outgtf: str = snakemake.output["gtf"]

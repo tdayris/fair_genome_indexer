@@ -94,7 +94,7 @@ def get_targets(
             datatype=["all"],
         ),
         "id2name": expand(
-            "resources/{genomes_property}/tx2gene.tsv",
+            "resources/{genomes_property}.id_to_gene.tsv",
             genomes_property=genomes_properties,
         ),
     }
@@ -116,5 +116,4 @@ def get_targets(
     if len(blacklist) > 0:
         genome_data["blacklist"] = blacklist
 
-    print(genome_data)
     return genome_data
