@@ -3,7 +3,7 @@
 usage:
   mandatory-flags:
     desc: Download and index Ensembl genome files
-    flags: FAIR Snakemake Ensembl
+    flags:
   software-stack-deployment:
     conda: true
     singularity: false
