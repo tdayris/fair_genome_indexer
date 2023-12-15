@@ -10,6 +10,5 @@ rule picard_create_dict:
         "benchmark/picard/create_dict/{species}.{build}.{release}.{datatype}.tsv"
     params:
         extra="",
-    cache: "omit-software"
     wrapper:
-        f"{snakemake_wrappers_version}/bio/picard/createsequencedictionary"
+        "v3.2.0/bio/picard/createsequencedictionary"

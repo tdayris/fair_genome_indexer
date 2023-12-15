@@ -80,6 +80,19 @@ and execute the workflow module that has been defined by the deployment in step 
 
 For further options, e.g. for cluster and cloud execution, see Snakemake_ documentation.
 
+On Gustave Roussy flamingo computing cluster, use:
+
+::
+
+    # Activate conda environment
+    conda activate /mnt/beegfs/pipelines/unofficial-snakemake-wrappers/shared_install/bigr_epicure_pipeline/
+    # Define caching directory
+    export SNAKEMAKE_OUTPUT_CACHE=/mnt/beegfs/pipelines/unofficial-snakemake-wrappers/snakemake_cache/
+    # Run snakemake command
+    snakemake --use-conda \
+              --profile '/mnt/beegfs/pipelines/unofficial-snakemake-wrappers/profiles/slurm-web/'
+
+
 
 Step 5 : Generate report
 ========================

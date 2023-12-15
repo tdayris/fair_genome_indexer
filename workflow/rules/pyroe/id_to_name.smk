@@ -11,4 +11,4 @@ rule pyroe_id_to_name:
     params:
         extra="",
     wrapper:
-        f"{snakemake_wrappers_version}/bio/pyroe/idtoname"
+        "v3.2.0/bio/pyroe/idtoname"

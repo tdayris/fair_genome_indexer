@@ -11,6 +11,5 @@ rule get_genome_vcf_variations:
         type="{datatype}",
         build="{build}",
         release="{release}",
-    cache: "omit-software"
     wrapper:
-        f"{snakemake_wrappers_version}/bio/reference/ensembl-variation"
+        "v3.2.0/bio/reference/ensembl-variation"

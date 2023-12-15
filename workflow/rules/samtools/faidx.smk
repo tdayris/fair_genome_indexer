@@ -10,6 +10,5 @@ rule samtools_index:
         "benchmark/reference/ensembl-annotation/{species}.{build}.{release}.{datatype}.tsv"
     params:
         extra="",
-    cache: "omit-software"
     wrapper:
-        f"{snakemake_wrappers_version}/bio/samtools/faidx"
+        "v3.2.0/bio/samtools/faidx"

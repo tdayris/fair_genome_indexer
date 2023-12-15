@@ -11,4 +11,4 @@ rule get_genome_gtf_annotation:
         build="{build}",
         release="{release}",
     wrapper:
-        f"{snakemake_wrappers_version}/bio/reference/ensembl-annotation"
+        "v3.2.0/bio/reference/ensembl-annotation"

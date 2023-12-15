@@ -11,6 +11,5 @@ rule get_genome_fasta_sequence:
         datatype="{datatype}",
         build="{build}",
         release="{release}",
-    cache: "omit-software"
     wrapper:
-        f"{snakemake_wrappers_version}/bio/reference/ensembl-sequence"
+        "v3.2.0/bio/reference/ensembl-sequence"

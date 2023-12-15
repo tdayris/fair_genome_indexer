@@ -7,7 +7,6 @@ rule blacklist_grch38:
         "logs/ftp/blacklist/homo_sapiens.GRCh38.{release}.log",
     benchmark:
         "benchmark/wget/blacklist/homo_sapiens.GRCh38.{release}.tsv"
-    cache: "omit-software"
     params:
         address="https://github.com/Boyle-Lab/Blacklist/raw/master/lists/Blacklist_v1/hg38-blacklist.bed.gz",
         extra="--verbose",

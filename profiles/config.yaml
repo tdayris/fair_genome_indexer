@@ -1,8 +1,6 @@
 default-resources:
   runtime: 90
   mem_mb: 512
-  partition: "shortq"
-  tmpdir: "tmp"
 
 set-resources:
   bedtools_merge_blacklist:
