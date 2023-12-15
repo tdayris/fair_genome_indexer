@@ -8,3 +8,4 @@
 .test/benchmark
 .test/black.txt
 .test/report.txt
+.snakemake
