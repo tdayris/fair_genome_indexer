@@ -2,8 +2,6 @@ import csv
 import pandas
 import snakemake.utils
 
-from typing import Dict, List, Union
-
 snakemake.utils.min_version("7.29.0")
 
 
@@ -34,26 +32,26 @@ genomes: pandas.DataFrame = pandas.read_csv(
 )
 snakemake.utils.validate(genomes, "../schemas/genomes.schema.yaml")
 
-snakemake_wrappers_version: str = "v3.0.0"
-
 
 report: "../reports/workflow.rst"
 
 
-release_list: List[str] = list(set(genomes.release.tolist()))
-build_list: List[str] = list(set(genomes.build.tolist()))
-species_list: List[str] = list(set(genomes.species.tolist()))
+release_list: list[str] = list(set(genomes.release.tolist()))
+build_list: list[str] = list(set(genomes.build.tolist()))
+species_list: list[str] = list(set(genomes.species.tolist()))
+datatype_list: list[str] = ["dna", "cdna", "all"]
 
 
 wildcard_constraints:
     release=r"|".join(release_list),
     build=r"|".join(build_list),
     species=r"|".join(species_list),
+    datatype=r"|".join(datatype_list),
 
 
 def get_targets(
     wildcards: snakemake.io.Wildcards, genomes: pandas.DataFrame = genomes
-) -> Dict[str, Union[List[str], str]]:
+) -> dict[str, list[str] | str]:
     """
     Return expected list of output files
 
@@ -61,15 +59,15 @@ def get_targets(
     wildcards (snakemake.io.Wildcards): Empty wildcards, required by Snakemake
     genomes   (pandas.DataFrame)      : User defined genomes properties
     """
-    genomes_properties: List[str] = [
-        f"{species}.{build}.{release}"
+    genomes_properties: list[str] = [
+        ".".join([species, build, release])
         for species, build, release in zip(
             genomes.species, genomes.build, genomes.release
         )
     ]
 
     # Base datasets available for many genomes
-    genome_data: Dict[str, List[str]] = {
+    genome_data: dict[str, list[str]] = {
         "fasta": expand(
             "reference/{genomes_property}.{datatype}.fasta",
             genomes_property=genomes_properties,
@@ -100,7 +98,7 @@ def get_targets(
     }
 
     # Public blacklist are not available for all genomes
-    blacklist: Dict[str, str] = expand(
+    blacklist: list[str] = expand(
         "reference/blacklist/{genome_property}.merged.bed",
         genome_property=[
             genome_property

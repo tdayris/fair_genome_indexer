@@ -21,10 +21,10 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 .. _Snakemake: https://snakemake.readthedocs.io
 .. _Github: https://github.com/tdayris/fair_genome_indexer
 .. _`Snakemake workflow`: https://snakemake.github.io/snakemake-workflow-catalog?usage=tdayris/fair_genome_indexer
-.. _Picard: https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/picard/createsequencedictionary.html
-.. _Samtools: https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/samtools/faidx.html
+.. _Picard: https://snakemake-wrappers.readthedocs.io/en/v3.2.0/wrappers/picard/createsequencedictionary.html
+.. _Samtools: https://snakemake-wrappers.readthedocs.io/en/v3.2.0/wrappers/samtools/faidx.html
 .. _Agat: https://agat.readthedocs.io/en/latest/index.html
-.. _Pyroe: https://snakemake-wrappers.readthedocs.io/en/v3.0.0/wrappers/pyroe/idtoname.html
+.. _Pyroe: https://snakemake-wrappers.readthedocs.io/en/v3.2.0/wrappers/pyroe/idtoname.html
 
 
 :Authors:
