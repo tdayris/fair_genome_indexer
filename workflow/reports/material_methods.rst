@@ -30,4 +30,4 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 :Authors:
     Thibault Dayris
 
-:Version: 2.3.0 of 12/03/2023
+:Version: 2.3.1 of 12/15/2023
