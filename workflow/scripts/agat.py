@@ -9,6 +9,7 @@ from os.path import basename
 from tempfile import TemporaryDirectory
 from snakemake.shell import shell
 from typing import Optional
+from yaml import dump
 
 extra: str = snakemake.params.get("extra", "")
 log: str = snakemake.log_fmt_shell(stdout=True, stderr=True, append=True)
@@ -23,16 +24,17 @@ with TemporaryDirectory() as tempdir:
     # Logging and aditional files not callable with command line are written
     # localy. We have to move to tempdir to perform work.
     shell("cd {tempdir}")
+    with open(file=f"{tempdir}/agat_config.yaml", mode="w") as yaml_config:
+        dump(snakemake.params.get("config", {}), yaml_config, default_flow_style=False)
 
     # Run agat
     shell(
         "agat_convert_sp_gff2gtf.pl "
-        "--gff {snakemake.input[0]} --output result.gtf "
+        "--gff {snakemake.input[0]} "
+        "--config {tempdir}/agat_config.yaml "
+        "--output {outgtf} "
         "{extra} {log}"
     )
-
-    # Move results and logs
-    shell("mv --verbose result.gtf {outgtf} {log}")
 
     if outlog:
         shell("mv --verbose {tmplog}.agat.log {outlog} {log}")
