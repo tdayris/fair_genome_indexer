@@ -5,8 +5,8 @@ rule get_genome_vcf_variations:
     resources:
         # Reserve 700Mb per attempt (max_vms: 691.63 on Flamingo)
         mem_mb=lambda wildcards, attempt: 700 * attempt,
-        # Reserve 45min per attempts (hg38: 0:42:53 on Flamingo)
-        runtime=lambda wildcards, attempt: 45 * attempt,
+        # Reserve 1h per attempts (hg38: 0:56:07 on Flamingo)
+        runtime=lambda wildcards, attempt: 60 * attempt,
         tmpdir="tmp",
     log:
         "logs/get_genome/fasta_sequence/{species}.{build}.{release}.{datatype}.log",

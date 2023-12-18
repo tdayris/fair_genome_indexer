@@ -5,8 +5,8 @@ rule agat_gff2gtf:
         gtf="reference/{species}.{build}.{release}.gtf",
     threads: 1
     resources:
-        # Reserve 14Gb per attempt (max_vms: 12786.95 on Flamingo)
-        mem_mb=lambda wildcards, attempt: (1024 * 14) * attempt,
+        # Reserve 16Gb per attempt (max_vms: 12786.95 on Flamingo)
+        mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
         # Reserve 20min per attempts (hg38: 0:14:50 on Flamingo)
         runtime=lambda wildcards, attempt: 20 * attempt,
         tmpdir="tmp",
