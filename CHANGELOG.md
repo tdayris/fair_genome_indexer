@@ -1,3 +1,17 @@
+# 2.3.1:
+
+## Features:
+
+* Memory/Time/tmp reservation for each rule, with attempt
+* Tests on Flamingo (Gustave Roussy's computing cluster)
+
+## Fix:
+
+* Agat logs overlapping
+* snakemake-wrappers version update to 3.2.0
+* format error on latest python/snakemake
+
+
 # 2.3.0:
 
 ## Feature:

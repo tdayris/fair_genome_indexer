@@ -4,6 +4,12 @@ rule agat_gff2gtf:
     output:
         gtf="reference/{species}.{build}.{release}.gtf",
     threads: 1
+    resources:
+        # Reserve 1Gb per attempt (max_vms: ??? on Flamingo)
+        mem_mb=lambda wildcards, attempt: 1024 * attempt,
+        # Reserve 30min per attempts (hg38: ??? on Flamingo)
+        runtime=lambda wildcards, attempt: 30 * attempt,
+        tmpdir="tmp",
     log:
         "logs/agat/gff2gtf/{species}.{build}.{release}.log",
     benchmark:

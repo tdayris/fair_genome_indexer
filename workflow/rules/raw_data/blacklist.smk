@@ -3,6 +3,12 @@ rule blacklist_grch38:
     output:
         "reference/blacklist/homo_sapiens.GRCh38.{release}.bed.gz",
     threads: 1
+    resources:
+        # Reserve 500Mb per attempt (max_vms: 347.80 on Flamingo)
+        mem_mb=lambda wildcards, attempt: 500 * attempt,
+        # Reserve 10min per attempts (hg38: 0:2:07 on Flamingo)
+        runtime=lambda wildcards, attempt: 10 * attempt,
+        tmpdir="tmp",
     log:
         "logs/ftp/blacklist/homo_sapiens.GRCh38.{release}.log",
     benchmark:
