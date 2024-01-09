@@ -17,4 +17,4 @@ rule picard_create_dict:
     params:
         extra="",
     wrapper:
-        "v3.2.0/bio/picard/createsequencedictionary"
+        "v3.3.3/bio/picard/createsequencedictionary"

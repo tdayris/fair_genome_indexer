@@ -13,6 +13,10 @@ include: "rules/pyroe/id_to_name.smk"
 rule target:
     input:
         unpack(get_targets),
+    resources:
+        mem_mb=128,
+        runtime=2,
+        tmpdir="tmp",
     log:
         "logs/targets.log",
     benchmark:

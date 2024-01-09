@@ -55,4 +55,14 @@ config:
 
 .PHONY: clean
 clean:
-	rm -rv linter_info.txt format.txt black.txt pipeline.txt reference logs benchmark
+	rm -rv linter_info.txt \
+		   format.txt \
+		   black.txt \
+		   pipeline.txt \
+		   reference \
+		   logs \
+		   benchmark \
+		   report.html \
+		   report.txt \
+		   resources \
+		   tmp

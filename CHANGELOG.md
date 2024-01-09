@@ -1,3 +1,15 @@
+# 2.3.2:
+
+## Features:
+
+* Snakemake-wrappers up to 3.3.3
+* Snakemake 8+ compatibility
+* main environment update
+
+## Fixes:
+
+* add missing reservation for `samtools faidx`
+
 # 2.3.1:
 
 ## Features:

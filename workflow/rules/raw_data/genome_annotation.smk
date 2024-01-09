@@ -17,4 +17,4 @@ rule get_genome_gtf_annotation:
         build="{build}",
         release="{release}",
     wrapper:
-        "v3.2.0/bio/reference/ensembl-annotation"
+        "v3.3.3/bio/reference/ensembl-annotation"

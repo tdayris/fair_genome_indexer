@@ -17,4 +17,4 @@ rule pyroe_id_to_name:
     params:
         extra="",
     wrapper:
-        "v3.2.0/bio/pyroe/idtoname"
+        "v3.3.3/bio/pyroe/idtoname"

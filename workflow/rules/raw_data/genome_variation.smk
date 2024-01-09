@@ -18,4 +18,4 @@ rule get_genome_vcf_variations:
         build="{build}",
         release="{release}",
     wrapper:
-        "v3.2.0/bio/reference/ensembl-variation"
+        "v3.3.3/bio/reference/ensembl-variation"
