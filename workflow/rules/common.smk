@@ -19,7 +19,7 @@ snakemake.utils.validate(config, "../schemas/config.schema.yaml")
 # Load and check genomes properties table
 genomes_table_path: str = config.get("genomes", "config/genomes.csv")
 with open(genomes_table_path, "r") as genomes_table_stream:
-    dialect: csv.Dialect = csv.Sniffer().sniff(genomes_table_stream.read(1024))
+    dialect: csv.Dialect = csv.Sniffer().sniff(genomes_table_stream.readline())
     genomes_table_stream.seek(0)
 
 genomes: pandas.DataFrame = pandas.read_csv(

@@ -1,3 +1,9 @@
+# 2.3.3:
+
+## Fixes:
+
+* csv.Sniffer having too much data
+
 # 2.3.2:
 
 ## Features:
