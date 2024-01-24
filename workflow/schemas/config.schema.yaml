@@ -9,5 +9,55 @@ genomes:
   description: Path to the CSV file defining genome properties
 
 
+params:
+  type: object
+  description: Optional parameters
+  pyfaidx:
+    type: object
+    description: Optional parameters for pyfaidx (filter/correct fasta format)
+    dna:
+      type: string
+      description: Filter-out non canonical chromosomes
+    cdna:
+      type: string
+      description: Keep all cdna sequences
+  agat:
+    type: object
+    description: Optional parameters for agat (filter/correct GTF format)
+    gff2gtf:
+      type: string
+      description: Optional parameters for agat_convert_sp_gff2gtf.pl
+    filter_features:
+      type: string
+      description: Optional parameters for agat_sq_filter_feature_from_fasta.pl
+    select_feature_by_attribute_value:
+      type: string
+      descrption: Optional parameters for agat_sq_select_feature_by_attribute_value.pl
+    agat_convert_sp_gff2tsv: 
+      type: string
+      description: Optional parameters for agat_convert_sp_gff2tsv.pl
+  gffread:
+    type: string
+    descrption: Optional parameters for GFFRead
+  bedtools:
+    type: object
+    descrption: Optional parameters for bedtools
+    filter_non_canonical_chrom:
+      type: string
+      description: Optional parameters for filtering non-canonical chromosomes over dbSNP
+  picard:
+    type: object
+    description: Optional parameters for picard command line
+    createsequencedictionary:
+      type: string
+      description: Optional parameters for picard create sequence dictionary
+  samtools:
+    type: object
+    description: Optional parameters for samtools
+    faidx:
+      type: string
+      description: Optional parameters for samtools fasta index
+
+
 required:
   - genomes

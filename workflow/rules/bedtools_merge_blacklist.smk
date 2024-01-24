@@ -1,6 +1,6 @@
 rule bedtools_merge_blacklist:
     input:
-        "reference/blacklist/{species}.{build}.{release}.bed.gz",
+        "tmp/blacklist/{species}.{build}.{release}.bed.gz",
     output:
         "reference/blacklist/{species}.{build}.{release}.merged.bed",
     threads: 2

@@ -39,7 +39,7 @@ report: "../reports/workflow.rst"
 release_list: list[str] = list(set(genomes.release.tolist()))
 build_list: list[str] = list(set(genomes.build.tolist()))
 species_list: list[str] = list(set(genomes.species.tolist()))
-datatype_list: list[str] = ["dna", "cdna", "all"]
+datatype_list: list[str] = ["dna", "cdna", "all", "transcripts"]
 
 
 wildcard_constraints:
@@ -69,31 +69,37 @@ def get_targets(
     # Base datasets available for many genomes
     genome_data: dict[str, list[str]] = {
         "fasta": expand(
-            "reference/{genomes_property}.{datatype}.fasta",
+            "reference/sequences/{genomes_property}.{datatype}.fasta",
             genomes_property=genomes_properties,
-            datatype=["dna", "cdna"],
+            datatype=["dna", "cdna", "transcripts"],
         ),
         "fai": expand(
-            "reference/{genomes_property}.{datatype}.fasta.fai",
+            "reference/sequences/{genomes_property}.{datatype}.fasta.fai",
             genomes_property=genomes_properties,
-            datatype=["dna", "cdna"],
+            datatype=["dna", "cdna", "transcripts"],
         ),
         "dict": expand(
-            "reference/{genomes_property}.dna.dict",
+            "reference/sequences/{genomes_property}.dna.dict",
             genomes_property=genomes_properties,
         ),
         "gtf": expand(
-            "reference/{genomes_property}.gtf",
+            "reference/annotation/{genomes_property}.gtf",
             genomes_property=genomes_properties,
         ),
         "vcf": expand(
-            "reference/{genomes_property}.{datatype}.vcf",
+            "reference/variants/{genomes_property}.{datatype}.vcf.gz",
+            genomes_property=genomes_properties,
+            datatype=["all"],
+        ),
+        "vcf_tbi": expand(
+            "reference/variants/{genomes_property}.{datatype}.vcf.gz.tbi",
             genomes_property=genomes_properties,
             datatype=["all"],
         ),
         "id2name": expand(
-            "resources/{genomes_property}.id_to_gene.tsv",
+            "reference/annotation/{genomes_property}.{content}.tsv",
             genomes_property=genomes_properties,
+            content=["id_to_gene", "t2g"],
         ),
     }
 

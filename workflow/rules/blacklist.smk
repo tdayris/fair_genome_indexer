@@ -1,7 +1,7 @@
 # WARNING: release >= 75
 rule blacklist_grch38:
     output:
-        "reference/blacklist/homo_sapiens.GRCh38.{release}.bed.gz",
+        temp("tmp/blacklist/homo_sapiens.GRCh38.{release}.bed.gz"),
     threads: 1
     resources:
         # Reserve 500Mb per attempt (max_vms: 347.80 on Flamingo)
@@ -17,7 +17,7 @@ rule blacklist_grch38:
         address="https://github.com/Boyle-Lab/Blacklist/raw/master/lists/Blacklist_v1/hg38-blacklist.bed.gz",
         extra="--verbose",
     conda:
-        "../../envs/bash.yaml"
+        "../envs/bash.yaml"
     shell:
         "wget {params.extra} {params.address} -O {output} > {log} 2>&1"
 
@@ -25,7 +25,7 @@ rule blacklist_grch38:
 # WARNING: 67 < release <= 102
 use rule blacklist_grch38 as blacklist_mm10 with:
     output:
-        "reference/blacklist/mus_musculus.GRCm38.{release}.bed.gz",
+        temp("tmp/blacklist/mus_musculus.GRCm38.{release}.bed.gz"),
     log:
         "logs/ftp/blacklist/mus_musculus.GRCm38.{release}.log",
     benchmark:
@@ -38,7 +38,7 @@ use rule blacklist_grch38 as blacklist_mm10 with:
 # WARNING: release <= 75
 use rule blacklist_grch38 as blacklist_grch37 with:
     output:
-        "reference/blacklist/homo_sapiens.GRCh37.{release}.bed.gz",
+        temp("tmp/blacklist/homo_sapiens.GRCh37.{release}.bed.gz"),
     benchmark:
         "benchmark/wget/blacklist/homo_sapiens.GRCh37.{release}.tsv"
     log:
@@ -51,7 +51,7 @@ use rule blacklist_grch38 as blacklist_grch37 with:
 # WARNING: release should be <= 67
 use rule blacklist_grch38 as blacklist_mm9 with:
     output:
-        "reference/blacklist/mus_musculus.NCBIM37.{release}.bed.gz",
+        temp("tmp/blacklist/mus_musculus.NCBIM37.{release}.bed.gz"),
     log:
         "logs/ftp/blacklist/mus_musculus.NCBIM37.{release}.log",
     benchmark:

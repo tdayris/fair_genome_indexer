@@ -1,6 +1,6 @@
 rule get_genome_fasta_sequence:
     output:
-        "reference/{species}.{build}.{release}.{datatype}.fasta",
+        temp("tmp/fasta/{species}.{build}.{release}.dna.fasta"),
     threads: 1
     resources:
         # Reserve 500Mb per attempt (max_vms: 391.72 on Flamingo)
@@ -9,12 +9,12 @@ rule get_genome_fasta_sequence:
         runtime=lambda wildcards, attempt: 30 * attempt,
         tmpdir="tmp",
     log:
-        "logs/get_genome/fasta_sequence/{species}.{build}.{release}.{datatype}.log",
+        "logs/get_genome/fasta_sequence/{species}.{build}.{release}.dna.log",
     benchmark:
-        "benchmark/reference/ensembl-annotation/{species}.{build}.{release}.{datatype}.tsv"
+        "benchmark/reference/fasta_sequence/{species}.{build}.{release}.dna.tsv"
     params:
         species="{species}",
-        datatype="{datatype}",
+        datatype="dna",
         build="{build}",
         release="{release}",
     wrapper:

@@ -1,8 +1,8 @@
 rule pyroe_id_to_name:
     input:
-        "reference/{species}.{build}.{release}.gtf",
+        "reference/annotation/{species}.{build}.{release}.gtf",
     output:
-        "resources/{species}.{build}.{release}.id_to_gene.tsv",
+        "reference/annotation/{species}.{build}.{release}.id_to_gene.tsv",
     threads: 1
     resources:
         # Reserve 9Gb per attempt (max_vms: 8247.39 on Flamingo)

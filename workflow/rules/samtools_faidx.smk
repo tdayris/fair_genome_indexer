@@ -1,8 +1,8 @@
 rule samtools_index:
     input:
-        "reference/{species}.{build}.{release}.{datatype}.fasta",
+        "reference/sequences/{species}.{build}.{release}.{datatype}.fasta",
     output:
-        "reference/{species}.{build}.{release}.{datatype}.fasta.fai",
+        "reference/sequences/{species}.{build}.{release}.{datatype}.fasta.fai",
     threads: 1
     resources:
         # Reserve 700Mb per attempt
@@ -12,8 +12,8 @@ rule samtools_index:
     log:
         "logs/samtools/faidx/{species}.{build}.{release}.{datatype}.log",
     benchmark:
-        "benchmark/reference/ensembl-annotation/{species}.{build}.{release}.{datatype}.tsv"
+        "benchmark/samtools/faidx/{species}.{build}.{release}.{datatype}.tsv"
     params:
-        extra="",
+        extra=config.get("params", {}).get("samtools", {}).get("faidx", ""),
     wrapper:
         "v3.3.3/bio/samtools/faidx"

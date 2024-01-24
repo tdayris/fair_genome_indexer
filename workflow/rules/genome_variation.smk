@@ -1,6 +1,6 @@
 rule get_genome_vcf_variations:
     output:
-        "reference/{species}.{build}.{release}.{datatype}.vcf",
+        temp("tmp/ensembl/{species}.{build}.{release}.{datatype}.vcf.gz"),
     threads: 1
     resources:
         # Reserve 700Mb per attempt (max_vms: 691.63 on Flamingo)

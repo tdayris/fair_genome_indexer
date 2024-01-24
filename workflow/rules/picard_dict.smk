@@ -1,8 +1,8 @@
 rule picard_create_dict:
     input:
-        "reference/{species}.{build}.{release}.{datatype}.fasta",
+        "reference/sequences/{species}.{build}.{release}.{datatype}.fasta",
     output:
-        "reference/{species}.{build}.{release}.{datatype}.dict",
+        "reference/sequences/{species}.{build}.{release}.{datatype}.dict",
     threads: 1
     resources:
         # Reserve 9Gb per attempt (max_vms: 8247.39 on Flamingo)
@@ -15,6 +15,8 @@ rule picard_create_dict:
     benchmark:
         "benchmark/picard/create_dict/{species}.{build}.{release}.{datatype}.tsv"
     params:
-        extra="",
+        extra=config.get("params", {})
+        .get("picard", {})
+        .get("createsequencedictionary", ""),
     wrapper:
         "v3.3.3/bio/picard/createsequencedictionary"
