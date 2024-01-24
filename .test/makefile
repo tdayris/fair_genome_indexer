@@ -43,7 +43,7 @@ all: report.txt
 report.txt: pipeline.txt
 	mamba activate test-snakemake-wrappers && \
 	snakemake -s ../workflow/Snakefile \
-		--report report.zip 2>&1 | tee report.txt
+		--report report.html 2>&1 | tee report.txt
 
 
 pipeline.txt: linter_info.txt
