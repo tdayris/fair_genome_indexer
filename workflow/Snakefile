@@ -1,23 +1,36 @@
 include: "rules/common.smk"
-include: "rules/raw_data/genome_sequence.smk"
-include: "rules/raw_data/genome_annotation.smk"
-include: "rules/agat/gff2gtf.smk"
-include: "rules/raw_data/genome_variation.smk"
-include: "rules/gatk/picard_dict.smk"
-include: "rules/samtools/faidx.smk"
-include: "rules/raw_data/blacklist.smk"
-include: "rules/bedtools/merge_blacklist.smk"
-include: "rules/pyroe/id_to_name.smk"
+include: "rules/agat.smk"
+include: "rules/bcftools_filter_dbsnp.smk"
+include: "rules/bedtools_merge_blacklist.smk"
+include: "rules/blacklist.smk"
+include: "rules/genome_annotation.smk"
+include: "rules/genome_sequence.smk"
+include: "rules/genome_variation.smk"
+include: "rules/gffread.smk"
+include: "rules/picard_dict.smk"
+include: "rules/pyfaidx.smk"
+include: "rules/pyroe.smk"
+include: "rules/samtools_faidx.smk"
+include: "rules/tabix.smk"
+include: "rules/transcript_to_gene.smk"
 
 
-rule target:
+rule fair_genome_indexer_target:
     input:
         unpack(get_targets),
+    output:
+        "reference/genomes.csv",
     resources:
-        mem_mb=128,
-        runtime=2,
+        mem_mb=lambda wildcards, attempt: 512 * attempt,
+        runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir="tmp",
     log:
-        "logs/targets.log",
+        "logs/targets/fair_genome_indexer_target.log",
     benchmark:
-        "benchmark/targets.tsv"
+        "benchmark/targets/fair_genome_indexer_target.tsv"
+    params:
+        genomes=genomes.copy(),
+    conda:
+        "envs/python.yaml"
+    script:
+        "scripts/regenerate_genomes.py"

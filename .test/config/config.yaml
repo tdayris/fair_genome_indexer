@@ -1,1 +1,30 @@
+# Optional parameters
+params:
+  # Optional parameters for pyfaidx (filter/correct fasta format)
+  pyfaidx:
+    # Filter-out non canonical chromosomes
+    dna: ""
+    # Keep all cdna sequences
+    cdna: ""
+  # Optional parameters for agat (filter/correct GTF format)
+  agat:
+    # Optional parameters for agat_convert_sp_gff2gtf.pl
+    gff2gtf: ""
+    # Optional parameters for agat_sq_filter_feature_from_fasta.pl
+    filter_features: ""
+    # Optional parameters for agat_sq_select_feature_by_attribute_value.pl
+    select_feature_by_attribute_value: "--attribute 'transcript_support_level' --value '\"NA\"' --test '='"
+    # Optional parameters for agat_convert_sp_gff2tsv
+    agat_convert_sp_gff2tsv: ""
+  # Optional parameters for GFFRead
+  gffread: ""
+  # Optional parameters for bedtools
+  bedtools:
+    # Optional parameters for filtering non-canonical chromosomes over dbSNP
+    filter_non_canonical_chrom: ""
+  # Optional parameters for tabix index VCF
+  tabix: "-p vcf"
+
+# Optional path to genome file
 genomes: config/genomes.csv
+
