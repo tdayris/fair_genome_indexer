@@ -8,18 +8,31 @@ MAKEFLAGS += --no-builtin-rules
 
 # List of snakefiles to lint
 snakefiles := \
-	"../workflow/rules/gatk/picard_dict.smk" \
-	"../workflow/rules/raw_data/genome_annotation.smk" \
-	"../workflow/rules/agat/gff2gtf.smk" \
-	"../workflow/rules/raw_data/genome_sequence.smk" \
-	"../workflow/rules/raw_data/genome_variation.smk" \
-	"../workflow/rules/samtools/faidx.smk" \
+	"../workflow/rules/agat.smk" \
+	"../workflow/rules/bcftools_filter_dbsnp.smk" \
+	"../workflow/rules/bedtools_merge_blacklist.smk" \
+	"../workflow/rules/blacklist.smk" \
 	"../workflow/rules/common.smk" \
-	"../workflow/rules/pyroe/id_to_name.smk" \
+	"../workflow/rules/genome_annotation.smk" \
+	"../workflow/rules/genome_sequence.smk" \
+	"../workflow/rules/genome_variation.smk" \
+	"../workflow/rules/gffread.smk" \
+	"../workflow/rules/picard_dict.smk" \
+	"../workflow/rules/pyfaidx.smk" \
+	"../workflow/rules/pyroe.smk" \
+	"../workflow/rules/samtools_faidx.smk" \
+	"../workflow/rules/tabix.smk" \
+	"../workflow/rules/transcript_to_gene.smk" \
 	"../workflow/Snakefile"
 
 python_scripts := \
-	"../workflow/scripts/agat.py"
+	"../workflow/scripts/agat_config.py" \
+	"../workflow/scripts/agat_convert_gff2tsv.py" \
+	"../workflow/scripts/agat_filter_feature_by_attribute_value.py" \
+	"../workflow/scripts/agat_filter_feature_from_fasta.py" \
+	"../workflow/scripts/agat_gff2gtf.py" \
+	"../workflow/scripts/pyfaidx.py" \
+	"../workflow/scripts/regenerate_genomes.py"
 
 # List of expected output files
 
@@ -29,29 +42,31 @@ all: report.txt
 
 report.txt: pipeline.txt
 	mamba activate test-snakemake-wrappers && \
-	snakemake -s ../workflow/Snakefile --cores 1 --use-conda --use-singularity --report report.html 2>&1 | tee report.txt
+	snakemake -s ../workflow/Snakefile \
+		--report report.zip 2>&1 | tee report.txt
 
 
-
-pipeline.txt: config linter_info.txt format.txt
+pipeline.txt: linter_info.txt
 	mamba activate test-snakemake-wrappers && \
-	snakemake -s ../workflow/Snakefile --cores 1 --use-conda --use-singularity --workflow-profile ../profiles 2>&1 | tee pipeline.txt
+	snakemake -s ../workflow/Snakefile \
+		--cores 7 \
+		--software-deployment-method conda \
+		2>&1 | tee pipeline.txt
 
-format.txt: config
+
+format.txt:
 	mamba activate test-snakemake-wrappers && \
 	snakefmt $(snakefiles) 2>&1 | tee format.txt
+
 
 black.txt:
 	mamba activate test-snakemake-wrappers && \
 	black $(python_scripts) 2>&1 | tee black.txt
 
 
-linter_info.txt: config format.txt black.txt
+linter_info.txt: format.txt black.txt
 	mamba activate test-snakemake-wrappers && \
 	snakemake -s ../workflow/Snakefile --lint 2>&1 | tee linter_info.txt
-
-config:
-	ln -srf ../config config
 
 .PHONY: clean
 clean:
@@ -63,6 +78,7 @@ clean:
 		   logs \
 		   benchmark \
 		   report.html \
-		   report.txt \
+		   report.zip \
+		   report \
 		   resources \
 		   tmp
