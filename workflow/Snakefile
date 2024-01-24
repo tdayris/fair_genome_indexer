@@ -19,15 +19,15 @@ rule fair_genome_indexer_target:
     input:
         unpack(get_targets),
     output:
-        "reference/genomes.csv",
+        "reference/genomes/fair_genome_indexer.csv",
     resources:
         mem_mb=lambda wildcards, attempt: 512 * attempt,
         runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir="tmp",
     log:
-        "logs/targets/fair_genome_indexer_target.log",
+        "logs/fair_genome_indexer_target.log",
     benchmark:
-        "benchmark/targets/fair_genome_indexer_target.tsv"
+        "benchmark/fair_genome_indexer_target.tsv"
     params:
         genomes=genomes.copy(),
     conda:
