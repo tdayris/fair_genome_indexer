@@ -1,3 +1,10 @@
+# 3.0.1
+
+## Features:
+
+* Genome schema validation update
+
+
 # 3.0.0
 
 Breaking change: Non canonical chromosomes removed by default
