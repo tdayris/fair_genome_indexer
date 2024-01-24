@@ -9,3 +9,9 @@
 .test/black.txt
 .test/report.txt
 .snakemake
+reference
+tmp
+logs
+benchmark
+report.zip
+report

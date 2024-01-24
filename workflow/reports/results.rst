@@ -9,31 +9,42 @@ files are present:
 ::
 
     reference/
-    ├── XXX.all.vcf
-    ├── XXX.cdna.fasta
-    ├── XXX.cdna.fasta.fai
-    ├── XXX.dna.dict
-    ├── XXX.dna.fasta
-    ├── XXX.dna.fasta.fai
-    ├── XXX.id_to_gene.tsv
-    └── XXX.gtf
+    ├── blacklist
+    |   └── XXX.merged.bed
+    ├── variants
+    |   ├── XXX.all.vcf.gz
+    |   └── XXX.all.vcf.gz.tbi
+    ├── sequences
+    |   ├── XXX.cdna.fasta
+    |   ├── XXX.cdna.fasta.fai
+    |   ├── XXX.dna.dict
+    |   ├── XXX.dna.fasta
+    |   └── XXX.dna.fasta.fai
+    └── annotation
+        ├── XXX.id_to_gene.tsv
+        ├── XXX.t2g.tsv
+        └── XXX.gtf
 
 
-+---------------+-----------------------------+
-| Extension     | Content                     |
-+===============+=============================+
-| `.gtf`        | Genome annotation           |
-+---------------+-----------------------------+
-| `.tsv`        | Genome id-to-name           |
-+---------------+-----------------------------+
-| `.fasta`      | Genome sequences            |
-+---------------+-----------------------------+
-| `.fasta.fai`  | Genome sequences index      |
-+---------------+-----------------------------+
-| `.dict`       | Genome sequences dictionary |
-+---------------+-----------------------------+
-| `.vcf`        | Genome known variations     |
-+---------------+-----------------------------+
++-------------------+-----------------------------+
+| Extension         | Content                     |
++===================+=============================+
+| `.bed`            | Genome blacklisted regions  |
++-------------------+-----------------------------+
+| `.gtf`            | Genome annotation           |
++-------------------+-----------------------------+
+| `.id_to_gene.tsv` | Genome id-to-name           |
++-------------------+-----------------------------+
+| `.t2g.tsv`        | Transcript id-to-name       |
++-------------------+-----------------------------+
+| `.fasta`          | Genome sequences            |
++-------------------+-----------------------------+
+| `.fasta.fai`      | Genome sequences index      |
++-------------------+-----------------------------+
+| `.dict`           | Genome sequences dictionary |
++-------------------+-----------------------------+
+| `.vcf.gz`         | Genome known variations     |
++-------------------+-----------------------------+
 
 These files are quite volumous and are not embeded in this HTML page. Please
 find them directly on file system.

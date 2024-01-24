@@ -1,8 +1,26 @@
-# 2.3.3:
+# 3.0.0
+
+Breaking change: Non canonical chromosomes removed by default
+
+## Features:
+
+* pyfaidx optionally filters non-canonical chromosomes in fasta
+* agat filters NA TSL in GTF
+* bedtools filters non-canonical chromosomes in bed
+* bcftools filters non-canonical chromosomes in vcf
+* tabix index of filtered known variants
+* remove rules subdirectories
 
 ## Fixes:
 
 * csv.Sniffer having too much data
+* Missing tests added
+
+## Documentation:
+
+* Pipeline description updated
+* Usage generalized
+* Gustave Roussy users have a dedicated usage section
 
 # 2.3.2:
 
