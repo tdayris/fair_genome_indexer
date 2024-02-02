@@ -1,7 +1,7 @@
-rule gffread_transcripts:
+rule fair_genome_indexer_gffread_transcripts:
     input:
         fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
-        fai="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
+        fai=ancient("reference/sequences/{species}.{build}.{release}.dna.fasta.fai"),
         annotation="reference/annotation/{species}.{build}.{release}.gtf",
     output:
         records="reference/sequences/{species}.{build}.{release}.transcripts.fasta",
@@ -19,10 +19,10 @@ rule gffread_transcripts:
     params:
         extra=config.get("params", {}).get("gffread", ""),
     wrapper:
-        "v3.3.3/bio/gffread"
+        "v3.3.6/bio/gffread"
 
 
-use rule gffread_transcripts as gffread_cdna with:
+use rule fair_genome_indexer_gffread_transcripts as fair_genome_indexer_gffread_cdna with:
     input:
         fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
         annotation="tmp/agat/{species}.{build}.{release}.cdna.gtf",

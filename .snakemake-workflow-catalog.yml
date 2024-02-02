@@ -8,4 +8,4 @@ usage:
     conda: true
     singularity: false
     singularity+conda: false
-  report: false
+  report: true

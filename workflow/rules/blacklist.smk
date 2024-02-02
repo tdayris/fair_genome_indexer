@@ -1,5 +1,5 @@
 # WARNING: release >= 75
-rule blacklist_grch38:
+rule fair_genome_indexer_blacklist_grch38:
     output:
         temp("tmp/blacklist/homo_sapiens.GRCh38.{release}.bed.gz"),
     threads: 1
@@ -23,7 +23,7 @@ rule blacklist_grch38:
 
 
 # WARNING: 67 < release <= 102
-use rule blacklist_grch38 as blacklist_mm10 with:
+use rule fair_genome_indexer_blacklist_grch38 as fair_genome_indexer_blacklist_mm10 with:
     output:
         temp("tmp/blacklist/mus_musculus.GRCm38.{release}.bed.gz"),
     log:
@@ -36,7 +36,7 @@ use rule blacklist_grch38 as blacklist_mm10 with:
 
 
 # WARNING: release <= 75
-use rule blacklist_grch38 as blacklist_grch37 with:
+use rule fair_genome_indexer_blacklist_grch38 as fair_genome_indexer_blacklist_grch37 with:
     output:
         temp("tmp/blacklist/homo_sapiens.GRCh37.{release}.bed.gz"),
     benchmark:
@@ -49,7 +49,7 @@ use rule blacklist_grch38 as blacklist_grch37 with:
 
 
 # WARNING: release should be <= 67
-use rule blacklist_grch38 as blacklist_mm9 with:
+use rule fair_genome_indexer_blacklist_grch38 as fair_genome_indexer_blacklist_mm9 with:
     output:
         temp("tmp/blacklist/mus_musculus.NCBIM37.{release}.bed.gz"),
     log:

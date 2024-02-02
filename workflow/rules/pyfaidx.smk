@@ -1,4 +1,4 @@
-rule pyfaidx_filter_out_noncanonical_chromosomes:
+rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
     input:
         fasta="tmp/fasta/{species}.{build}.{release}.{datatype}.fasta",
     output:

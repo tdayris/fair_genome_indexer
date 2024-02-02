@@ -1,4 +1,4 @@
-rule bedtools_merge_blacklist:
+rule fair_genome_indexer_bedtools_merge_blacklist:
     input:
         "tmp/blacklist/{species}.{build}.{release}.bed.gz",
     output:
@@ -17,4 +17,4 @@ rule bedtools_merge_blacklist:
     params:
         extra="-d 5",
     wrapper:
-        "v3.3.3/bio/bedtools/merge"
+        "v3.3.6/bio/bedtools/merge"

@@ -1,4 +1,4 @@
-rule get_genome_fasta_sequence:
+rule fair_genome_indexer_get_genome_fasta_sequence:
     output:
         temp("tmp/fasta/{species}.{build}.{release}.dna.fasta"),
     threads: 1
@@ -18,4 +18,4 @@ rule get_genome_fasta_sequence:
         build="{build}",
         release="{release}",
     wrapper:
-        "v3.3.3/bio/reference/ensembl-sequence"
+        "v3.3.6/bio/reference/ensembl-sequence"

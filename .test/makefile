@@ -81,4 +81,5 @@ clean:
 		   report.zip \
 		   report \
 		   resources \
-		   tmp
+		   tmp \
+		   report.txt

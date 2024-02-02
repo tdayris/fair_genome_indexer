@@ -2,10 +2,14 @@ import csv
 import pandas
 import snakemake.utils
 
+from typing import Any, NamedTuple
+
 snakemake.utils.min_version("7.29.0")
 
 
-# containerized: "docker://snakemake/snakemake:v7.32.4"
+containerized: "docker://snakemake/snakemake:v8.4.3"
+
+
 # containerized: "docker://mambaorg/micromamba:git-8440cec-jammy-cuda-12.2.0"
 # containerized: "docker://condaforge/mambaforge:23.3.1-1"
 
@@ -49,7 +53,27 @@ wildcard_constraints:
     datatype=r"|".join(datatype_list),
 
 
-def get_targets(
+def agat_sp_filter_feature_by_attribute_value_has_non_null_params(
+    config: dict[str, Any] = config
+) -> bool:
+    """
+    Return True if the configuration file has a parameter for the rule
+    agat_sp_filter_feature_by_attribute_value, else return False.
+
+    This is here because agat cannot work with null parameters and sometimes,
+    there is no filter to be done over GTF/GFF file.
+
+    Parameters:
+    config  (dict[str, Any]): User provided configuration file
+    """
+    return (
+        config.get("params", {})
+        .get("agat", {})
+        .get("select_feature_by_attribute_value")
+    )
+
+
+def get_fair_genome_indexer_target(
     wildcards: snakemake.io.Wildcards, genomes: pandas.DataFrame = genomes
 ) -> dict[str, list[str] | str]:
     """
@@ -59,11 +83,17 @@ def get_targets(
     wildcards (snakemake.io.Wildcards): Empty wildcards, required by Snakemake
     genomes   (pandas.DataFrame)      : User defined genomes properties
     """
+    # Filter-out genomes without basic properties
+    usable_genomes: list[NamedTuple] | NamedTuple = lookup(
+        query="species != '' & build != '' & release != ''", within=genomes
+    )
+    if not isinstance(usable_genomes, list):
+        usable_genomes = [usable_genomes]
+
+    # Build genome identifier: species.build.release
     genomes_properties: list[str] = [
-        ".".join([species, build, release])
-        for species, build, release in zip(
-            genomes.species, genomes.build, genomes.release
-        )
+        ".".join([usable_genome.species, usable_genome.build, usable_genome.release])
+        for usable_genome in usable_genomes
     ]
 
     # Base datasets available for many genomes
@@ -104,20 +134,26 @@ def get_targets(
     }
 
     # Public blacklist are not available for all genomes
-    blacklist: list[str] = expand(
-        "reference/blacklist/{genome_property}.merged.bed",
-        genome_property=[
-            genome_property
-            for genome_property in genomes_properties
-            if any(
-                genome_build in genome_property
-                for genome_build in ["GRCh38", "GRCh37", "GRCm38", "NCBIM37"]
-            )
-        ],
+    # Drop genomes without known blacklisted regions
+    blacklist_usable_genomes: list[NamedTuple] | NamedTuple = lookup(
+        query="species != '' & release != '' & (build == 'GRCh38' | build == 'GRCh37' | build == 'GRCm38' | build == 'NCBIM37')",
+        within=genomes,
     )
 
+    if not isinstance(blacklist_usable_genomes, list):
+        blacklist_usable_genomes = [blacklist_usable_genomes]
+
+    # Format genomes identifiers: species.build.release
+    blacklist_genomes_properties: list[str] = [
+        ".".join([usable_genome.species, usable_genome.build, usable_genome.release])
+        for usable_genome in blacklist_usable_genomes
+    ]
+
     # Add only available blacklists
-    if len(blacklist) > 0:
-        genome_data["blacklist"] = blacklist
+    if len(blacklist_genomes_properties) > 0:
+        genome_data["blacklist"] = expand(
+            "reference/blacklist/{genome_property}.merged.bed",
+            genome_property=blacklist_genomes_properties,
+        )
 
     return genome_data

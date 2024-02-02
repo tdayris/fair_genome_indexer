@@ -1,4 +1,4 @@
-rule pyroe_id_to_name:
+rule fair_genome_indexer_pyroe_id_to_name:
     input:
         "reference/annotation/{species}.{build}.{release}.gtf",
     output:
@@ -17,4 +17,4 @@ rule pyroe_id_to_name:
     params:
         extra="",
     wrapper:
-        "v3.3.3/bio/pyroe/idtoname"
+        "v3.3.6/bio/pyroe/idtoname"

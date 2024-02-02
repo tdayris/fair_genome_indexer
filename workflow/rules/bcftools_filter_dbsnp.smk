@@ -1,7 +1,7 @@
-rule pyfaidx_fasta_dict_to_bed:
+rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
     input:
         fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
-        fai="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
+        fai=ancient("reference/sequences/{species}.{build}.{release}.dna.fasta.fai"),
     output:
         temp("tmp/pyfaidx/bed/{species}.{build}.{release}.dna.bed"),
     threads: 1
@@ -23,11 +23,11 @@ rule pyfaidx_fasta_dict_to_bed:
         "../scripts/pyfaidx.py"
 
 
-rule bcftools_filter_non_canonical_chrom:
+rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
     input:
         "tmp/ensembl/{species}.{build}.{release}.all.vcf.gz",
-        tbi="tmp/ensembl/{species}.{build}.{release}.all.vcf.gz.tbi",
-        regions="tmp/pyfaidx/bed/{species}.{build}.{release}.dna.bed",
+        tbi=ancient("tmp/ensembl/{species}.{build}.{release}.all.vcf.gz.tbi"),
+        regions=ancient("tmp/pyfaidx/bed/{species}.{build}.{release}.dna.bed"),
     output:
         "reference/variants/{species}.{build}.{release}.all.vcf.gz",
     threads: 2
@@ -44,4 +44,4 @@ rule bcftools_filter_non_canonical_chrom:
     params:
         extra=config.get("bcftools", {}).get("filter_non_canonical_chrom", ""),
     wrapper:
-        "v3.3.3/bio/bcftools/filter"
+        "v3.3.6/bio/bcftools/filter"

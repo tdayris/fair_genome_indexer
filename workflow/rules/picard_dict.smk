@@ -1,4 +1,4 @@
-rule picard_create_dict:
+rule fair_genome_indexer_picard_create_dict:
     input:
         "reference/sequences/{species}.{build}.{release}.{datatype}.fasta",
     output:
@@ -19,4 +19,4 @@ rule picard_create_dict:
         .get("picard", {})
         .get("createsequencedictionary", ""),
     wrapper:
-        "v3.3.3/bio/picard/createsequencedictionary"
+        "v3.3.6/bio/picard/createsequencedictionary"

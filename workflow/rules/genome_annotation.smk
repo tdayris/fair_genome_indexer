@@ -1,4 +1,4 @@
-rule get_genome_gtf_annotation:
+rule fair_genome_indexer_get_genome_gtf_annotation:
     output:
         temp("tmp/{species}.{build}.{release}.gtf"),
     threads: 1
@@ -17,4 +17,4 @@ rule get_genome_gtf_annotation:
         build="{build}",
         release="{release}",
     wrapper:
-        "v3.3.3/bio/reference/ensembl-annotation"
+        "v3.3.6/bio/reference/ensembl-annotation"

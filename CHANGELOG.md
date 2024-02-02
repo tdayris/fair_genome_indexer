@@ -1,3 +1,16 @@
+# 3.1.0
+
+## Features:
+
+* Agat jobs now reserve more time to get rid of OOT errors
+* Skip agat-filter-from-attribute-value if no parameters is provided by user with [branch](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#the-branch-function)
+* Check if species, build and release are empty. Do not try to download anything in that case.
+* snakemake-wrappers update to version [v3.3.6](https://github.com/snakemake/snakemake-wrappers/compare/v3.3.5...v3.3.6) leading to both Samtools and Tabix update.
+* Use of [lookup](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#the-lookup-function) rather than hand-made parsing
+* Append pipeline name to all rule names in order to keep rule origin in future import, without breaking inner rule inheritence
+* timestamp ignored for genome indexes to avoid cluster touch issues
+
+
 # 3.0.1
 
 ## Features:

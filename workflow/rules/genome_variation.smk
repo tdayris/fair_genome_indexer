@@ -1,4 +1,4 @@
-rule get_genome_vcf_variations:
+rule fair_genome_indexer_get_genome_vcf_variations:
     output:
         temp("tmp/ensembl/{species}.{build}.{release}.{datatype}.vcf.gz"),
     threads: 1
@@ -18,4 +18,4 @@ rule get_genome_vcf_variations:
         build="{build}",
         release="{release}",
     wrapper:
-        "v3.3.3/bio/reference/ensembl-variation"
+        "v3.3.6/bio/reference/ensembl-variation"

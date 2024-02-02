@@ -17,7 +17,7 @@ include: "rules/transcript_to_gene.smk"
 
 rule fair_genome_indexer_target:
     input:
-        unpack(get_targets),
+        unpack(get_fair_genome_indexer_target),
     output:
         "reference/genomes/fair_genome_indexer.csv",
     resources:

@@ -1,4 +1,4 @@
-rule samtools_index:
+rule fair_genome_indexer_samtools_index:
     input:
         "reference/sequences/{species}.{build}.{release}.{datatype}.fasta",
     output:
@@ -16,4 +16,4 @@ rule samtools_index:
     params:
         extra=config.get("params", {}).get("samtools", {}).get("faidx", ""),
     wrapper:
-        "v3.3.3/bio/samtools/faidx"
+        "v3.3.6/bio/samtools/faidx"

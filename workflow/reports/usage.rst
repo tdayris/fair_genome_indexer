@@ -14,6 +14,12 @@ and ignore the rest of this documentation.
         https://github.com/tdayris/fair_genome_indexer . \
         --tag <version>
 
+    # Edit your configuration file if needed
+    vim config/config.yaml
+
+    # Use shared genome.csv file to avoid downloading all the available resources from the web
+    rsync -cvrhP /mnt/beegfs/pipelines/unofficial-snakemake-wrappers/genomes.csv config/genomes.csv
+
     # Run snakemake command
     snakemake --profile '/mnt/beegfs/pipelines/unofficial-snakemake-wrappers/profiles/slurm-web/'
 

@@ -1,4 +1,4 @@
-rule agat_config:
+rule fair_genome_indexer_agat_config:
     output:
         yaml=temp("tmp/agat/config.yaml"),
     threads: 1
@@ -46,7 +46,7 @@ rule agat_config:
         "../scripts/agat_config.py"
 
 
-rule agat_convert_sp_gff2gtf:
+rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     input:
         gtf="tmp/{species}.{build}.{release}.gtf",
         config="tmp/agat/config.yaml",
@@ -57,7 +57,7 @@ rule agat_convert_sp_gff2gtf:
         # Reserve 21Gb per attempt
         mem_mb=lambda wildcards, attempt: (1024 * 21) * attempt,
         # Reserve 20min per attempts
-        runtime=lambda wildcards, attempt: 20 * attempt,
+        runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir="tmp",
     shadow:
         "minimal"
@@ -73,41 +73,12 @@ rule agat_convert_sp_gff2gtf:
         "../scripts/agat_gff2gtf.py"
 
 
-rule agat_sq_filter_feature_from_fasta:
+rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
     input:
         gtf="tmp/agat/{species}.{build}.{release}.format.gtf",
-        fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
-        fasta_index="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
         config="tmp/agat/config.yaml",
     output:
-        gtf=temp("tmp/agat/{species}.{build}.{release}.chrom.gtf"),
-    threads: 1
-    resources:
-        # Reserve 16Gb per attempt
-        mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
-        # Reserve 20min per attempts
-        runtime=lambda wildcards, attempt: 20 * attempt,
-        tmpdir="tmp",
-    shadow:
-        "minimal"
-    log:
-        "logs/agat/filter_feature_from_fasta/{species}.{build}.{release}.log",
-    benchmark:
-        "benchmark/agat/filter_feature_from_fasta/{species}.{build}.{release}.tsv"
-    params:
-        extra=config.get("params", {}).get("agat", {}).get("filter_features", ""),
-    conda:
-        "../envs/agat.yaml"
-    script:
-        "../scripts/agat_filter_feature_from_fasta.py"
-
-
-rule agat_sp_filter_feature_by_attribute_value:
-    input:
-        gtf="tmp/agat/{species}.{build}.{release}.chrom.gtf",
-        config="tmp/agat/config.yaml",
-    output:
-        gtf="reference/annotation/{species}.{build}.{release}.gtf",
+        gtf=temp("tmp/agat/{species}.{build}.{release}.filtered.gtf"),
         discarded=temp("tmp/agat/{species}.{build}.{release}.features_discarded.txt"),
         report=temp("tmp/agat/{species}.{build}.{release}.feaures_report.txt"),
     threads: 1
@@ -115,7 +86,7 @@ rule agat_sp_filter_feature_by_attribute_value:
         # Reserve 16Gb per attempt (max_vms: 12786.95 on Flamingo)
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
         # Reserve 20min per attempts (hg38: 0:14:50 on Flamingo)
-        runtime=lambda wildcards, attempt: 20 * attempt,
+        runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir="tmp",
     shadow:
         "minimal"
@@ -133,7 +104,42 @@ rule agat_sp_filter_feature_by_attribute_value:
         "../scripts/agat_filter_feature_by_attribute_value.py"
 
 
-use rule agat_sp_filter_feature_by_attribute_value as agat_sp_filter_feature_by_attribute_value_cdna with:
+rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
+    input:
+        gtf=branch(
+            agat_sp_filter_feature_by_attribute_value_has_non_null_params(
+                config=config
+            ),
+            "tmp/agat/{species}.{build}.{release}.filtered.gtf",
+            "tmp/agat/{species}.{build}.{release}.format.gtf",
+        ),
+        fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
+        fasta_index="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
+        config="tmp/agat/config.yaml",
+    output:
+        gtf="reference/annotation/{species}.{build}.{release}.gtf",
+    threads: 1
+    resources:
+        # Reserve 16Gb per attempt
+        mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
+        # Reserve 20min per attempts
+        runtime=lambda wildcards, attempt: 35 * attempt,
+        tmpdir="tmp",
+    shadow:
+        "minimal"
+    log:
+        "logs/agat/filter_feature_from_fasta/{species}.{build}.{release}.log",
+    benchmark:
+        "benchmark/agat/filter_feature_from_fasta/{species}.{build}.{release}.tsv"
+    params:
+        extra=config.get("params", {}).get("agat", {}).get("filter_features", ""),
+    conda:
+        "../envs/agat.yaml"
+    script:
+        "../scripts/agat_filter_feature_from_fasta.py"
+
+
+use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna with:
     input:
         gtf="reference/annotation/{species}.{build}.{release}.gtf",
         config="tmp/agat/config.yaml",

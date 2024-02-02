@@ -1,4 +1,4 @@
-rule tabix_index_dbsnp:
+rule fair_genome_indexer_tabix_index_dbsnp:
     input:
         "reference/variants/{species}.{build}.{release}.all.vcf.gz",
     output:
@@ -16,10 +16,10 @@ rule tabix_index_dbsnp:
     params:
         extra=config.get("params", {}).get("tabix", "-p vcf"),
     wrapper:
-        "v3.3.3/bio/tabix/index"
+        "v3.3.6/bio/tabix/index"
 
 
-use rule tabix_index_dbsnp as tabix_index_raw_dbsnp with:
+use rule fair_genome_indexer_tabix_index_dbsnp as fair_genome_indexer_tabix_index_raw_dbsnp with:
     input:
         "tmp/ensembl/{species}.{build}.{release}.all.vcf.gz",
     output:
