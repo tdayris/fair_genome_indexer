@@ -1,15 +1,21 @@
+# 3.1.2
+
+## Fixes:
+
+* Badges fixed
+
 # 3.1.1
 
 ## Features:
 
 * Raise snakemake validation up to 8.1+
 
-## Fixes
+## Fixes:
 
 * Latest changes raises the snakemake requirements up to v8.1+
 * rsync was added to the bash environment
 
-## Documentation
+## Documentation:
 
 * Users of Gustave Roussy's computing cluster (Flamingo) have a new environment
 
