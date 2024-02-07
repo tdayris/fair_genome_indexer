@@ -4,7 +4,7 @@ import snakemake.utils
 
 from typing import Any, NamedTuple
 
-snakemake.utils.min_version("7.29.0")
+snakemake.utils.min_version("8.1.0")
 
 
 # containerized: "docker://snakemake/snakemake:v8.4.5"

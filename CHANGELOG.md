@@ -1,3 +1,18 @@
+# 3.1.1
+
+## Features:
+
+* Raise snakemake validation up to 8.1+
+
+## Fixes
+
+* Latest changes raises the snakemake requirements up to v8.1+
+* rsync was added to the bash environment
+
+## Documentation
+
+* Users of Gustave Roussy's computing cluster (Flamingo) have a new environment
+
 # 3.1.0
 
 ## Features:
@@ -10,6 +25,11 @@
 * Append pipeline name to all rule names in order to keep rule origin in future import, without breaking inner rule inheritence
 * timestamp ignored for genome indexes to avoid cluster touch issues
 * default ensembl-release set to 111
+
+
+## Known bug:
+
+* Snakemake v8.1+ required. See version 3.1.1 above.
 
 
 # 3.0.1
