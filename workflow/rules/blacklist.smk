@@ -4,11 +4,10 @@ rule fair_genome_indexer_blacklist_grch38:
         temp("tmp/blacklist/homo_sapiens.GRCh38.{release}.bed.gz"),
     threads: 1
     resources:
-        # Reserve 500Mb per attempt (max_vms: 347.80 on Flamingo)
         mem_mb=lambda wildcards, attempt: 500 * attempt,
-        # Reserve 10min per attempts (hg38: 0:2:07 on Flamingo)
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/ftp/blacklist/homo_sapiens.GRCh38.{release}.log",
     benchmark:

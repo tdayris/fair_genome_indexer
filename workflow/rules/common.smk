@@ -1,4 +1,5 @@
 import csv
+import os
 import pandas
 import snakemake.utils
 
@@ -49,6 +50,30 @@ wildcard_constraints:
     build=r"|".join(build_list),
     species=r"|".join(species_list),
     datatype=r"|".join(datatype_list),
+
+
+def get_partition(
+    wildcards: snakemake.io.Wildcards,
+    attempt: int,
+    multiplier: int = 1,
+    config: dict[str, Any] = config,
+) -> str | None:
+    """
+    If, and only if pipeline is run at Gustave Roussy, this function returns a
+    string. Else, it returns None.
+    """
+    hostname: str = os.environ.get("HOSTNAME").lower()
+    runtime: int = attempt * multiplier
+    if hostname.startswith("flamingo"):
+        if runtime <= 60 * 6:
+            return "shortq"
+        if job.resources.runtime <= 60 * 24:
+            partition = "mediumq"
+        if job.resources.runtime <= 60 * 24 * 7:
+            partition = "longq"
+        if job.resources.runtime <= 60 * 24 * 60:
+            partition = "verylongq"
+        return "shortq"
 
 
 def agat_sp_filter_feature_by_attribute_value_has_non_null_params(

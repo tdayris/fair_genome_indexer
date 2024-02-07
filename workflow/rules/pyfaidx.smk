@@ -2,15 +2,16 @@ rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
     input:
         fasta="tmp/fasta/{species}.{build}.{release}.{datatype}.fasta",
     output:
-        ensure("tmp/pyfaidx/{species}.{build}.{release}.{datatype}.fasta", non_empty=True),
+        ensure(
+            "tmp/pyfaidx/{species}.{build}.{release}.{datatype}.fasta", non_empty=True
+        ),
         temp("tmp/fasta/{species}.{build}.{release}.{datatype}.fasta.fai"),
     threads: 1
     resources:
-        # Reserve 1GB per attempt
         mem_mb=lambda wildcards, attempt: 1024 * attempt,
-        # Reserve 5 minutes per attempt
         runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 5),
     log:
         "logs/pyfaidx/fasta_sequence/{species}.{build}.{release}.{datatype}.log",
     benchmark:
@@ -31,14 +32,15 @@ rule fair_genome_indexer_rsync_make_fasta_available:
             otherwise="tmp/fasta/{species}.{build}.{release}.dna.fasta",
         ),
     output:
-        "reference/sequences/{species}.{build}.{release}.dna.fasta"
+        "reference/sequences/{species}.{build}.{release}.dna.fasta",
     threads: 1
     resources:
         mem_mb=512,
         runtime=lambda wildcards, attempt: attempt * 10,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
-        "logs/rsync/{species}.{build}.{release}.dna.fasta.log"
+        "logs/rsync/{species}.{build}.{release}.dna.fasta.log",
     benchmark:
         "benchmark/rsync/{species}.{build}.{release}.dna.fasta.tsv"
     params:

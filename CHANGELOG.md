@@ -1,5 +1,9 @@
 # 3.1.2
 
+## Features:
+
+* Partition handled in resources for Gustave Roussy's cluster only.
+
 ## Fixes:
 
 * Badges fixed

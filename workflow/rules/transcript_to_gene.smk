@@ -34,11 +34,10 @@ rule fair_genome_indexer_xsv_select_t2g_columns:
         temp("tmp/xsv/select/{species}.{build}.{release}.t2g.tsv"),
     threads: 1
     resources:
-        # Reserve 2Gb per attempt
         mem_mb=lambda wildcards, attempt: (1024 * 2) * attempt,
-        # Reserve 10min per attempts
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/xsv/select_columns/{species}.{build}.{release}.log",
     benchmark:

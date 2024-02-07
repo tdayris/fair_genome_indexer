@@ -5,11 +5,10 @@ rule fair_genome_indexer_pyroe_id_to_name:
         "reference/annotation/{species}.{build}.{release}.id_to_gene.tsv",
     threads: 1
     resources:
-        # Reserve 9Gb per attempt (max_vms: 8247.39 on Flamingo)
         mem_mb=lambda wildcards, attempt: (1024 * 9) * attempt,
-        # Reserve 10min per attempts (hg38: 0:01:03 on Flamingo)
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/pyroe/id2name/{species}.{build}.{release}.log",
     benchmark:

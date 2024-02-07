@@ -3,11 +3,10 @@ rule fair_genome_indexer_agat_config:
         yaml=temp("tmp/agat/config.yaml"),
     threads: 1
     resources:
-        # Reserve 512Mb per attempt
         mem_mb=lambda wildcards, attempt: 512 * attempt,
-        # Reserve 2min per attempts
         runtime=lambda wildcards, attempt: 2 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 2),
     log:
         "logs/agat/config.log",
     benchmark:
@@ -54,11 +53,10 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
         gtf=temp("tmp/agat/{species}.{build}.{release}.format.gtf"),
     threads: 1
     resources:
-        # Reserve 21Gb per attempt
         mem_mb=lambda wildcards, attempt: (1024 * 21) * attempt,
-        # Reserve 20min per attempts
         runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 35),
     shadow:
         "minimal"
     log:
@@ -83,11 +81,10 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
         report=temp("tmp/agat/{species}.{build}.{release}.feaures_report.txt"),
     threads: 1
     resources:
-        # Reserve 16Gb per attempt (max_vms: 12786.95 on Flamingo)
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
-        # Reserve 20min per attempts (hg38: 0:14:50 on Flamingo)
         runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 35),
     shadow:
         "minimal"
     log:
@@ -120,11 +117,10 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
         gtf="reference/annotation/{species}.{build}.{release}.gtf",
     threads: 1
     resources:
-        # Reserve 16Gb per attempt
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
-        # Reserve 20min per attempts
         runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 35),
     shadow:
         "minimal"
     log:

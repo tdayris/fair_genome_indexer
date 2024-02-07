@@ -5,10 +5,10 @@ rule fair_genome_indexer_tabix_index_dbsnp:
         "reference/variants/{species}.{build}.{release}.all.vcf.gz.tbi",
     threads: 1
     resources:
-        # Reserve 700Mb per attempt
         mem_mb=lambda wildcards, attempt: 700 * attempt,
-        # Reserve 10min per attempts
         runtime=lambda wildcards, attempt: 10 * attempt,
+        tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/tabix/index/{species}.{build}.{release}.all.log",
     benchmark:

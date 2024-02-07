@@ -3,11 +3,10 @@ rule fair_genome_indexer_get_genome_vcf_variations:
         temp("tmp/ensembl/{species}.{build}.{release}.{datatype}.vcf.gz"),
     threads: 1
     resources:
-        # Reserve 700Mb per attempt (max_vms: 691.63 on Flamingo)
         mem_mb=lambda wildcards, attempt: 700 * attempt,
-        # Reserve 1h per attempts (hg38: 0:56:07 on Flamingo)
         runtime=lambda wildcards, attempt: 60 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 60),
     log:
         "logs/get_genome/fasta_sequence/{species}.{build}.{release}.{datatype}.log",
     benchmark:

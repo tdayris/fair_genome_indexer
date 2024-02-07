@@ -6,11 +6,10 @@ rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
         temp("tmp/pyfaidx/bed/{species}.{build}.{release}.dna.bed"),
     threads: 1
     resources:
-        # Reserve 1GB per attempt
         mem_mb=lambda wildcards, attempt: 1024 * attempt,
-        # Reserve 5 minutes per attempt
         runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 5),
     log:
         "logs/pyfaidx/bed/{species}.{build}.{release}.dna.log",
     benchmark:
@@ -32,11 +31,10 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
         "reference/variants/{species}.{build}.{release}.all.vcf.gz",
     threads: 2
     resources:
-        # Reserve 4GB per attempt
         mem_mb=lambda wildcards, attempt: (1024 * 4) * attempt,
-        # Reserve 15 minutes per attempt
         runtime=lambda wildcards, attempt: 15 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 15),
     log:
         "logs/bcftools/filter/{species}.{build}.{release}.log",
     benchmark:

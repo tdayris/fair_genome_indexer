@@ -7,11 +7,10 @@ rule fair_genome_indexer_gffread_transcripts:
         records="reference/sequences/{species}.{build}.{release}.transcripts.fasta",
     threads: 1
     resources:
-        # Reserve 4Gb per attempt
         mem_mb=lambda wildcards, attempt: (1024 * 4) * attempt,
-        # Reserve 20min per attempts
         runtime=lambda wildcards, attempt: 20 * attempt,
         tmpdir="tmp",
+        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 20),
     log:
         "logs/gffread/{species}.{build}.{release}.transcripts.log",
     benchmark:
