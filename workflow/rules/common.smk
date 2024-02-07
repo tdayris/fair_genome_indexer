@@ -7,9 +7,7 @@ from typing import Any, NamedTuple
 snakemake.utils.min_version("7.29.0")
 
 
-containerized: "docker://snakemake/snakemake:v8.4.3"
-
-
+# containerized: "docker://snakemake/snakemake:v8.4.5"
 # containerized: "docker://mambaorg/micromamba:git-8440cec-jammy-cuda-12.2.0"
 # containerized: "docker://condaforge/mambaforge:23.3.1-1"
 
@@ -65,12 +63,31 @@ def agat_sp_filter_feature_by_attribute_value_has_non_null_params(
 
     Parameters:
     config  (dict[str, Any]): User provided configuration file
+
+    Return: boolean
     """
     return (
         config.get("params", {})
         .get("agat", {})
         .get("select_feature_by_attribute_value")
     )
+
+
+def is_variation_available(genome_property: str) -> bool:
+    """
+    Snakemake-wrapper that downloads ensembl variations
+    only supports releases 98 and above.
+
+    Parameters:
+    genome_property (str) : The genome unique identifier {species}.{build}.{release}
+    """
+    availability: bool = False
+    try:
+        availability = int(genome_property.split(".")[-1]) >= 98
+    except ValueError:
+        pass
+    finally:
+        return availability
 
 
 def get_fair_genome_indexer_target(
@@ -118,12 +135,12 @@ def get_fair_genome_indexer_target(
         ),
         "vcf": expand(
             "reference/variants/{genomes_property}.{datatype}.vcf.gz",
-            genomes_property=genomes_properties,
+            genomes_property=filter(is_variation_available, genomes_properties),
             datatype=["all"],
         ),
         "vcf_tbi": expand(
             "reference/variants/{genomes_property}.{datatype}.vcf.gz.tbi",
-            genomes_property=genomes_properties,
+            genomes_property=filter(is_variation_available, genomes_properties),
             datatype=["all"],
         ),
         "id2name": expand(

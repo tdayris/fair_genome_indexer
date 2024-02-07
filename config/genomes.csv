@@ -1,4 +1,6 @@
 species,build,release
-homo_sapiens,GRCh38,110
+homo_sapiens,GRCh37,75
+homo_sapiens,GRCh38,111
+mus_musculus,NCBIM37,67
 mus_musculus,GRCm38,99
-mus_musculus,GRCm39,110
+mus_musculus,GRCm39,111
