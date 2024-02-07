@@ -62,7 +62,7 @@ def get_partition(
     If, and only if pipeline is run at Gustave Roussy, this function returns a
     string. Else, it returns None.
     """
-    hostname: str = os.environ.get("HOSTNAME").lower()
+    hostname: str = os.environ.get("HOSTNAME", "").lower()
     runtime: int = attempt * multiplier
     if hostname.startswith("flamingo"):
         if runtime <= 60 * 6:
