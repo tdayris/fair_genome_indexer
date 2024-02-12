@@ -14,6 +14,6 @@ rule fair_genome_indexer_bedtools_merge_blacklist:
     benchmark:
         "benchmark/bedtools/merge/{species}.{build}.{release}.tsv"
     params:
-        extra="-d 5",
+        extra=lookup(dpath="params/bedtools/merge", within=config),
     wrapper:
         "v3.3.6/bio/bedtools/merge"

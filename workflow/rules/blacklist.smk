@@ -14,7 +14,7 @@ rule fair_genome_indexer_blacklist_grch38:
         "benchmark/wget/blacklist/homo_sapiens.GRCh38.{release}.tsv"
     params:
         address="https://github.com/Boyle-Lab/Blacklist/raw/master/lists/Blacklist_v1/hg38-blacklist.bed.gz",
-        extra="--verbose",
+        extra=lookup(dpath="params/wget", within=config),
     conda:
         "../envs/bash.yaml"
     shell:

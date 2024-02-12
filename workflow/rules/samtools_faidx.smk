@@ -14,6 +14,6 @@ rule fair_genome_indexer_samtools_index:
     benchmark:
         "benchmark/samtools/faidx/{species}.{build}.{release}.{datatype}.tsv"
     params:
-        extra=config.get("params", {}).get("samtools", {}).get("faidx", ""),
+        extra=lookup(dpath="params/samtools/faidx", within=config),
     wrapper:
         "v3.3.6/bio/samtools/faidx"

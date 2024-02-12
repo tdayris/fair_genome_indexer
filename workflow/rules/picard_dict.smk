@@ -14,8 +14,6 @@ rule fair_genome_indexer_picard_create_dict:
     benchmark:
         "benchmark/picard/create_dict/{species}.{build}.{release}.{datatype}.tsv"
     params:
-        extra=config.get("params", {})
-        .get("picard", {})
-        .get("createsequencedictionary", ""),
+        extra=lookup(dpath="params/picard/createsequencedictionary", within=config),
     wrapper:
         "v3.3.6/bio/picard/createsequencedictionary"

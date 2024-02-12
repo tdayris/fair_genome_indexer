@@ -16,7 +16,7 @@ rule fair_genome_indexer_gffread_transcripts:
     benchmark:
         "benchmark/gffread/{species}.{build}.{release}.transcripts.tsv"
     params:
-        extra=config.get("params", {}).get("gffread", ""),
+        extra=lookup(dpath="params/gffread", within=config),
     wrapper:
         "v3.3.6/bio/gffread"
 

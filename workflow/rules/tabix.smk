@@ -14,7 +14,7 @@ rule fair_genome_indexer_tabix_index_dbsnp:
     benchmark:
         "benchmark/tabix/index/{species}.{build}.{release}.all.tsv"
     params:
-        extra=config.get("params", {}).get("tabix", "-p vcf"),
+        extra=lookup(dpath="params/tabix", within=config),
     wrapper:
         "v3.3.6/bio/tabix/index"
 

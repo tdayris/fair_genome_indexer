@@ -21,6 +21,9 @@ params:
     cdna:
       type: string
       description: Keep all cdna sequences
+    required:
+      - dna
+      - cdna
   agat:
     type: object
     description: Optional parameters for agat (filter/correct GTF format)
@@ -36,6 +39,10 @@ params:
     agat_convert_sp_gff2tsv: 
       type: string
       description: Optional parameters for agat_convert_sp_gff2tsv.pl
+    required:
+      - gff2gtf
+      - filter_features
+      - select_feature_by_attribute_value
   gffread:
     type: string
     descrption: Optional parameters for GFFRead
@@ -45,18 +52,51 @@ params:
     filter_non_canonical_chrom:
       type: string
       description: Optional parameters for filtering non-canonical chromosomes over dbSNP
+    merge:
+      type: string
+      description: Merge overlapping blacklist intervals
+    required:
+      - filter_non_canonical_chrom
+      - merge
+  tabix:
+    type: string
+    description: Optional parameters for tabix index VCF
   picard:
     type: object
     description: Optional parameters for picard command line
     createsequencedictionary:
       type: string
       description: Optional parameters for picard create sequence dictionary
+    required:
+      - createsequencedictionary
   samtools:
     type: object
     description: Optional parameters for samtools
     faidx:
       type: string
       description: Optional parameters for samtools fasta index
+    required:
+      - faidx
+  wget:
+    type: string
+    description: Optional parameters for wget downloads
+  rsync:
+    type: string
+    description: Optional parameters for rsync copy
+  pyroe:
+    type: string
+    description: Optional parameters for pyroe indexing
+  required:
+    - pyfaidx
+    - agat
+    - gffread
+    - bedtools
+    - tabix
+    - picard
+    - samtools
+    - wget
+    - rsync
+    - pyroe
 
 
 required:

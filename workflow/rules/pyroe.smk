@@ -14,6 +14,6 @@ rule fair_genome_indexer_pyroe_id_to_name:
     benchmark:
         "benchmark/pyroe/id2name/{species}.{build}.{release}.tsv"
     params:
-        extra="",
+        extra=lookup(dpath="params/pyroe/idtoname", within=config),
     wrapper:
         "v3.3.6/bio/pyroe/idtoname"

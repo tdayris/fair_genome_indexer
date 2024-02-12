@@ -1,3 +1,10 @@
+# 3.1.3
+
+## Features:
+
+* Use of `lookup` and `dpath` to reach values in configuration file
+* All keys in configuration must be present in configuration file
+
 # 3.1.2
 
 ## Features:

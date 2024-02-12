@@ -64,7 +64,7 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     benchmark:
         "benchmark/agat/gff2gtf/{species}.{build}.{release}.tsv"
     params:
-        extra=config.get("params", {}).get("agat", {}).get("gff2gtf", ""),
+        extra=lookup(dpath="params/agat/gff2gtf", within=config),
     conda:
         "../envs/agat.yaml"
     script:
@@ -92,9 +92,9 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
     benchmark:
         "benchmark/agat/filter_feature_by_attribute_value/{species}.{build}.{release}.tsv"
     params:
-        extra=config.get("params", {})
-        .get("agat", {})
-        .get("select_feature_by_attribute_value", ""),
+        extra=lookup(
+            dpath="params/agat/select_feature_by_attribute_value", within=config
+        ),
     conda:
         "../envs/agat.yaml"
     script:
@@ -107,8 +107,8 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
             agat_sp_filter_feature_by_attribute_value_has_non_null_params(
                 config=config
             ),
-            "tmp/agat/{species}.{build}.{release}.filtered.gtf",
-            "tmp/agat/{species}.{build}.{release}.format.gtf",
+            then="tmp/agat/{species}.{build}.{release}.filtered.gtf",
+            otherwise="tmp/agat/{species}.{build}.{release}.format.gtf",
         ),
         fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
         fasta_index="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
@@ -128,7 +128,7 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     benchmark:
         "benchmark/agat/filter_feature_from_fasta/{species}.{build}.{release}.tsv"
     params:
-        extra=config.get("params", {}).get("agat", {}).get("filter_features", ""),
+        extra=lookup(dpath="params/agat/filter_features", within=config),
     conda:
         "../envs/agat.yaml"
     script:

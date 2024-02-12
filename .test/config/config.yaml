@@ -3,7 +3,7 @@ params:
   # Optional parameters for pyfaidx (filter/correct fasta format)
   pyfaidx:
     # Filter-out non canonical chromosomes
-    dna: ""
+    dna: '--regex "^[[0-9]+|X|Y|MT]"'
     # Keep all cdna sequences
     cdna: ""
   # Optional parameters for agat (filter/correct GTF format)
@@ -15,16 +15,33 @@ params:
     # Optional parameters for agat_sq_select_feature_by_attribute_value.pl
     select_feature_by_attribute_value: "--attribute 'transcript_support_level' --value '\"NA\"' --test '='"
     # Optional parameters for agat_convert_sp_gff2tsv
-    agat_convert_sp_gff2tsv: ""
+    # agat_convert_sp_gff2tsv: ""
   # Optional parameters for GFFRead
   gffread: ""
   # Optional parameters for bedtools
   bedtools:
     # Optional parameters for filtering non-canonical chromosomes over dbSNP
     filter_non_canonical_chrom: ""
+    # Merge overlapping blacklist intervals
+    merge: "-d 5"
   # Optional parameters for tabix index VCF
   tabix: "-p vcf"
+  # Optional parameters for picard command line
+  picard:
+    # Optional parameters for picard create sequence dictionary
+    createsequencedictionary: ""
+  # Optional parameters for samtools
+  samtools:
+    # Optional parameters for samtools fasta index
+    faidx: ""
+  # Optional parameters for wget
+  wget: "--verbose"
+  # Optional parameters for rsync
+  rsync: "--verbose --checksum --force --human-readable --progress"
+  # Optional parameters for pyroe
+  pyroe:
+    # Optional parameters for ID 2 name
+    idtoname: ""
 
 # Optional path to genome file
 genomes: config/genomes.csv
-

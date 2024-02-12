@@ -40,6 +40,6 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
     benchmark:
         "benchmark/bcftools/filter/{species}.{build}.{release}.tsv"
     params:
-        extra=config.get("bcftools", {}).get("filter_non_canonical_chrom", ""),
+        extra=lookup(dpath="params/bedtools/filter_non_canonical_chrom", within=config),
     wrapper:
         "v3.3.6/bio/bcftools/filter"

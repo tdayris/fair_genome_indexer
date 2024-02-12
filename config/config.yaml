@@ -22,6 +22,8 @@ params:
   bedtools:
     # Optional parameters for filtering non-canonical chromosomes over dbSNP
     filter_non_canonical_chrom: ""
+    # Merge overlapping blacklist intervals
+    merge: "-d 5"
   # Optional parameters for tabix index VCF
   tabix: "-p vcf"
   # Optional parameters for picard command line
@@ -32,6 +34,14 @@ params:
   samtools:
     # Optional parameters for samtools fasta index
     faidx: ""
+  # Optional parameters for wget
+  wget: "--verbose"
+  # Optional parameters for rsync
+  rsync: "--verbose --checksum --force --human-readable --progress"
+  # Optional parameters for pyroe
+  pyroe:
+    # Optional parameters for ID 2 name
+    idtoname: ""
 
 # Optional path to genome file
 genomes: config/genomes.csv
