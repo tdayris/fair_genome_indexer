@@ -104,8 +104,8 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
 rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     input:
         gtf=branch(
-            agat_sp_filter_feature_by_attribute_value_has_non_null_params(
-                config=config
+            lookup(
+                dpath="params/agat/select_feature_by_attribute_value", within=config
             ),
             then="tmp/agat/{species}.{build}.{release}.filtered.gtf",
             otherwise="tmp/agat/{species}.{build}.{release}.format.gtf",

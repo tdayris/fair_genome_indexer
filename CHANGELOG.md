@@ -1,5 +1,7 @@
 # 3.1.3
 
+Snakemake minumum version: 8.4.8
+
 ## Features:
 
 * Use of `lookup` and `dpath` to reach values in configuration file

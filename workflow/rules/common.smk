@@ -5,7 +5,7 @@ import snakemake.utils
 
 from typing import Any, NamedTuple
 
-snakemake.utils.min_version("8.1.0")
+snakemake.utils.min_version("8.4.8")
 
 
 # containerized: "docker://snakemake/snakemake:v8.4.5"
@@ -74,28 +74,6 @@ def get_partition(
         if job.resources.runtime <= 60 * 24 * 60:
             partition = "verylongq"
         return "shortq"
-
-
-def agat_sp_filter_feature_by_attribute_value_has_non_null_params(
-    config: dict[str, Any] = config
-) -> bool:
-    """
-    Return True if the configuration file has a parameter for the rule
-    agat_sp_filter_feature_by_attribute_value, else return False.
-
-    This is here because agat cannot work with null parameters and sometimes,
-    there is no filter to be done over GTF/GFF file.
-
-    Parameters:
-    config  (dict[str, Any]): User provided configuration file
-
-    Return: boolean
-    """
-    return (
-        config.get("params", {})
-        .get("agat", {})
-        .get("select_feature_by_attribute_value")
-    )
 
 
 def is_variation_available(genome_property: str) -> bool:
