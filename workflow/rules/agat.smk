@@ -1,6 +1,6 @@
 rule fair_genome_indexer_agat_config:
     output:
-        yaml=temp("tmp/agat/config.yaml"),
+        yaml=temp("tmp/fair_genome_indexer/agat_config/config.yaml"),
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 512 * attempt,
@@ -8,9 +8,9 @@ rule fair_genome_indexer_agat_config:
         tmpdir="tmp",
         slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 2),
     log:
-        "logs/agat/config.log",
+        "logs/fair_genome_indexer/agat_config.log",
     benchmark:
-        "benchmark/agat/config.tsv"
+        "benchmark/fair_genome_indexer/agat_config.tsv"
     params:
         config={
             "output_format": "GTF",
@@ -47,10 +47,12 @@ rule fair_genome_indexer_agat_config:
 
 rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     input:
-        gtf="tmp/{species}.{build}.{release}.gtf",
-        config="tmp/agat/config.yaml",
+        gtf="tmp/fair_genome_indexer/get_genome_gtf_annotation{species}.{build}.{release}.gtf",
+        config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
-        gtf=temp("tmp/agat/{species}.{build}.{release}.format.gtf"),
+        gtf=temp(
+            "tmp/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf"
+        ),
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 21) * attempt,
@@ -60,9 +62,9 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     shadow:
         "minimal"
     log:
-        "logs/agat/gff2gtf/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/agat/gff2gtf/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.tsv"
     params:
         extra=lookup(dpath="params/agat/gff2gtf", within=config),
     conda:
@@ -73,12 +75,18 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
 
 rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
     input:
-        gtf="tmp/agat/{species}.{build}.{release}.format.gtf",
-        config="tmp/agat/config.yaml",
+        gtf="tmp/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf",
+        config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
-        gtf=temp("tmp/agat/{species}.{build}.{release}.filtered.gtf"),
-        discarded=temp("tmp/agat/{species}.{build}.{release}.features_discarded.txt"),
-        report=temp("tmp/agat/{species}.{build}.{release}.feaures_report.txt"),
+        gtf=temp(
+            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.filtered.gtf"
+        ),
+        discarded=temp(
+            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.features_discarded.txt"
+        ),
+        report=temp(
+            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.feaures_report.txt"
+        ),
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
@@ -88,9 +96,9 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
     shadow:
         "minimal"
     log:
-        "logs/agat/filter_feature_by_attribute_value/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/agat/filter_feature_by_attribute_value/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.tsv"
     params:
         extra=lookup(
             dpath="params/agat/select_feature_by_attribute_value", within=config
@@ -107,12 +115,12 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
             lookup(
                 dpath="params/agat/select_feature_by_attribute_value", within=config
             ),
-            then="tmp/agat/{species}.{build}.{release}.filtered.gtf",
-            otherwise="tmp/agat/{species}.{build}.{release}.format.gtf",
+            then="tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.filtered.gtf",
+            otherwise="tmp/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf",
         ),
         fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
         fasta_index="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
-        config="tmp/agat/config.yaml",
+        config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
         gtf="reference/annotation/{species}.{build}.{release}.gtf",
     threads: 1
@@ -124,9 +132,9 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     shadow:
         "minimal"
     log:
-        "logs/agat/filter_feature_from_fasta/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer/agat_sq_filter_feature_from_fasta/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/agat/filter_feature_from_fasta/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer/agat_sq_filter_feature_from_fasta/{species}.{build}.{release}.tsv"
     params:
         extra=lookup(dpath="params/agat/filter_features", within=config),
     conda:
@@ -138,16 +146,20 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
 use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna with:
     input:
         gtf="reference/annotation/{species}.{build}.{release}.gtf",
-        config="tmp/agat/config.yaml",
+        config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
-        gtf=temp("tmp/agat/{species}.{build}.{release}.cdna.gtf"),
+        gtf=temp(
+            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.cdna.gtf"
+        ),
         discarded=temp(
             "tmp/agat/{species}.{build}.{release}.cdna.feature_discarded.txt"
         ),
-        report=temp("tmp/agat/{species}.{build}.{release}.cdna.feaures_report.txt"),
+        report=temp(
+            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.cdna.feaures_report.txt"
+        ),
     log:
-        "logs/agat/filter_cdna/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/agat/filter_cdna/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.tsv"
     params:
         extra="--attribute transcript_biotype --value '\"protein_coding\"' --test '='",

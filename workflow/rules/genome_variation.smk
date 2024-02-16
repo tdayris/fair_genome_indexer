@@ -1,6 +1,8 @@
 rule fair_genome_indexer_get_genome_vcf_variations:
     output:
-        temp("tmp/ensembl/{species}.{build}.{release}.{datatype}.vcf.gz"),
+        temp(
+            "tmp/fair_genome_indexer/get_genome_vcf_variations/{species}.{build}.{release}.{datatype}.vcf.gz"
+        ),
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 700 * attempt,
@@ -8,9 +10,9 @@ rule fair_genome_indexer_get_genome_vcf_variations:
         tmpdir="tmp",
         slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 60),
     log:
-        "logs/get_genome/fasta_sequence/{species}.{build}.{release}.{datatype}.log",
+        "logs/fair_genome_indexer/get_genome_vcf_variations/{species}.{build}.{release}.{datatype}.log",
     benchmark:
-        "benchmark/reference/ensembl-annotation/{species}.{build}.{release}.{datatype}.tsv"
+        "benchmark/fair_genome_indexer/get_genome_vcf_variations/{species}.{build}.{release}.{datatype}.tsv"
     params:
         species="{species}",
         type="{datatype}",

@@ -15,7 +15,7 @@ params:
     # Optional parameters for agat_sq_select_feature_by_attribute_value.pl
     select_feature_by_attribute_value: "--attribute 'transcript_support_level' --value '\"NA\"' --test '='"
     # Optional parameters for agat_convert_sp_gff2tsv
-    # agat_convert_sp_gff2tsv: ""
+    agat_convert_sp_gff2tsv: ""
   # Optional parameters for GFFRead
   gffread: ""
   # Optional parameters for bedtools

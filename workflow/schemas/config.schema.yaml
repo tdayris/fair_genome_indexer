@@ -43,6 +43,7 @@ params:
       - gff2gtf
       - filter_features
       - select_feature_by_attribute_value
+      - agat_convert_sp_gff2tsv
   gffread:
     type: string
     descrption: Optional parameters for GFFRead

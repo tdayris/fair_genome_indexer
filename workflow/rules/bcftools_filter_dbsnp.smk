@@ -3,7 +3,9 @@ rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
         fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
         fai=ancient("reference/sequences/{species}.{build}.{release}.dna.fasta.fai"),
     output:
-        temp("tmp/pyfaidx/bed/{species}.{build}.{release}.dna.bed"),
+        temp(
+            "tmp/fair_genome_indexer/pyfaidx_fasta_dict_to_bed/{species}.{build}.{release}.dna.bed"
+        ),
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 1024 * attempt,
@@ -11,9 +13,9 @@ rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
         tmpdir="tmp",
         slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 5),
     log:
-        "logs/pyfaidx/bed/{species}.{build}.{release}.dna.log",
+        "logs/fair_genome_indexer/pyfaidx_fasta_dict_to_bed/{species}.{build}.{release}.dna.log",
     benchmark:
-        "benchmark/pyfaidx/bed/{species}.{build}.{release}.dna.tsv"
+        "benchmark/fair_genome_indexer/pyfaidx_fasta_dict_to_bed/{species}.{build}.{release}.dna.tsv"
     params:
         extra="",
     conda:
@@ -24,9 +26,13 @@ rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
 
 rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
     input:
-        "tmp/ensembl/{species}.{build}.{release}.all.vcf.gz",
-        tbi=ancient("tmp/ensembl/{species}.{build}.{release}.all.vcf.gz.tbi"),
-        regions=ancient("tmp/pyfaidx/bed/{species}.{build}.{release}.dna.bed"),
+        "tmp/fair_genome_indexer/get_genome_vcf_variations/{species}.{build}.{release}.all.vcf.gz",
+        tbi=ancient(
+            "tmp/fair_genome_indexer/get_genome_vcf_variations/{species}.{build}.{release}.all.vcf.gz.tbi"
+        ),
+        regions=ancient(
+            "tmp/fair_genome_indexer/pyfaidx_fasta_dict_to_bed/{species}.{build}.{release}.dna.bed"
+        ),
     output:
         "reference/variants/{species}.{build}.{release}.all.vcf.gz",
     threads: 2
@@ -36,9 +42,9 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
         tmpdir="tmp",
         slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 15),
     log:
-        "logs/bcftools/filter/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer/bcftools_filter_non_canonical_chrom/{species}.{build}.{release}.all.log",
     benchmark:
-        "benchmark/bcftools/filter/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer/bcftools_filter_non_canonical_chrom/{species}.{build}.{release}.all.tsv"
     params:
         extra=lookup(dpath="params/bedtools/filter_non_canonical_chrom", within=config),
     wrapper:

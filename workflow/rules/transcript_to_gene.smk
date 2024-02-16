@@ -1,7 +1,7 @@
 rule fair_genome_indexer_agat_convert_sp_gff2tsv:
     input:
         gtf="reference/annotation/{species}.{build}.{release}.gtf",
-        config="tmp/agat/config.yaml",
+        config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
         tsv=temp("tmp/agat/{species}.{build}.{release}.t2g.tsv"),
     threads: 1
@@ -18,9 +18,7 @@ rule fair_genome_indexer_agat_convert_sp_gff2tsv:
     benchmark:
         "benchmark/agat/agat_convert_sp_gff2tsv/{species}.{build}.{release}.tsv"
     params:
-        extra=config.get("params", {})
-        .get("agat", {})
-        .get("agat_convert_sp_gff2tsv", ""),
+        extra=lookup(dpath="params/agat/agat_convert_sp_gff2tsv", within=config),
     conda:
         "../envs/agat.yaml"
     script:

@@ -18,6 +18,46 @@ The expected results of this pipeline are described [here](https://github.com/td
 
 The tools used in this pipeline are described [here](https://github.com/tdayris/fair_genome_indexer/blob/main/workflow/reports/workflow.rst) textually.
 
+```
+                                                                                                                        ┌────────────────────────┐
+                                                                ┌───────────────────────┐                               │     Wget               │       ┌────────────────────────┐
+┌──────────────────────┐                                        │        Wget           │                               │ Download DNA GTF       │       │     Wget               │
+│   Wget               │                                        │ Download DNA Fasta    │                               └──────────┬─────────────┘       │ Download black-lists   │
+│ Download SNP         │                                        └──────────┬────────────┘                                          │                     └────────────────────────┘
+└─────────┬────────────┘                                                   │                                                       │
+          │                  ┌─────────────────────┐            ┌──────────▼────────────┐                               ┌──────────▼─────────────┐
+          │                  │    Samtools         ◄────────────┤        Agat           │                               │    Agat                │
+          ├──────────────────┤ Index DNA sequences │            │ Remove non-canonical  ├───────────────────────────────►Remove non-canonical    │
+          │                  └─────────────────────┘            │ chromosomes           │                               │chromosomes             │
+┌─────────▼────────────┐                                        └──┬──────────┬─────────┘                               └──────────┬─────────────┘
+│   Agat               │     ┌─────────────────────┐               │          │                                                    │
+│ Remove non-canonical │     │    Picard           │               │          │                                                    │
+│ chromosomes          │     │ Create DNA Dict     ◄───────────────┘          │                                         ┌──────────▼─────────────┐
+└──────────────────────┘     └─────────────────────┘                          ├─────────────────────────────────────────┤    Agat                │
+                                                                              │                                         │Remove untrusted genic  │
+                                                                              │                                         │objects (transcripts)   │
+                                        ┌─────────────────────────────────────┤                          ┌──────────────┴──────────┬─────────────┘
+                                        │                                     │                          │                         │
+                                        │                                     │                          │                         │
+                                        │                                     │                          │                         │
+                                        │                                     │                          │                         │
+                              ┌─────────▼──────────┐              ┌───────────▼──────────┐      ┌────────▼───────────┐   ┌─────────▼───────────┐
+                              │       GffRead      │              │       GffRead        │      │    Pyroe           │   │     Agat            │
+                              │Extract transcripts │              │Extract cDNA sequences│      │Transcript ◄─► Gene │   │ Transcript ◄─► Gene │
+                              │sequences           │              │                      │      │(error proof)       │   │ (human readable)    │
+                              └─────────┬──────────┘              └───────────┬──────────┘      └────────────────────┘   └─────────────────────┘
+                                        │                                     │
+                                        │                                     │
+                                        │                                     │
+                                        │                                     │
+                              ┌─────────▼──────────┐              ┌───────────▼───────────┐
+                              │       Samtools     │              │      Samtools         │
+                              │Index transcripts   │              │Index cDNA sequences   │
+                              │sequences           │              │                       │
+                              └────────────────────┘              └───────────────────────┘
+
+```
+
 
 ## Step by step
 

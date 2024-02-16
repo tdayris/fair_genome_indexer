@@ -1,6 +1,6 @@
 rule fair_genome_indexer_bedtools_merge_blacklist:
     input:
-        "tmp/blacklist/{species}.{build}.{release}.bed.gz",
+        "tmp/fair_genome_indexer/blacklist/{species}.{build}.{release}.bed.gz",
     output:
         "reference/blacklist/{species}.{build}.{release}.merged.bed",
     threads: 2
@@ -10,9 +10,9 @@ rule fair_genome_indexer_bedtools_merge_blacklist:
         tmpdir="tmp",
         slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
-        "logs/bedtools/merge/blacklist/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer/bedtools_merge_blacklist/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/bedtools/merge/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer/bedtools_merge_blacklist/{species}.{build}.{release}.tsv"
     params:
         extra=lookup(dpath="params/bedtools/merge", within=config),
     wrapper:

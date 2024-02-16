@@ -1,3 +1,19 @@
+# 3.1.4
+
+## Features:
+
+* Usage updated
+* DAG as ascii art
+* tempfiles, logs and benchmarks paths reorganized: 
+    * `tmp/fair_fastqc_multiqc/{rule_name}/{wildcards}.{extension}`
+    * `log/fair_fastqc_multiqc/{rule_name}/{wildcards}.log`
+    * `benchmark/fair_fastqc_multiqc/{rule_name}/{wildcards}.tsv`
+
+
+## Fixes:
+
+* All `wget` commands lookup in configuration for optional parameters
+
 # 3.1.3
 
 Snakemake minumum version: 8.4.8

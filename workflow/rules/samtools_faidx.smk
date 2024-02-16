@@ -10,9 +10,9 @@ rule fair_genome_indexer_samtools_index:
         tmpdir="tmp",
         slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
-        "logs/samtools/faidx/{species}.{build}.{release}.{datatype}.log",
+        "logs/fair_genome_indexer/samtools_index/{species}.{build}.{release}.{datatype}.log",
     benchmark:
-        "benchmark/samtools/faidx/{species}.{build}.{release}.{datatype}.tsv"
+        "benchmark/fair_genome_indexer/samtools_index/{species}.{build}.{release}.{datatype}.tsv"
     params:
         extra=lookup(dpath="params/samtools/faidx", within=config),
     wrapper:

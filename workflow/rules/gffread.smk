@@ -12,9 +12,9 @@ rule fair_genome_indexer_gffread_transcripts:
         tmpdir="tmp",
         slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 20),
     log:
-        "logs/gffread/{species}.{build}.{release}.transcripts.log",
+        "logs/fair_genome_indexer/gffread_transcripts/{species}.{build}.{release}.transcripts.log",
     benchmark:
-        "benchmark/gffread/{species}.{build}.{release}.transcripts.tsv"
+        "benchmark/fair_genome_indexer/gffread_transcripts/{species}.{build}.{release}.transcripts.tsv"
     params:
         extra=lookup(dpath="params/gffread", within=config),
     wrapper:
@@ -24,10 +24,10 @@ rule fair_genome_indexer_gffread_transcripts:
 use rule fair_genome_indexer_gffread_transcripts as fair_genome_indexer_gffread_cdna with:
     input:
         fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
-        annotation="tmp/agat/{species}.{build}.{release}.cdna.gtf",
+        annotation="tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.cdna.gtf",
     output:
         records="reference/sequences/{species}.{build}.{release}.cdna.fasta",
     log:
-        "logs/gffread/{species}.{build}.{release}.cdna.log",
+        "logs/fair_genome_indexer/gffread_cdna/{species}.{build}.{release}.cdna.log",
     benchmark:
-        "benchmark/gffread/{species}.{build}.{release}.cdna.tsv"
+        "benchmark/fair_genome_indexer/gffread_cdna/{species}.{build}.{release}.cdna.tsv"

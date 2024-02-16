@@ -10,9 +10,9 @@ rule fair_genome_indexer_pyroe_id_to_name:
         tmpdir="tmp",
         slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
-        "logs/pyroe/id2name/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer/pyroe_id_to_name/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/pyroe/id2name/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer/pyroe_id_to_name/{species}.{build}.{release}.tsv"
     params:
         extra=lookup(dpath="params/pyroe/idtoname", within=config),
     wrapper:

@@ -1,6 +1,8 @@
 rule fair_genome_indexer_get_genome_gtf_annotation:
     output:
-        temp("tmp/{species}.{build}.{release}.gtf"),
+        temp(
+            "tmp/fair_genome_indexer/get_genome_gtf_annotation{species}.{build}.{release}.gtf"
+        ),
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 700 * attempt,
@@ -8,9 +10,9 @@ rule fair_genome_indexer_get_genome_gtf_annotation:
         tmpdir="tmp",
         slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
-        "logs/get_genome/gtf_annotation/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer/get_genome_gtf_annotation/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/reference/ensembl-annotation/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer/get_genome_gtf_annotation/{species}.{build}.{release}.tsv"
     params:
         species="{species}",
         build="{build}",
