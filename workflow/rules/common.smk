@@ -7,6 +7,7 @@ from typing import Any, NamedTuple
 
 snakemake.utils.min_version("8.4.8")
 
+
 container: "docker://snakemake/snakemake:v8.5.3"
 
 

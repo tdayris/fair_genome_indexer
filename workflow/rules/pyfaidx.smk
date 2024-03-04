@@ -14,7 +14,6 @@ rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
         mem_mb=lambda wildcards, attempt: 1024 * attempt,
         runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 5),
     log:
         "logs/fair_genome_indexer/pyfaidx_filter_out_noncanonical_chromosomes/{species}.{build}.{release}.{datatype}.log",
     benchmark:
@@ -41,7 +40,6 @@ rule fair_genome_indexer_rsync_make_fasta_available:
         mem_mb=512,
         runtime=lambda wildcards, attempt: attempt * 10,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.log",
     benchmark:
