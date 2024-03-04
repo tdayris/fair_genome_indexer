@@ -8,7 +8,6 @@ rule fair_genome_indexer_tabix_index_dbsnp:
         mem_mb=lambda wildcards, attempt: 700 * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/tabix/index/{species}.{build}.{release}.all.log",
     benchmark:
@@ -16,7 +15,7 @@ rule fair_genome_indexer_tabix_index_dbsnp:
     params:
         extra=lookup(dpath="params/tabix", within=config),
     wrapper:
-        "v3.3.6/bio/tabix/index"
+        "v3.4.1/bio/tabix/index"
 
 
 use rule fair_genome_indexer_tabix_index_dbsnp as fair_genome_indexer_tabix_index_raw_dbsnp with:

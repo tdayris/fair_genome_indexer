@@ -6,7 +6,6 @@ rule fair_genome_indexer_agat_config:
         mem_mb=lambda wildcards, attempt: 512 * attempt,
         runtime=lambda wildcards, attempt: 2 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 2),
     log:
         "logs/fair_genome_indexer/agat_config.log",
     benchmark:
@@ -58,7 +57,6 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
         mem_mb=lambda wildcards, attempt: (1024 * 21) * attempt,
         runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 35),
     shadow:
         "minimal"
     log:
@@ -92,7 +90,6 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
         runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 35),
     shadow:
         "minimal"
     log:
@@ -128,7 +125,6 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
         runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 35),
     shadow:
         "minimal"
     log:

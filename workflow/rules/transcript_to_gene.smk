@@ -6,9 +6,7 @@ rule fair_genome_indexer_agat_convert_sp_gff2tsv:
         tsv=temp("tmp/agat/{species}.{build}.{release}.t2g.tsv"),
     threads: 1
     resources:
-        # Reserve 16Gb per attempt (max_vms: 12786.95 on Flamingo)
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
-        # Reserve 20min per attempts (hg38: 0:14:50 on Flamingo)
         runtime=lambda wildcards, attempt: 20 * attempt,
         tmpdir="tmp",
     shadow:
@@ -35,7 +33,6 @@ rule fair_genome_indexer_xsv_select_t2g_columns:
         mem_mb=lambda wildcards, attempt: (1024 * 2) * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/xsv/select_columns/{species}.{build}.{release}.log",
     benchmark:
@@ -44,7 +41,7 @@ rule fair_genome_indexer_xsv_select_t2g_columns:
         subcommand="select",
         extra="transcript_id,gene_id,gene_name",
     wrapper:
-        "v3.3.6/utils/xsv"
+        "v3.4.1/utils/xsv"
 
 
 use rule fair_genome_indexer_xsv_select_t2g_columns as fair_genome_indexer_xsv_fmt_t2g with:

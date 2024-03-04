@@ -11,7 +11,6 @@ rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
         mem_mb=lambda wildcards, attempt: 1024 * attempt,
         runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 5),
     log:
         "logs/fair_genome_indexer/pyfaidx_fasta_dict_to_bed/{species}.{build}.{release}.dna.log",
     benchmark:
@@ -40,7 +39,6 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
         mem_mb=lambda wildcards, attempt: (1024 * 4) * attempt,
         runtime=lambda wildcards, attempt: 15 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 15),
     log:
         "logs/fair_genome_indexer/bcftools_filter_non_canonical_chrom/{species}.{build}.{release}.all.log",
     benchmark:
@@ -48,4 +46,4 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
     params:
         extra=lookup(dpath="params/bedtools/filter_non_canonical_chrom", within=config),
     wrapper:
-        "v3.3.6/bio/bcftools/filter"
+        "v3.4.1/bio/bcftools/filter"

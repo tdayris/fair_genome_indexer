@@ -7,10 +7,7 @@ from typing import Any, NamedTuple
 
 snakemake.utils.min_version("8.4.8")
 
-
-# containerized: "docker://snakemake/snakemake:v8.4.5"
-# containerized: "docker://mambaorg/micromamba:git-8440cec-jammy-cuda-12.2.0"
-# containerized: "docker://condaforge/mambaforge:23.3.1-1"
+container: "docker://snakemake/snakemake:v8.5.3"
 
 
 # Load and check configuration file
@@ -50,30 +47,6 @@ wildcard_constraints:
     build=r"|".join(build_list),
     species=r"|".join(species_list),
     datatype=r"|".join(datatype_list),
-
-
-def get_partition(
-    wildcards: snakemake.io.Wildcards,
-    attempt: int,
-    multiplier: int = 1,
-    config: dict[str, Any] = config,
-) -> str | None:
-    """
-    If, and only if pipeline is run at Gustave Roussy, this function returns a
-    string. Else, it returns None.
-    """
-    hostname: str = os.environ.get("HOSTNAME", "").lower()
-    runtime: int = attempt * multiplier
-    if hostname.startswith("flamingo"):
-        if runtime <= 60 * 6:
-            return "shortq"
-        if job.resources.runtime <= 60 * 24:
-            partition = "mediumq"
-        if job.resources.runtime <= 60 * 24 * 7:
-            partition = "longq"
-        if job.resources.runtime <= 60 * 24 * 60:
-            partition = "verylongq"
-        return "shortq"
 
 
 def is_variation_available(genome_property: str) -> bool:

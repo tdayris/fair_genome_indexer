@@ -8,7 +8,6 @@ rule fair_genome_indexer_samtools_index:
         mem_mb=lambda wildcards, attempt: 700 * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/fair_genome_indexer/samtools_index/{species}.{build}.{release}.{datatype}.log",
     benchmark:
@@ -16,4 +15,4 @@ rule fair_genome_indexer_samtools_index:
     params:
         extra=lookup(dpath="params/samtools/faidx", within=config),
     wrapper:
-        "v3.3.6/bio/samtools/faidx"
+        "v3.4.1/bio/samtools/faidx"

@@ -7,7 +7,6 @@ rule fair_genome_indexer_blacklist_grch38:
         mem_mb=lambda wildcards, attempt: 500 * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/fair_genome_indexer/blacklist/homo_sapiens.GRCh38.{release}.log",
     benchmark:

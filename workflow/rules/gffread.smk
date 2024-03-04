@@ -10,7 +10,6 @@ rule fair_genome_indexer_gffread_transcripts:
         mem_mb=lambda wildcards, attempt: (1024 * 4) * attempt,
         runtime=lambda wildcards, attempt: 20 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 20),
     log:
         "logs/fair_genome_indexer/gffread_transcripts/{species}.{build}.{release}.transcripts.log",
     benchmark:
@@ -18,7 +17,7 @@ rule fair_genome_indexer_gffread_transcripts:
     params:
         extra=lookup(dpath="params/gffread", within=config),
     wrapper:
-        "v3.3.6/bio/gffread"
+        "v3.4.1/bio/gffread"
 
 
 use rule fair_genome_indexer_gffread_transcripts as fair_genome_indexer_gffread_cdna with:

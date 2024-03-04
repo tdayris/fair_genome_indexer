@@ -8,7 +8,6 @@ rule fair_genome_indexer_pyroe_id_to_name:
         mem_mb=lambda wildcards, attempt: (1024 * 9) * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/fair_genome_indexer/pyroe_id_to_name/{species}.{build}.{release}.log",
     benchmark:
@@ -16,4 +15,4 @@ rule fair_genome_indexer_pyroe_id_to_name:
     params:
         extra=lookup(dpath="params/pyroe/idtoname", within=config),
     wrapper:
-        "v3.3.6/bio/pyroe/idtoname"
+        "v3.4.1/bio/pyroe/idtoname"

@@ -8,7 +8,6 @@ rule fair_genome_indexer_picard_create_dict:
         mem_mb=lambda wildcards, attempt: (1024 * 9) * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir="tmp",
-        slurm_partition=lambda wildcards, attempt: get_partition(wildcards, attempt, 10),
     log:
         "logs/fair_genome_indexer/picard_create_dict/{species}.{build}.{release}.{datatype}.log",
     benchmark:
@@ -16,4 +15,4 @@ rule fair_genome_indexer_picard_create_dict:
     params:
         extra=lookup(dpath="params/picard/createsequencedictionary", within=config),
     wrapper:
-        "v3.3.6/bio/picard/createsequencedictionary"
+        "v3.4.1/bio/picard/createsequencedictionary"
