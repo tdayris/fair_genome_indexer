@@ -44,20 +44,20 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 .. _Snakemake: https://snakemake.readthedocs.io
 .. _Github: https://github.com/tdayris/fair_genome_indexer
 .. _`Snakemake workflow`: https://snakemake.github.io/snakemake-workflow-catalog?usage=tdayris/fair_genome_indexer
-.. _Picard: https://snakemake-wrappers.readthedocs.io/en/v3.3.6/wrappers/picard/createsequencedictionary.html
-.. _Samtools: https://snakemake-wrappers.readthedocs.io/en/v3.3.6/wrappers/samtools/faidx.html
+.. _Picard: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/picard/createsequencedictionary.html
+.. _Samtools: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/samtools/faidx.html
 .. _Agat: https://agat.readthedocs.io/en/latest/index.html
-.. _Pyroe: https://snakemake-wrappers.readthedocs.io/en/v3.3.6/wrappers/pyroe/idtoname.html
+.. _Pyroe: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/pyroe/idtoname.html
 .. _Pyfaidx: https://github.com/mdshw5/pyfaidx
-.. _GFFRead: https://snakemake-wrappers.readthedocs.io/en/v3.3.6/wrappers/gffread.html
-.. _XSV: https://snakemake-wrappers.readthedocs.io/en/v3.3.6/wrappers/xsv.html
-.. _BCFTools: https://snakemake-wrappers.readthedocs.io/en/v3.3.6/wrappers/bcftools/filter.html
-.. _Tabix: https://snakemake-wrappers.readthedocs.io/en/v3.3.6/wrappers/tabix/index.html
+.. _GFFRead: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/gffread.html
+.. _XSV: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/xsv.html
+.. _BCFTools: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/bcftools/filter.html
+.. _Tabix: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/tabix/index.html
 .. _`Boyle-Lab's Github`: https://github.com/Boyle-Lab/Blacklist
-.. _BEDTools: https://snakemake-wrappers.readthedocs.io/en/v3.3.6/wrappers/bedtools/merge.html
+.. _BEDTools: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/bedtools/merge.html
 
 
 :Authors:
     Thibault Dayris
 
-:Version: 3.0.0 of 01/17/2024
+:Version: 3.2.0 of 01/17/2024

@@ -1,3 +1,11 @@
+# 3.2.0
+
+## Features:
+
+* Snakemake wrappers update to 3.4.1
+* Full containerization
+
+
 # 3.1.4
 
 ## Features:
