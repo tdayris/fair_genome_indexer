@@ -75,9 +75,10 @@ The tools used in this pipeline are described [here](https://github.com/tdayris/
 | Step                                                       | Commands                                                                                                             |
 | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | Download GTF annotation                                    | [ensembl-annotation](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/reference/ensembl-annotation.html) |
-| Fix format errors                                          | [Agat](https://agat.readthedocs.io/en/latest/tools/agat_convert_sp_gff2gtf.html)                                     |
-| Remove non-canonical chromosomes, based on above DNA Fasta | [Agat](https://agat.readthedocs.io/en/latest/tools/agat_sq_filter_feature_from_fasta.html)                           |
-| Remove `<NA>` Transcript support levels                    | [Agat](https://agat.readthedocs.io/en/latest/tools/agat_sp_filter_feature_by_attribute_value.html)                   |
+| Fix format errors                                          | [Agat](https://agat.readthedocs.io/en/v3.4.1/tools/agat_convert_sp_gff2gtf.html)                                     |
+| Remove non-canonical chromosomes, based on above DNA Fasta | [Agat](https://agat.readthedocs.io/en/v3.4.1/tools/agat_sq_filter_feature_from_fasta.html)                           |
+| Remove `<NA>` Transcript support levels                    | [Agat](https://agat.readthedocs.io/en/v3.4.1/tools/agat_sp_filter_feature_by_attribute_value.html)                   |
+| Convert GTF to GenePred format                             | [gtf2genepred](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/ucsc/gtftogenepred.html)                 |
 
 ### Get transcripts sequence
 
@@ -92,7 +93,7 @@ The tools used in this pipeline are described [here](https://github.com/tdayris/
 
 | Step                                                  | Commands                                                                                                    |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Extract coding transcripts from above GTF             | [Agat](https://agat.readthedocs.io/en/latest/tools/agat_sp_filter_feature_by_attribute_value.html)          |
+| Extract coding transcripts from above GTF             | [Agat](https://agat.readthedocs.io/en/v3.4.1/tools/agat_sp_filter_feature_by_attribute_value.html)          |
 | Extract coding sequences from above DNA Fasta and GTF | [gffread](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/gffread.html)                        |
 | Index DNA sequence                                    | [samtools](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/samtools/faidx.html)                |
 | Creatse sequence Dictionary                           | [picard](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/picard/createsequencedictionary.html) |
@@ -103,7 +104,7 @@ The tools used in this pipeline are described [here](https://github.com/tdayris/
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | Download dbSNP variants          | [ensembl-variation](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/reference/ensembl-variation.html)                           |
 | Filter non-canonical chromosomes | [pyfaidx](https://github.com/mdshw5/pyfaidx) + [BCFTools](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/bcftools/filter.html) |
-| Index variants                   | [tabix](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/tabix/index.html)                                                                                                                                             |
+| Index variants                   | [tabix](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/tabix/index.html)                                                       |
 
 
 ### Get transcript_id, gene_id, and gene_name correspondancy
@@ -111,7 +112,7 @@ The tools used in this pipeline are described [here](https://github.com/tdayris/
 | Step                                            | Commands                                                                                                                                                        |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Extract gene_id <-> gene_name correspondancy    | [pyroe](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/pyroe/idtoname.html)                                                                       |
-| Extract transcript_id <-> gene_id <-> gene_name | [Agat](https://agat.readthedocs.io/en/latest/tools/agat_convert_sp_gff2tsv.html) + [XSV](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/xsv.html) |
+| Extract transcript_id <-> gene_id <-> gene_name | [Agat](https://agat.readthedocs.io/en/v3.4.1/tools/agat_convert_sp_gff2tsv.html) + [XSV](https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/xsv.html) |
 
 ### Get blacklisted regions
 
