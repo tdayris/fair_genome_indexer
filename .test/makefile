@@ -23,6 +23,7 @@ snakefiles := \
 	"../workflow/rules/samtools_faidx.smk" \
 	"../workflow/rules/tabix.smk" \
 	"../workflow/rules/transcript_to_gene.smk" \
+	"../workflow/rules/ucsc.smk" \
 	"../workflow/Snakefile"
 
 python_scripts := \
@@ -50,7 +51,7 @@ pipeline.txt: linter_info.txt
 	mamba activate test-snakemake-wrappers && \
 	snakemake -s ../workflow/Snakefile \
 		--cores 7 \
-		--software-deployment-method conda \
+		--software-deployment-method apptainer conda \
 		2>&1 | tee pipeline.txt
 
 
