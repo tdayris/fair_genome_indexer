@@ -60,6 +60,10 @@ blacklist:
   type: string
   description: Path to blacklisted regions for peak-calling (bed)
 
+genepred:
+  type: string
+  description: Gene model in genepred format (bed6-like)
+
 required:
   - species
   - build

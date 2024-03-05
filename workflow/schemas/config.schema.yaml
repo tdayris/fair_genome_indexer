@@ -12,93 +12,104 @@ genomes:
 params:
   type: object
   description: Optional parameters
-  pyfaidx:
+  fair_genome_indexer:
     type: object
-    description: Optional parameters for pyfaidx (filter/correct fasta format)
-    dna:
+    description: Optional parameters for this pipeline
+    pyfaidx:
+      type: object
+      description: Optional parameters for pyfaidx (filter/correct fasta format)
+      dna:
+        type: string
+        description: Filter-out non canonical chromosomes
+      cdna:
+        type: string
+        description: Keep all cdna sequences
+      required:
+        - dna
+        - cdna
+    agat:
+      type: object
+      description: Optional parameters for agat (filter/correct GTF format)
+      gtf2gtf:
+        type: string
+        description: Optional parameters for agat_convert_sp_gff2gtf.pl
+      filter_features:
+        type: string
+        description: Optional parameters for agat_sq_filter_feature_from_fasta.pl
+      select_feature_by_attribute_value:
+        type: string
+        descrption: Optional parameters for agat_sq_select_feature_by_attribute_value.pl
+      agat_convert_sp_gff2tsv: 
+        type: string
+        description: Optional parameters for agat_convert_sp_gff2tsv.pl
+      required:
+        - gff2gtf
+        - filter_features
+        - select_feature_by_attribute_value
+        - agat_convert_sp_gff2tsv
+    gffread:
       type: string
-      description: Filter-out non canonical chromosomes
-    cdna:
+      descrption: Optional parameters for GFFRead
+    bedtools:
+      type: object
+      descrption: Optional parameters for bedtools
+      filter_non_canonical_chrom:
+        type: string
+        description: Optional parameters for filtering non-canonical chromosomes over dbSNP
+      merge:
+        type: string
+        description: Merge overlapping blacklist intervals
+      required:
+        - filter_non_canonical_chrom
+        - merge
+    tabix:
       type: string
-      description: Keep all cdna sequences
+      description: Optional parameters for tabix index VCF
+    picard:
+      type: object
+      description: Optional parameters for picard command line
+      createsequencedictionary:
+        type: string
+        description: Optional parameters for picard create sequence dictionary
+      required:
+        - createsequencedictionary
+    samtools:
+      type: object
+      description: Optional parameters for samtools
+      faidx:
+        type: string
+        description: Optional parameters for samtools fasta index
+      required:
+        - faidx
+    wget:
+      type: string
+      description: Optional parameters for wget downloads
+    rsync:
+      type: string
+      description: Optional parameters for rsync copy
+    pyroe:
+      type: string
+      description: Optional parameters for pyroe indexing
+    ucsc:
+      type: object
+      description: Optional parameters for UCSC tools
+      gtf2genepred:
+        type: string
+        description: Optional parameters for conversion to genepred format
     required:
-      - dna
-      - cdna
-  agat:
-    type: object
-    description: Optional parameters for agat (filter/correct GTF format)
-    gff2gtf:
-      type: string
-      description: Optional parameters for agat_convert_sp_gff2gtf.pl
-    filter_features:
-      type: string
-      description: Optional parameters for agat_sq_filter_feature_from_fasta.pl
-    select_feature_by_attribute_value:
-      type: string
-      descrption: Optional parameters for agat_sq_select_feature_by_attribute_value.pl
-    agat_convert_sp_gff2tsv: 
-      type: string
-      description: Optional parameters for agat_convert_sp_gff2tsv.pl
-    required:
-      - gff2gtf
-      - filter_features
-      - select_feature_by_attribute_value
-      - agat_convert_sp_gff2tsv
-  gffread:
-    type: string
-    descrption: Optional parameters for GFFRead
-  bedtools:
-    type: object
-    descrption: Optional parameters for bedtools
-    filter_non_canonical_chrom:
-      type: string
-      description: Optional parameters for filtering non-canonical chromosomes over dbSNP
-    merge:
-      type: string
-      description: Merge overlapping blacklist intervals
-    required:
-      - filter_non_canonical_chrom
-      - merge
-  tabix:
-    type: string
-    description: Optional parameters for tabix index VCF
-  picard:
-    type: object
-    description: Optional parameters for picard command line
-    createsequencedictionary:
-      type: string
-      description: Optional parameters for picard create sequence dictionary
-    required:
-      - createsequencedictionary
-  samtools:
-    type: object
-    description: Optional parameters for samtools
-    faidx:
-      type: string
-      description: Optional parameters for samtools fasta index
-    required:
-      - faidx
-  wget:
-    type: string
-    description: Optional parameters for wget downloads
-  rsync:
-    type: string
-    description: Optional parameters for rsync copy
-  pyroe:
-    type: string
-    description: Optional parameters for pyroe indexing
+      - pyfaidx
+      - agat
+      - gffread
+      - bedtools
+      - tabix
+      - picard
+      - samtools
+      - wget
+      - rsync
+      - pyroe
   required:
-    - pyfaidx
-    - agat
-    - gffread
-    - bedtools
-    - tabix
-    - picard
-    - samtools
-    - wget
-    - rsync
-    - pyroe
-
+    - fair_genome_indexer
 
 required:
   - genomes
+  - params
