@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Snakemake-wrapper building agat configuration file"""
 
 __author__ = "Thibault Dayris"

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Snakemake-wrapper for agat_sq_filter_feature_from_fasta.pl"""
 
 __author__ = "Thibault Dayris"

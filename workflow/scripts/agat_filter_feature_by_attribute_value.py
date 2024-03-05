@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Snakemake-wrapper for agat_sp_filter_feature_by_attribute_value.pl"""
 
 __author__ = "Thibault Dayris"

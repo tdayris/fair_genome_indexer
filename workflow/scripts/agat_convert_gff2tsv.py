@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Snakemake-wrapper for agat_convert_sp_gff2tsv.pl"""
 
 __author__ = "Thibault Dayris"

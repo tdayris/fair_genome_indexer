@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Snakemake-wrapper for agat_gff2gtf.pl"""
 
 __author__ = "Thibault Dayris"

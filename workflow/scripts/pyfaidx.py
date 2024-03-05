@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Snakemake-wrapper for pyfaidx"""
 
 __author__ = "Thibault Dayris"

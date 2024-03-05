@@ -1,3 +1,5 @@
+# coding: utf-8
+
 """Snakemake-wrapper for building new genome file"""
 
 __author__ = "Thibault Dayris"
@@ -136,6 +138,13 @@ genomes = replace_col(
     df=genomes,
     column="blacklist",
     default="reference/blacklist/{species}.{build}.{release}.bed",
+)
+
+# GenePred segments
+genomes = replace_col(
+    df=genomes,
+    column="genepred",
+    default="reference/annotation/{species}.{build}.{release}.genePred",
 )
 
 
