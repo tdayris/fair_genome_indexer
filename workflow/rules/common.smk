@@ -41,6 +41,7 @@ release_list: list[str] = list(set(genomes.release.tolist()))
 build_list: list[str] = list(set(genomes.build.tolist()))
 species_list: list[str] = list(set(genomes.species.tolist()))
 datatype_list: list[str] = ["dna", "cdna", "all", "transcripts"]
+tmp: str = f"{os.getcwd()}/tmp"
 
 
 wildcard_constraints:
@@ -124,6 +125,10 @@ def get_fair_genome_indexer_target(
             "reference/annotation/{genomes_property}.{content}.tsv",
             genomes_property=genomes_properties,
             content=["id_to_gene", "t2g"],
+        ),
+        "genepred": expand(
+            "reference/annotation/{genomes_property}.genePred",
+            genomes_property=genomes_properties,
         ),
     }
 
