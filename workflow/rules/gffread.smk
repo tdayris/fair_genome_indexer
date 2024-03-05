@@ -9,13 +9,13 @@ rule fair_genome_indexer_gffread_transcripts:
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 4) * attempt,
         runtime=lambda wildcards, attempt: 20 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/gffread_transcripts/{species}.{build}.{release}.transcripts.log",
     benchmark:
         "benchmark/fair_genome_indexer/gffread_transcripts/{species}.{build}.{release}.transcripts.tsv"
     params:
-        extra=lookup(dpath="params/gffread", within=config),
+        extra=lookup(dpath="params/fair_genome_indexer/gffread", within=config),
     wrapper:
         "v3.4.1/bio/gffread"
 

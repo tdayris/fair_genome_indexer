@@ -7,12 +7,12 @@ rule fair_genome_indexer_pyroe_id_to_name:
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 9) * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/pyroe_id_to_name/{species}.{build}.{release}.log",
     benchmark:
         "benchmark/fair_genome_indexer/pyroe_id_to_name/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(dpath="params/pyroe/idtoname", within=config),
+        extra=lookup(dpath="params/fair_genome_indexer/pyroe/idtoname", within=config),
     wrapper:
         "v3.4.1/bio/pyroe/idtoname"

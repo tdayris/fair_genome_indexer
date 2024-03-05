@@ -13,7 +13,7 @@ rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
     resources:
         mem_mb=lambda wildcards, attempt: 1024 * attempt,
         runtime=lambda wildcards, attempt: 5 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/pyfaidx_filter_out_noncanonical_chromosomes/{species}.{build}.{release}.{datatype}.log",
     benchmark:
@@ -39,13 +39,13 @@ rule fair_genome_indexer_rsync_make_fasta_available:
     resources:
         mem_mb=512,
         runtime=lambda wildcards, attempt: attempt * 10,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.log",
     benchmark:
         "benchmark/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.tsv"
     params:
-        extra=lookup(dpath="params/rsync", within=config),
+        extra=lookup(dpath="params/fair_genome_indexer/rsync", within=config),
     conda:
         "../envs/bash.yaml"
     shell:

@@ -7,12 +7,12 @@ rule fair_genome_indexer_bedtools_merge_blacklist:
     resources:
         mem_mb=lambda wildcards, attempt: 500 * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/bedtools_merge_blacklist/{species}.{build}.{release}.log",
     benchmark:
         "benchmark/fair_genome_indexer/bedtools_merge_blacklist/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(dpath="params/bedtools/merge", within=config),
+        extra=lookup(dpath="params/fair_genome_indexer/bedtools/merge", within=config),
     wrapper:
         "v3.4.1/bio/bedtools/merge"

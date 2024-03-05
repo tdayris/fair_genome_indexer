@@ -7,13 +7,13 @@ rule fair_genome_indexer_tabix_index_dbsnp:
     resources:
         mem_mb=lambda wildcards, attempt: 700 * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/tabix/index/{species}.{build}.{release}.all.log",
     benchmark:
         "benchmark/tabix/index/{species}.{build}.{release}.all.tsv"
     params:
-        extra=lookup(dpath="params/tabix", within=config),
+        extra=lookup(dpath="params/fair_genome_indexer/tabix", within=config),
     wrapper:
         "v3.4.1/bio/tabix/index"
 

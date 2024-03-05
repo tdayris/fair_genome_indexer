@@ -7,7 +7,7 @@ rule fair_genome_indexer_get_genome_fasta_sequence:
     resources:
         mem_mb=lambda wildcards, attempt: 500 * attempt,
         runtime=lambda wildcards, attempt: 30 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/get_genome_fasta_sequence/{species}.{build}.{release}.dna.log",
     benchmark:

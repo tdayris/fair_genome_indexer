@@ -13,6 +13,7 @@ include: "rules/pyroe.smk"
 include: "rules/samtools_faidx.smk"
 include: "rules/tabix.smk"
 include: "rules/transcript_to_gene.smk"
+include: "rules/ucsc.smk"
 
 
 rule fair_genome_indexer_target:
@@ -23,7 +24,7 @@ rule fair_genome_indexer_target:
     resources:
         mem_mb=lambda wildcards, attempt: 512 * attempt,
         runtime=lambda wildcards, attempt: 5 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_target.log",
     benchmark:

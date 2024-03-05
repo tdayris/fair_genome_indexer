@@ -5,7 +5,7 @@ rule fair_genome_indexer_agat_config:
     resources:
         mem_mb=lambda wildcards, attempt: 512 * attempt,
         runtime=lambda wildcards, attempt: 2 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/agat_config.log",
     benchmark:
@@ -56,7 +56,7 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 21) * attempt,
         runtime=lambda wildcards, attempt: 35 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     shadow:
         "minimal"
     log:
@@ -64,7 +64,7 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     benchmark:
         "benchmark/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(dpath="params/agat/gff2gtf", within=config),
+        extra=lookup(dpath="params/fair_genome_indexer/agat/gff2gtf", within=config),
     conda:
         "../envs/agat.yaml"
     script:
@@ -89,7 +89,7 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
         runtime=lambda wildcards, attempt: 35 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     shadow:
         "minimal"
     log:
@@ -98,7 +98,8 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
         "benchmark/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.tsv"
     params:
         extra=lookup(
-            dpath="params/agat/select_feature_by_attribute_value", within=config
+            dpath="params/fair_genome_indexer/agat/select_feature_by_attribute_value",
+            within=config,
         ),
     conda:
         "../envs/agat.yaml"
@@ -110,7 +111,8 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     input:
         gtf=branch(
             lookup(
-                dpath="params/agat/select_feature_by_attribute_value", within=config
+                dpath="params/fair_genome_indexer/agat/select_feature_by_attribute_value",
+                within=config,
             ),
             then="tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.filtered.gtf",
             otherwise="tmp/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf",
@@ -124,7 +126,7 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
         runtime=lambda wildcards, attempt: 35 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     shadow:
         "minimal"
     log:
@@ -132,7 +134,9 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     benchmark:
         "benchmark/fair_genome_indexer/agat_sq_filter_feature_from_fasta/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(dpath="params/agat/filter_features", within=config),
+        extra=lookup(
+            dpath="params/fair_genome_indexer/agat/filter_features", within=config
+        ),
     conda:
         "../envs/agat.yaml"
     script:

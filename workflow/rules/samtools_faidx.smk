@@ -7,12 +7,12 @@ rule fair_genome_indexer_samtools_index:
     resources:
         mem_mb=lambda wildcards, attempt: 700 * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/samtools_index/{species}.{build}.{release}.{datatype}.log",
     benchmark:
         "benchmark/fair_genome_indexer/samtools_index/{species}.{build}.{release}.{datatype}.tsv"
     params:
-        extra=lookup(dpath="params/samtools/faidx", within=config),
+        extra=lookup(dpath="params/fair_genome_indexer/samtools/faidx", within=config),
     wrapper:
         "v3.4.1/bio/samtools/faidx"

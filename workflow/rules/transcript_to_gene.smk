@@ -8,7 +8,7 @@ rule fair_genome_indexer_agat_convert_sp_gff2tsv:
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
         runtime=lambda wildcards, attempt: 20 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     shadow:
         "minimal"
     log:
@@ -16,7 +16,10 @@ rule fair_genome_indexer_agat_convert_sp_gff2tsv:
     benchmark:
         "benchmark/agat/agat_convert_sp_gff2tsv/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(dpath="params/agat/agat_convert_sp_gff2tsv", within=config),
+        extra=lookup(
+            dpath="params/fair_genome_indexer/agat/agat_convert_sp_gff2tsv",
+            within=config,
+        ),
     conda:
         "../envs/agat.yaml"
     script:
@@ -32,7 +35,7 @@ rule fair_genome_indexer_xsv_select_t2g_columns:
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 2) * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/xsv/select_columns/{species}.{build}.{release}.log",
     benchmark:

@@ -7,7 +7,7 @@ rule fair_genome_indexer_get_genome_gtf_annotation:
     resources:
         mem_mb=lambda wildcards, attempt: 700 * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
-        tmpdir="tmp",
+        tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/get_genome_gtf_annotation/{species}.{build}.{release}.log",
     benchmark:
