@@ -6,7 +6,8 @@ Pyfaidx_ [#pyfaidxpaper]_ was used to filter non-cannonical
 chromosomes. Agat_ [#agatpaper]_ was used to correct common 
 issues found in Ensembl genome annotation files, filter non-
 cannonical chromosomes, and remove transcripts with TSL being
-equal to NA. 
+equal to NA. UCSC_ tools [#genepredpaper]_ were used to
+convert GTF to GenePred format.
 
 GFFRead_ [#gffreadpaper]_ was used to build
 cDNA and transcripts sequences from both filtered and corrected
@@ -31,6 +32,7 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 
 .. [#pyfaidxpaper] Shirley, Matthew D., et al. Efficient" pythonic" access to FASTA files using pyfaidx. No. e1196. PeerJ PrePrints, 2015.
 .. [#agatpaper] Dainat J. AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.  (Version v0.7.0). Zenodo. https://www.doi.org/10.5281/zenodo.3552717
+.. [#genepredpaper] Hsu, Fan, et al. "The UCSC known genes." Bioinformatics 22.9 (2006): 1036-1046.
 .. [#gffreadpaper] Pertea, Geo, and Mihaela Pertea. "GFF utilities: GffRead and GffCompare." F1000Research 9 (2020).
 .. [#samtoolspaper] Li, Heng, et al. "The sequence alignment/map format and SAMtools." bioinformatics 25.16 (2009): 2078-2079.
 .. [#gatkpaper] McKenna, Aaron, et al. "The Genome Analysis Toolkit: a MapReduce framework for analyzing next-generation DNA sequencing data." Genome research 20.9 (2010): 1297-1303.
@@ -55,7 +57,7 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 .. _Tabix: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/tabix/index.html
 .. _`Boyle-Lab's Github`: https://github.com/Boyle-Lab/Blacklist
 .. _BEDTools: https://snakemake-wrappers.readthedocs.io/en/v3.4.1/wrappers/bedtools/merge.html
-
+.. _UCSC: https://genome.ucsc.edu/FAQ/FAQformat.html
 
 :Authors:
     Thibault Dayris
