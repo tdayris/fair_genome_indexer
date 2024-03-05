@@ -23,6 +23,7 @@ files are present:
     └── annotation
         ├── XXX.id_to_gene.tsv
         ├── XXX.t2g.tsv
+        ├── XXX.genePred
         └── XXX.gtf
 
 
@@ -32,6 +33,8 @@ files are present:
 | `.bed`            | Genome blacklisted regions  |
 +-------------------+-----------------------------+
 | `.gtf`            | Genome annotation           |
++-------------------+-----------------------------+
+| `.genePred`       | Genes predictions format    |
 +-------------------+-----------------------------+
 | `.id_to_gene.tsv` | Genome id-to-name           |
 +-------------------+-----------------------------+

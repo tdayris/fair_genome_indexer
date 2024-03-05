@@ -1,3 +1,11 @@
+# 3.2.1
+
+## Features:
+
+* While importing this pipeline and many others to large workflows, parmspace was too large. It has been splitted with clear pipeline names in it
+* UCSC genePred format
+* Tests are now containerized
+
 # 3.2.0
 
 ## Features:

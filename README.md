@@ -12,7 +12,7 @@ The usage of this workflow is described in the [Snakemake workflow catalog](http
 
 ## Results
 
-The expected results of this pipeline are described [here](https://github.com/tdayris/fair_genome_indexer/blob/main/workflow/reports/results.rst). An example of report can be found in [.test](https://github.com/tdayris/fair_genome_indexer/blob/main/.test/report.html) directory.
+The expected results of this pipeline are described [here](https://github.com/tdayris/fair_genome_indexer/blob/main/workflow/reports/results.rst).
 
 ## Material and methods
 

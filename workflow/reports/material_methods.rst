@@ -60,4 +60,4 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 :Authors:
     Thibault Dayris
 
-:Version: 3.2.0 of 01/17/2024
+:Version: 3.2.1 of 03/05/2024
