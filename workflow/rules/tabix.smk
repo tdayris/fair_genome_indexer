@@ -13,9 +13,11 @@ rule fair_genome_indexer_tabix_index_dbsnp:
     benchmark:
         "benchmark/tabix/index/{species}.{build}.{release}.all.tsv"
     params:
-        extra=lookup(dpath="params/fair_genome_indexer/tabix", within=config),
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/tabix", within=config, default="-p vcf"
+        ),
     wrapper:
-        "v3.4.1/bio/tabix/index"
+        "v3.5.2/bio/tabix/index"
 
 
 use rule fair_genome_indexer_tabix_index_dbsnp as fair_genome_indexer_tabix_index_raw_dbsnp with:

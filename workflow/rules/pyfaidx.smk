@@ -45,7 +45,11 @@ rule fair_genome_indexer_rsync_make_fasta_available:
     benchmark:
         "benchmark/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.tsv"
     params:
-        extra=lookup(dpath="params/fair_genome_indexer/rsync", within=config),
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/rsync",
+            within=config,
+            default="--verbose --checksum --force --human-readable --progress",
+        ),
     conda:
         "../envs/bash.yaml"
     shell:

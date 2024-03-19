@@ -68,6 +68,28 @@ def is_variation_available(genome_property: str) -> bool:
         return availability
 
 
+def dlookup(
+    dpath: str | None = None,
+    query: str | None = None,
+    cols: list[str] | None = None,
+    within=None,
+    default: str | dict[str, Any] | None = None,
+) -> str:
+    value = None
+    try:
+        value = lookup(dpath=dpath, query=query, cols=cols, within=within)
+    except LookupError:
+        value = default
+    except WorkflowError:
+        value = default
+    except KeyError:
+        value = default
+    except AttributeError:
+        value = default
+
+    return value
+
+
 def get_fair_genome_indexer_target(
     wildcards: snakemake.io.Wildcards, genomes: pandas.DataFrame = genomes
 ) -> dict[str, list[str] | str]:

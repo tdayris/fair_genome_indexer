@@ -18,4 +18,4 @@ rule fair_genome_indexer_get_genome_fasta_sequence:
         build="{build}",
         release="{release}",
     wrapper:
-        "v3.4.1/bio/reference/ensembl-sequence"
+        "v3.5.2/bio/reference/ensembl-sequence"

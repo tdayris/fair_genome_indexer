@@ -15,9 +15,11 @@ rule fair_genome_indexer_gffread_transcripts:
     benchmark:
         "benchmark/fair_genome_indexer/gffread_transcripts/{species}.{build}.{release}.transcripts.tsv"
     params:
-        extra=lookup(dpath="params/fair_genome_indexer/gffread", within=config),
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/gffread", within=config, default=""
+        ),
     wrapper:
-        "v3.4.1/bio/gffread"
+        "v3.5.2/bio/gffread"
 
 
 use rule fair_genome_indexer_gffread_transcripts as fair_genome_indexer_gffread_cdna with:

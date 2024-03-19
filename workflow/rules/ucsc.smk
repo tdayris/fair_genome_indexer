@@ -13,8 +13,10 @@ rule fair_genome_indexer_ucsc_gtf_to_genepred:
     benchmark:
         "benchmark/fair_genome_indexer/ucsc_gtf_to_genepred/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(
-            dpath="params/fair_genome_indexer/ucsc/gtf2genepred", within=config
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/ucsc/gtf2genepred",
+            within=config,
+            default="",
         ),
     wrapper:
-        "v3.4.1/bio/ucsc/gtfToGenePred"
+        "v3.5.2/bio/ucsc/gtfToGenePred"

@@ -16,7 +16,11 @@ rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
     benchmark:
         "benchmark/fair_genome_indexer/pyfaidx_fasta_dict_to_bed/{species}.{build}.{release}.dna.tsv"
     params:
-        extra="",
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/pyfaidx/fasta_dict_to_bed",
+            within=config,
+            default="",
+        ),
     conda:
         "../envs/pyfaidx.yaml"
     script:
@@ -44,9 +48,10 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
     benchmark:
         "benchmark/fair_genome_indexer/bcftools_filter_non_canonical_chrom/{species}.{build}.{release}.all.tsv"
     params:
-        extra=lookup(
+        extra=dlookup(
             dpath="params/fair_genome_indexer/bedtools/filter_non_canonical_chrom",
             within=config,
+            default="",
         ),
     wrapper:
-        "v3.4.1/bio/bcftools/filter"
+        "v3.5.2/bio/bcftools/filter"

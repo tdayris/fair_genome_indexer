@@ -11,33 +11,37 @@ rule fair_genome_indexer_agat_config:
     benchmark:
         "benchmark/fair_genome_indexer/agat_config.tsv"
     params:
-        config={
-            "output_format": "GTF",
-            "gff_output_version": 3,
-            "gtf_output_version": "relax",
-            "verbose": 1,
-            "progress_bar": False,
-            "log": False,
-            "debug": False,
-            "tabix": False,
-            "merge_loci": False,
-            "throw_fasta": False,
-            "force_gff_input_version": 0,
-            "create_l3_for_l2_orphan": True,
-            "locus_tag": ["locus_tag", "gene_id"],
-            "prefix_new_id": "nbis",
-            "check_sequential": True,
-            "check_l2_linked_to_l3": True,
-            "check_l1_linked_to_l2": True,
-            "remove_orphan_l1": True,
-            "check_all_level3_locations": True,
-            "check_cds": True,
-            "check_exons": True,
-            "check_utrs": True,
-            "check_all_level2_locations": True,
-            "check_all_level1_locations": True,
-            "check_identical_isoforms": True,
-        },
+        config=dlookup(
+            dpath="params/fair_genome_indexer/agat/config",
+            within=config,
+            default={
+                "output_format": "GTF",
+                "gff_output_version": 3,
+                "gtf_output_version": "relax",
+                "verbose": 1,
+                "progress_bar": False,
+                "log": False,
+                "debug": False,
+                "tabix": False,
+                "merge_loci": False,
+                "throw_fasta": False,
+                "force_gff_input_version": 0,
+                "create_l3_for_l2_orphan": True,
+                "locus_tag": ["locus_tag", "gene_id"],
+                "prefix_new_id": "nbis",
+                "check_sequential": True,
+                "check_l2_linked_to_l3": True,
+                "check_l1_linked_to_l2": True,
+                "remove_orphan_l1": True,
+                "check_all_level3_locations": True,
+                "check_cds": True,
+                "check_exons": True,
+                "check_utrs": True,
+                "check_all_level2_locations": True,
+                "check_all_level1_locations": True,
+                "check_identical_isoforms": True,
+            },
+        ),
     conda:
         "../envs/python.yaml"
     script:
@@ -64,7 +68,9 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     benchmark:
         "benchmark/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(dpath="params/fair_genome_indexer/agat/gff2gtf", within=config),
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/agat/gff2gtf", within=config, default=""
+        ),
     conda:
         "../envs/agat.yaml"
     script:
@@ -97,9 +103,10 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
     benchmark:
         "benchmark/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(
+        extra=dlookup(
             dpath="params/fair_genome_indexer/agat/select_feature_by_attribute_value",
             within=config,
+            default="--attribute 'transcript_support_level' --value '\"NA\"' --test '='",
         ),
     conda:
         "../envs/agat.yaml"
@@ -110,7 +117,7 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
 rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     input:
         gtf=branch(
-            lookup(
+            dlookup(
                 dpath="params/fair_genome_indexer/agat/select_feature_by_attribute_value",
                 within=config,
             ),
@@ -134,8 +141,10 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     benchmark:
         "benchmark/fair_genome_indexer/agat_sq_filter_feature_from_fasta/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(
-            dpath="params/fair_genome_indexer/agat/filter_features", within=config
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/agat/filter_features",
+            within=config,
+            default="",
         ),
     conda:
         "../envs/agat.yaml"
@@ -162,4 +171,8 @@ use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_g
     benchmark:
         "benchmark/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.tsv"
     params:
-        extra="--attribute transcript_biotype --value '\"protein_coding\"' --test '='",
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/agat/filter_feature_by_attribute_value",
+            within=config,
+            default="--attribute transcript_biotype --value '\"protein_coding\"' --test '='",
+        ),

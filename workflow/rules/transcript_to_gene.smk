@@ -16,9 +16,10 @@ rule fair_genome_indexer_agat_convert_sp_gff2tsv:
     benchmark:
         "benchmark/agat/agat_convert_sp_gff2tsv/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup(
+        extra=dlookup(
             dpath="params/fair_genome_indexer/agat/agat_convert_sp_gff2tsv",
             within=config,
+            default="",
         ),
     conda:
         "../envs/agat.yaml"
@@ -42,9 +43,12 @@ rule fair_genome_indexer_xsv_select_t2g_columns:
         "benchmark/xsv/select_columns/{species}.{build}.{release}.tsv"
     params:
         subcommand="select",
-        extra="transcript_id,gene_id,gene_name",
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/xsv/select_t2g_columns",
+            default="transcript_id,gene_id,gene_name",
+        ),
     wrapper:
-        "v3.4.1/utils/xsv"
+        "v3.5.2/utils/xsv"
 
 
 use rule fair_genome_indexer_xsv_select_t2g_columns as fair_genome_indexer_xsv_fmt_t2g with:
@@ -58,4 +62,8 @@ use rule fair_genome_indexer_xsv_select_t2g_columns as fair_genome_indexer_xsv_f
         "benchmark/xsv/fmt/{species}.{build}.{release}.tsv"
     params:
         subcommand="fmt",
-        extra="--out-delimiter $'\t'",
+        extra=dlookup(
+            dpath="params/fair_genome_indexer/xsv/fmt_t2g",
+            within=config,
+            default="--out-delimiter $'\t'",
+        ),
