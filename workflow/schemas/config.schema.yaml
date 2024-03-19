@@ -96,20 +96,3 @@ params:
       gtf2genepred:
         type: string
         description: Optional parameters for conversion to genepred format
-    required:
-      - pyfaidx
-      - agat
-      - gffread
-      - bedtools
-      - tabix
-      - picard
-      - samtools
-      - wget
-      - rsync
-      - pyroe
-  required:
-    - fair_genome_indexer
-
-required:
-  - genomes
-  - params
