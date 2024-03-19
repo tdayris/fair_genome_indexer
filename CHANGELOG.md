@@ -1,3 +1,10 @@
+# 3.3.0
+
+## Features:
+
+* Configuration keys are *all* optional
+* Snakemake-wrapper up to version 3.5.2
+
 # 3.2.1
 
 ## Features:
