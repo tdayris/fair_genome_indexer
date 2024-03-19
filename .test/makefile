@@ -50,7 +50,7 @@ report.txt: pipeline.txt
 pipeline.txt: linter_info.txt
 	mamba activate test-snakemake-wrappers && \
 	snakemake -s ../workflow/Snakefile \
-		--cores 7 \
+		--cores 7 --profile local \
 		--software-deployment-method apptainer conda \
 		2>&1 | tee pipeline.txt
 
