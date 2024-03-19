@@ -17,4 +17,4 @@ rule fair_genome_indexer_get_genome_gtf_annotation:
         build="{build}",
         release="{release}",
     wrapper:
-        "v3.5.2/bio/reference/ensembl-annotation"
+        f"{snakemake_wrappers_prefix}/bio/reference/ensembl-annotation"

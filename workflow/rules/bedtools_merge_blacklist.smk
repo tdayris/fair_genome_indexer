@@ -19,4 +19,4 @@ rule fair_genome_indexer_bedtools_merge_blacklist:
             default="-d 5",
         ),
     wrapper:
-        "v3.5.2/bio/bedtools/merge"
+        f"{snakemake_wrappers_prefix}/bio/bedtools/merge"

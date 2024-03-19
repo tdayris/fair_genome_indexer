@@ -17,7 +17,7 @@ rule fair_genome_indexer_tabix_index_dbsnp:
             dpath="params/fair_genome_indexer/tabix", within=config, default="-p vcf"
         ),
     wrapper:
-        "v3.5.2/bio/tabix/index"
+        f"{snakemake_wrappers_prefix}/bio/tabix/index"
 
 
 use rule fair_genome_indexer_tabix_index_dbsnp as fair_genome_indexer_tabix_index_raw_dbsnp with:

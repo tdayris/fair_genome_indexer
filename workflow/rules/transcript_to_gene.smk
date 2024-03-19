@@ -48,7 +48,7 @@ rule fair_genome_indexer_xsv_select_t2g_columns:
             default="transcript_id,gene_id,gene_name",
         ),
     wrapper:
-        "v3.5.2/utils/xsv"
+        f"{snakemake_wrappers_prefix}/utils/xsv"
 
 
 use rule fair_genome_indexer_xsv_select_t2g_columns as fair_genome_indexer_xsv_fmt_t2g with:

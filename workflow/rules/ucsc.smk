@@ -19,4 +19,4 @@ rule fair_genome_indexer_ucsc_gtf_to_genepred:
             default="",
         ),
     wrapper:
-        "v3.5.2/bio/ucsc/gtfToGenePred"
+        f"{snakemake_wrappers_prefix}/bio/ucsc/gtfToGenePred"

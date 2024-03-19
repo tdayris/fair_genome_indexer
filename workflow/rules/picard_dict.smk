@@ -19,4 +19,4 @@ rule fair_genome_indexer_picard_create_dict:
             default="",
         ),
     wrapper:
-        "v3.5.2/bio/picard/createsequencedictionary"
+        f"{snakemake_wrappers_prefix}/bio/picard/createsequencedictionary"

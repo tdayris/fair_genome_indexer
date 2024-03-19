@@ -19,4 +19,4 @@ rule fair_genome_indexer_pyroe_id_to_name:
             default="",
         ),
     wrapper:
-        "v3.5.2/bio/pyroe/idtoname"
+        f"{snakemake_wrappers_prefix}/bio/pyroe/idtoname"

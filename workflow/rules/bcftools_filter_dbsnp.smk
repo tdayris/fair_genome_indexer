@@ -54,4 +54,4 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
             default="",
         ),
     wrapper:
-        "v3.5.2/bio/bcftools/filter"
+        f"{snakemake_wrappers_prefix}/bio/bcftools/filter"

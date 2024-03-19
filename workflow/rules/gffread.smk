@@ -19,7 +19,7 @@ rule fair_genome_indexer_gffread_transcripts:
             dpath="params/fair_genome_indexer/gffread", within=config, default=""
         ),
     wrapper:
-        "v3.5.2/bio/gffread"
+        f"{snakemake_wrappers_prefix}/bio/gffread"
 
 
 use rule fair_genome_indexer_gffread_transcripts as fair_genome_indexer_gffread_cdna with:

@@ -19,4 +19,4 @@ rule fair_genome_indexer_samtools_index:
             default="",
         ),
     wrapper:
-        "v3.5.2/bio/samtools/faidx"
+        f"{snakemake_wrappers_prefix}/bio/samtools/faidx"
