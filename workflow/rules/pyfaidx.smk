@@ -30,7 +30,7 @@ rule fair_genome_indexer_rsync_make_fasta_available:
     input:
         branch(
             evaluate("{species} == 'homo_sapiens'"),
-            then="tmp/fair_genome_indexer/pyfaidx_filter_out_noncanonical_chromosomes/{species}.{build}.{release}.{datatype}.fasta",
+            then="tmp/fair_genome_indexer/pyfaidx_filter_out_noncanonical_chromosomes/{species}.{build}.{release}.dna.fasta",
             otherwise="tmp/fair_genome_indexer/get_genome_fasta_sequence/{species}.{build}.{release}.dna.fasta",
         ),
     output:
@@ -43,7 +43,7 @@ rule fair_genome_indexer_rsync_make_fasta_available:
     log:
         "logs/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.log",
     benchmark:
-        "benchmark/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.{datatype}.fasta.tsv"
+        "benchmark/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.tsv"
     params:
         extra=dlookup(
             dpath="params/fair_genome_indexer/rsync",
