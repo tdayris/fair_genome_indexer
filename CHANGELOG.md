@@ -1,3 +1,9 @@
+# 3.3.1
+
+## Features:
+
+* Fix wildcard error on non-human organisms
+
 # 3.3.0
 
 ## Features:
