@@ -43,7 +43,7 @@ rule fair_genome_indexer_rsync_make_fasta_available:
     log:
         "logs/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.log",
     benchmark:
-        "benchmark/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.tsv"
+        "benchmark/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.{datatype}.fasta.tsv"
     params:
         extra=dlookup(
             dpath="params/fair_genome_indexer/rsync",
