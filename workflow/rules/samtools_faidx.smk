@@ -5,7 +5,7 @@ rule fair_genome_indexer_samtools_index:
         "reference/sequences/{species}.{build}.{release}.{datatype}.fasta.fai",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 700 * attempt,
+        mem_mb=lambda wildcards, attempt: 512 * attempt,
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir=tmp,
     log:

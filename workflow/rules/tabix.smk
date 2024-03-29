@@ -9,9 +9,9 @@ rule fair_genome_indexer_tabix_index_dbsnp:
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir=tmp,
     log:
-        "logs/tabix/index/{species}.{build}.{release}.all.log",
+        "logs/fair_genome_indexer/tabix/index/{species}.{build}.{release}.all.log",
     benchmark:
-        "benchmark/tabix/index/{species}.{build}.{release}.all.tsv"
+        "benchmark/fair_genome_indexer/tabix/index/{species}.{build}.{release}.all.tsv"
     params:
         extra=dlookup(
             dpath="params/fair_genome_indexer/tabix", within=config, default="-p vcf"

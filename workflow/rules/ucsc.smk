@@ -1,12 +1,17 @@
 rule fair_genome_indexer_ucsc_gtf_to_genepred:
     input:
-        "reference/annotation/{species}.{build}.{release}.gtf",
+        dlookup(
+            query="species == '{species} & release == '{release}' & build == '{build}'",
+            within=genomes,
+            key="gtf",
+            default="reference/annotation/{species}.{build}.{release}.gtf",
+        ),
     output:
         "reference/annotation/{species}.{build}.{release}.genePred",
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: attempt * 1024,
-        runtime=lambda wildcards, attempt: attempt * 15,
+        runtime=lambda wildcards, attempt: attempt * 10,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/ucsc_gtf_to_genepred/{species}.{build}.{release}.log",

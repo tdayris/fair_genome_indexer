@@ -5,8 +5,8 @@ rule fair_genome_indexer_picard_create_dict:
         "reference/sequences/{species}.{build}.{release}.{datatype}.dict",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: (1024 * 9) * attempt,
-        runtime=lambda wildcards, attempt: 10 * attempt,
+        mem_mb=lambda wildcards, attempt: (1024 * 11) * attempt,
+        runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/picard_create_dict/{species}.{build}.{release}.{datatype}.log",

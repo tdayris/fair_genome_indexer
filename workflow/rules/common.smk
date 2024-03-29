@@ -75,8 +75,20 @@ def dlookup(
     query: str | None = None,
     cols: list[str] | None = None,
     within=None,
+    key: str | None = None,
     default: str | dict[str, Any] | None = None,
 ) -> str:
+    """
+    Allow default values and attribute getter in lookup function
+
+    Parameters:
+    dpath       str | None                  : Passed to lookup function
+    query       str | None                  : Passed to lookup function
+    cols        str | None                  : Passed to lookup function
+    within      object                      : Passed to lookup function
+    key         str                         : Attribute name
+    default     str | dict[str, Any] | None : Default value to return
+    """
     value = None
     try:
         value = lookup(dpath=dpath, query=query, cols=cols, within=within)
@@ -88,6 +100,13 @@ def dlookup(
         value = default
     except AttributeError:
         value = default
+
+    if key is not None:
+        return getattr(
+            value,
+            key,
+            default,
+        )
 
     return value
 

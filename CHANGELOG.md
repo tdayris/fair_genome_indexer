@@ -1,3 +1,10 @@
+# 3.4.0
+
+## Features:
+
+* User-provided files are used more regularly
+* Slurm resources more closely related to homo_sapiens and mus_musculus requirements
+
 # 3.3.1
 
 ## Features:

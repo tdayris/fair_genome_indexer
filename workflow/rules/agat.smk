@@ -3,7 +3,7 @@ rule fair_genome_indexer_agat_config:
         yaml=temp("tmp/fair_genome_indexer/agat_config/config.yaml"),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 512 * attempt,
+        mem_mb=lambda wildcards, attempt: 468 * attempt,
         runtime=lambda wildcards, attempt: 2 * attempt,
         tmpdir=tmp,
     log:
@@ -59,7 +59,7 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: (1024 * 21) * attempt,
-        runtime=lambda wildcards, attempt: 35 * attempt,
+        runtime=lambda wildcards, attempt: 55 * attempt,
         tmpdir=tmp,
     shadow:
         "minimal"
@@ -93,8 +93,8 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
-        runtime=lambda wildcards, attempt: 35 * attempt,
+        mem_mb=lambda wildcards, attempt: 1024 * 34 * attempt,
+        runtime=lambda wildcards, attempt: 45 * attempt,
         tmpdir=tmp,
     shadow:
         "minimal"
@@ -131,8 +131,8 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
         gtf="reference/annotation/{species}.{build}.{release}.gtf",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: (1024 * 16) * attempt,
-        runtime=lambda wildcards, attempt: 35 * attempt,
+        mem_mb=lambda wildcards, attempt: 1024 * 35 * attempt,
+        runtime=lambda wildcards, attempt: 30 * attempt,
         tmpdir=tmp,
     shadow:
         "minimal"
@@ -154,7 +154,12 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
 
 use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna with:
     input:
-        gtf="reference/annotation/{species}.{build}.{release}.gtf",
+        gtf=dlookup(
+            query="species == '{species} & release == '{release}' & build == '{build}'",
+            within=genomes,
+            key="gtf",
+            default="reference/annotation/{species}.{build}.{release}.gtf",
+        ),
         config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
         gtf=temp(

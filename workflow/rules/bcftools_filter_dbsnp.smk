@@ -1,14 +1,24 @@
 rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
     input:
-        fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
-        fai=ancient("reference/sequences/{species}.{build}.{release}.dna.fasta.fai"),
+        fasta=dlookup(
+            query="species == '{species}' & build == '{build}' & release == '{release}'",
+            within=genomes,
+            key="dna_fasta",
+            default="reference/sequences/{species}.{build}.{release}.dna.fasta",
+        ),
+        fai=dlookup(
+            query="species == '{species}' & build == '{build}' & release == '{release}'",
+            within=genomes,
+            key="dna_fai",
+            default="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
+        ),
     output:
         temp(
             "tmp/fair_genome_indexer/pyfaidx_fasta_dict_to_bed/{species}.{build}.{release}.dna.bed"
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 1024 * attempt,
+        mem_mb=lambda wildcards, attempt: 768 * attempt,
         runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir=tmp,
     log:
@@ -40,8 +50,8 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
         "reference/variants/{species}.{build}.{release}.all.vcf.gz",
     threads: 2
     resources:
-        mem_mb=lambda wildcards, attempt: (1024 * 4) * attempt,
-        runtime=lambda wildcards, attempt: 15 * attempt,
+        mem_mb=lambda wildcards, attempt: 768 * attempt,
+        runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer/bcftools_filter_non_canonical_chrom/{species}.{build}.{release}.all.log",
