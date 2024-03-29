@@ -13,9 +13,8 @@ rule fair_genome_indexer_samtools_index:
     benchmark:
         "benchmark/fair_genome_indexer/samtools_index/{species}.{build}.{release}.{datatype}.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/samtools/faidx",
-            within=config,
             default="",
         ),
     wrapper:

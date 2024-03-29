@@ -1,11 +1,6 @@
 rule fair_genome_indexer_pyroe_id_to_name:
     input:
-        dlookup(
-            query="species == '{species} & release == '{release}' & build == '{build}'",
-            within=genomes,
-            key="gtf",
-            default="reference/annotation/{species}.{build}.{release}.gtf",
-        ),
+        lambda wildcards: get_gtf(wildcards),
     output:
         "reference/annotation/{species}.{build}.{release}.id_to_gene.tsv",
     threads: 1
@@ -18,9 +13,8 @@ rule fair_genome_indexer_pyroe_id_to_name:
     benchmark:
         "benchmark/fair_genome_indexer/pyroe_id_to_name/{species}.{build}.{release}.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/pyroe/idtoname",
-            within=config,
             default="",
         ),
     wrapper:

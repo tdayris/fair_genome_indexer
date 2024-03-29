@@ -1,11 +1,6 @@
 rule fair_genome_indexer_ucsc_gtf_to_genepred:
     input:
-        dlookup(
-            query="species == '{species} & release == '{release}' & build == '{build}'",
-            within=genomes,
-            key="gtf",
-            default="reference/annotation/{species}.{build}.{release}.gtf",
-        ),
+        lambda wildcards: get_gtf(wildcards),
     output:
         "reference/annotation/{species}.{build}.{release}.genePred",
     threads: 1
@@ -18,9 +13,8 @@ rule fair_genome_indexer_ucsc_gtf_to_genepred:
     benchmark:
         "benchmark/fair_genome_indexer/ucsc_gtf_to_genepred/{species}.{build}.{release}.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/ucsc/gtf2genepred",
-            within=config,
             default="",
         ),
     wrapper:

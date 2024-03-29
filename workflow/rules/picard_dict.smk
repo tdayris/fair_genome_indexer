@@ -13,9 +13,8 @@ rule fair_genome_indexer_picard_create_dict:
     benchmark:
         "benchmark/fair_genome_indexer/picard_create_dict/{species}.{build}.{release}.{datatype}.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/picard/createsequencedictionary",
-            within=config,
             default="",
         ),
     wrapper:

@@ -11,9 +11,8 @@ rule fair_genome_indexer_agat_config:
     benchmark:
         "benchmark/fair_genome_indexer/agat_config.tsv"
     params:
-        config=dlookup(
+        config=lookup_config(
             dpath="params/fair_genome_indexer/agat/config",
-            within=config,
             default={
                 "output_format": "GTF",
                 "gff_output_version": 3,
@@ -68,9 +67,7 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     benchmark:
         "benchmark/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.tsv"
     params:
-        extra=dlookup(
-            dpath="params/fair_genome_indexer/agat/gff2gtf", within=config, default=""
-        ),
+        extra=lookup_config(dpath="params/fair_genome_indexer/agat/gff2gtf", default=""),
     conda:
         "../envs/agat.yaml"
     script:
@@ -103,9 +100,8 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
     benchmark:
         "benchmark/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/agat/select_feature_by_attribute_value",
-            within=config,
             default="--attribute 'transcript_support_level' --value '\"NA\"' --test '='",
         ),
     conda:
@@ -117,25 +113,14 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
 rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     input:
         gtf=branch(
-            dlookup(
+            lookup_config(
                 dpath="params/fair_genome_indexer/agat/select_feature_by_attribute_value",
-                within=config,
             ),
             then="tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.filtered.gtf",
             otherwise="tmp/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf",
         ),
-        fasta=dlookup(
-            default="reference/sequences/{species}.{build}.{release}.dna.fasta",
-            query="species == '{species}' & build == '{build} & release == '{release}'",
-            key="dna_fasta",
-            within=genomes,
-        ),
-        fasta_index=dlookup(
-            query="species == '{species}' & build == '{build} & release == '{release}'",
-            key="dna_fai",
-            within=genomes,
-            default="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
-        ),
+        fasta=lambda wildcards: get_dna_fasta(wildcards),
+        fasta_index=lambda wildcards: get_dna_fai(wildcards),
         config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
         gtf="reference/annotation/{species}.{build}.{release}.gtf",
@@ -151,9 +136,8 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     benchmark:
         "benchmark/fair_genome_indexer/agat_sq_filter_feature_from_fasta/{species}.{build}.{release}.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/agat/filter_features",
-            within=config,
             default="",
         ),
     conda:
@@ -164,12 +148,7 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
 
 use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna with:
     input:
-        gtf=dlookup(
-            query="species == '{species} & release == '{release}' & build == '{build}'",
-            within=genomes,
-            key="gtf",
-            default="reference/annotation/{species}.{build}.{release}.gtf",
-        ),
+        gtf=lambda wildcards: get_gtf(wildcards),
         config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
         gtf=temp(
@@ -186,8 +165,7 @@ use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_g
     benchmark:
         "benchmark/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/agat/filter_feature_by_attribute_value",
-            within=config,
             default="--attribute transcript_biotype --value '\"protein_coding\"' --test '='",
         ),

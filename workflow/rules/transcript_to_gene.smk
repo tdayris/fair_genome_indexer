@@ -1,11 +1,6 @@
 rule fair_genome_indexer_agat_convert_sp_gff2tsv:
     input:
-        gtf=dlookup(
-            query="species == '{species} & release == '{release}' & build == '{build}'",
-            within=genomes,
-            key="gtf",
-            default="reference/annotation/{species}.{build}.{release}.gtf",
-        ),
+        gtf=lambda wildcards: get_gtf(wildcards),
         config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
         tsv=temp("tmp/fair_genome_indexer/agat/{species}.{build}.{release}.t2g.tsv"),
@@ -21,9 +16,8 @@ rule fair_genome_indexer_agat_convert_sp_gff2tsv:
     benchmark:
         "benchmark/fair_genome_indexer/agat/agat_convert_sp_gff2tsv/{species}.{build}.{release}.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/agat/agat_convert_sp_gff2tsv",
-            within=config,
             default="",
         ),
     conda:
@@ -48,7 +42,7 @@ rule fair_genome_indexer_xsv_select_t2g_columns:
         "benchmark/fair_genome_indexer/xsv/select_columns/{species}.{build}.{release}.tsv"
     params:
         subcommand="select",
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/xsv/select_t2g_columns",
             default="transcript_id,gene_id,gene_name",
         ),
@@ -67,8 +61,7 @@ use rule fair_genome_indexer_xsv_select_t2g_columns as fair_genome_indexer_xsv_f
         "benchmark/fair_genome_indexer/xsv/fmt/{species}.{build}.{release}.tsv"
     params:
         subcommand="fmt",
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/xsv/fmt_t2g",
-            within=config,
             default="--out-delimiter $'\t'",
         ),

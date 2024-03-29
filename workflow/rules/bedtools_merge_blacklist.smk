@@ -13,9 +13,8 @@ rule fair_genome_indexer_bedtools_merge_blacklist:
     benchmark:
         "benchmark/fair_genome_indexer/bedtools_merge_blacklist/{species}.{build}.{release}.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/bedtools/merge",
-            within=config,
             default="-d 5",
         ),
     wrapper:

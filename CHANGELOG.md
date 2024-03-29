@@ -1,3 +1,10 @@
+# 3.4.2
+
+## Features:
+
+* Use human readable functions to replace raw lookups
+* snakemake-wrappers update to 3.7.0
+
 # 3.4.1
 
 ## Features:

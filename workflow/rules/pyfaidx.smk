@@ -19,7 +19,10 @@ rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
     benchmark:
         "benchmark/fair_genome_indexer/pyfaidx_filter_out_noncanonical_chromosomes/{species}.{build}.{release}.{datatype}.tsv"
     params:
-        extra=lambda w: config.get("params", {}).get("pyfaidx", {}).get(w.datatype, ""),
+        extra=lambda wildcards: lookup_config(
+            dpath=f"params/fair_genome_indexer/pydaidx/{wildcards.datatype}",
+            default="",
+        ),
     conda:
         "../envs/pyfaidx.yaml"
     script:
@@ -45,9 +48,8 @@ rule fair_genome_indexer_rsync_make_fasta_available:
     benchmark:
         "benchmark/fair_genome_indexer/rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.tsv"
     params:
-        extra=dlookup(
+        extra=lookup_config(
             dpath="params/fair_genome_indexer/rsync",
-            within=config,
             default="--verbose --checksum --force --human-readable --progress",
         ),
     conda:
