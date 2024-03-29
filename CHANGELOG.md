@@ -1,3 +1,9 @@
+# 3.4.1
+
+## Features:
+
+* Use provided fasta/fai for GTF regeneration
+
 # 3.4.0
 
 ## Features:

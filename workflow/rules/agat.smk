@@ -124,8 +124,18 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
             then="tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.filtered.gtf",
             otherwise="tmp/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf",
         ),
-        fasta="reference/sequences/{species}.{build}.{release}.dna.fasta",
-        fasta_index="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
+        fasta=dlookup(
+            default="reference/sequences/{species}.{build}.{release}.dna.fasta",
+            query="species == '{species}' & build == '{build} & release == '{release}'",
+            key="dna_fasta",
+            within=genomes,
+        ),
+        fasta_index=dlookup(
+            query="species == '{species}' & build == '{build} & release == '{release}'",
+            key="dna_fai",
+            within=genomes,
+            default="reference/sequences/{species}.{build}.{release}.dna.fasta.fai",
+        ),
         config="tmp/fair_genome_indexer/agat_config/config.yaml",
     output:
         gtf="reference/annotation/{species}.{build}.{release}.gtf",
