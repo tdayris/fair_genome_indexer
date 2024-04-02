@@ -70,47 +70,6 @@ def is_variation_available(genome_property: str) -> bool:
         return availability
 
 
-def dlookup(
-    dpath: str | None = None,
-    query: str | None = None,
-    cols: list[str] | None = None,
-    within=None,
-    key: str | None = None,
-    default: str | dict[str, Any] | None = None,
-) -> str:
-    """
-    Allow default values and attribute getter in lookup function
-
-    Parameters:
-    dpath       str | None                  : Passed to lookup function
-    query       str | None                  : Passed to lookup function
-    cols        str | None                  : Passed to lookup function
-    within      object                      : Passed to lookup function
-    key         str                         : Attribute name
-    default     str | dict[str, Any] | None : Default value to return
-    """
-    value = None
-    try:
-        value = lookup(dpath=dpath, query=query, cols=cols, within=within)
-    except LookupError:
-        value = default
-    except WorkflowError:
-        value = default
-    except KeyError:
-        value = default
-    except AttributeError:
-        value = default
-
-    if key is not None:
-        return getattr(
-            value,
-            key,
-            default,
-        )
-
-    return value
-
-
 def lookup_config(
     dpath: str, default: str | None = None, config: dict[str, Any] = config
 ) -> str:
