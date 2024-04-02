@@ -12,6 +12,10 @@ Example:
 genomes: config/genomes.csv
 ```
 
+A complete list of accepted keys is available [in schemas](https://github.com/tdayris/fair_genome_indexer/blob/main/workflow/schemas/config.schema.yaml),
+with their default value, expected type, and human readable description.
+
+
 # `genomes.csv`
 
 A CSV-formatted text file containing the following mandatory columns:
@@ -28,6 +32,9 @@ homo_sapiens,GRCh38,110
 mus_musculus,GRCm38,99
 mus_musculus,GRCm39,110
 ```
+
+A complete list of accepted keys is available [in schemas](https://github.com/tdayris/fair_genome_indexer/blob/main/workflow/schemas/genomes.schema.yaml),
+with their default value, expected type, and human readable description.
 
 While `CSV` format is tested and recommended, this workflow uses python
 `csv.Sniffer()` to detect column separator. Tabulation and semicolumn are
