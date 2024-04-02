@@ -1,3 +1,10 @@
+# 3.4.3
+
+## Features:
+
+* Schema update
+* Cleaning
+
 # 3.4.2
 
 ## Features:
