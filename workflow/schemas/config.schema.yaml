@@ -12,87 +12,132 @@ genomes:
 params:
   type: object
   description: Optional parameters
+
   fair_genome_indexer:
     type: object
     description: Optional parameters for this pipeline
+    
     pyfaidx:
       type: object
       description: Optional parameters for pyfaidx (filter/correct fasta format)
       dna:
         type: string
         description: Filter-out non canonical chromosomes
+        default: ""
+
       cdna:
         type: string
         description: Keep all cdna sequences
-      required:
-        - dna
-        - cdna
+        default: ""
+
+      fasta_dict_to_bed:
+        type: string
+        descriptbion: Convert fasta to bed
+        default: ""
+
     agat:
       type: object
       description: Optional parameters for agat (filter/correct GTF format)
+      config:
+        type: object
+        description: Agat configuration as a key/value map
+
       gtf2gtf:
         type: string
         description: Optional parameters for agat_convert_sp_gff2gtf.pl
+        default: ""
+
       filter_features:
         type: string
         description: Optional parameters for agat_sq_filter_feature_from_fasta.pl
+        default: "--attribute 'transcript_support_level' --value '\"NA\"' --test '='"
+
       select_feature_by_attribute_value:
         type: string
         descrption: Optional parameters for agat_sq_select_feature_by_attribute_value.pl
+        default: ""
+
       agat_convert_sp_gff2tsv: 
         type: string
         description: Optional parameters for agat_convert_sp_gff2tsv.pl
-      required:
-        - gff2gtf
-        - filter_features
-        - select_feature_by_attribute_value
-        - agat_convert_sp_gff2tsv
+        default: ""
+    
     gffread:
       type: string
       descrption: Optional parameters for GFFRead
+      default: ""
+    
     bedtools:
       type: object
       descrption: Optional parameters for bedtools
       filter_non_canonical_chrom:
         type: string
         description: Optional parameters for filtering non-canonical chromosomes over dbSNP
+        default: ""
+
       merge:
         type: string
         description: Merge overlapping blacklist intervals
-      required:
-        - filter_non_canonical_chrom
-        - merge
+        default: "-d 5"
+
     tabix:
       type: string
       description: Optional parameters for tabix index VCF
+      default: "-p vcf"
+    
     picard:
       type: object
       description: Optional parameters for picard command line
       createsequencedictionary:
         type: string
         description: Optional parameters for picard create sequence dictionary
-      required:
-        - createsequencedictionary
+        default: ""
+    
     samtools:
       type: object
       description: Optional parameters for samtools
       faidx:
         type: string
         description: Optional parameters for samtools fasta index
-      required:
-        - faidx
+        default: ""
+    
     wget:
       type: string
       description: Optional parameters for wget downloads
+      default: "--verbose"
+    
     rsync:
       type: string
       description: Optional parameters for rsync copy
+      default: "--verbose --checksum --force --human-readable --progress"
+
     pyroe:
       type: string
       description: Optional parameters for pyroe indexing
+      default: ""
+    
     ucsc:
       type: object
       description: Optional parameters for UCSC tools
+      
       gtf2genepred:
         type: string
         description: Optional parameters for conversion to genepred format
+        deafult: ""
+
+
+    xsv:
+      type: object
+      description: XSV reformatting parameters
+
+      select_t2g_columns:
+        type: string
+        description: Select column in agat table to make a t2g file
+        default: "transcript_id,gene_id,gene_name"
+
+      fmt_t2g:
+        type: string
+        description: Reformat temporary t2g file
+        default: "--out-delimiter $'\t'"
+
+
