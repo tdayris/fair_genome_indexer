@@ -207,3 +207,22 @@ The tools used in this pipeline are described [here](https://github.com/tdayris/
 └───────────────────────────────────────┘
 
 ```
+
+# GenePred format
+
+| Step            | Commands                                                                                           |
+| --------------- | -------------------------------------------------------------------------------------------------- |
+| GTF to GenePred | [UCSC-tools](https://snakemake-wrappers.readthedocs.io/en/v3.7.0/wrappers/ucsc/gtfToGenePred.html) |
+
+
+```
+┌────────────────────────────────┐       
+│Genome annotation (see get GTF) │       
+└────────────┬───────────────────┘       
+             │                           
+             │                           
+┌────────────▼──────────────┐
+│GTFtoGenePred (UCSC-tools) │
+└───────────────────────────┘
+
+```
