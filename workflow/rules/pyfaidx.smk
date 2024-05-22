@@ -8,6 +8,8 @@ Gustave Roussy computing cluster (Flamingo) reports:
 
 for grch38
 """
+
+
 rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
     input:
         fasta="tmp/fair_genome_indexer_get_genome_fasta_sequence/{species}.{build}.{release}.{datatype}.fasta",
@@ -49,6 +51,8 @@ Gustave Roussy computing cluster (Flamingo) reports:
 
 for grch38
 """
+
+
 rule fair_genome_indexer_rsync_make_fasta_available:
     input:
         branch(
