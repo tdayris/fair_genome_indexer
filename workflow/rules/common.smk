@@ -33,7 +33,7 @@ genomes: pandas.DataFrame = pandas.read_csv(
 )
 snakemake.utils.validate(genomes, "../schemas/genomes.schema.yaml")
 
-snakemake_wrappers_prefix: str = "v3.7.0"
+snakemake_wrappers_prefix: str = "v3.10.2"
 
 
 report: "../reports/workflow.rst"

@@ -1,3 +1,12 @@
+# 3.5.0
+
+## Features:
+
+* Changes in configuration: parameters now holds the name of the rule they refer to
+* Log, Benchmarks, and temp files now point to a directory named from their rule name
+* Reservation made according to Gustave Roussy's Flamingo tests on Ensembl's GRCh38
+* snakemake-wrappers update to 3.10.2
+
 # 3.4.4
 
 ## Features:

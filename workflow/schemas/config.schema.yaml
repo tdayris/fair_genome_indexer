@@ -13,131 +13,98 @@ params:
   type: object
   description: Optional parameters
 
-  fair_genome_indexer:
+  fair_genome_indexer_ucsc_gtf_to_genepred:
+    type: str
+    description: Optional parameters for ucsc gtfToGenePred
+
+  fair_genome_indexer_agat_convert_sp_gff2tsv:
+    type: str
+    description: Optional parameters for agat_convert_sp_gff2tsv.pl
+
+  fair_genome_indexer_xsv_select_t2g_columns:
+    type: str
+    description: Optional parameters for xsv select
+
+  fair_genome_indexer_xsv_fmt_t2g:
+    type: str
+    description: Optional parameters for xsv fmt
+
+  fair_genome_indexer_tabix_index_dbsnp:
+    type: str
+    description: Optional parameters for tabix index
+
+  fair_genome_indexer_tabix_index_dbsnp_index_raw_dbsnp:
+    type: str
+    description: Optional parameters for tabix index
+
+  fair_genome_indexer_samtools_index:
+    type: str
+    description: Optional parameters for samtools faidx
+
+  fair_genome_indexer_pyroe_id_to_name:
+    type: str
+    description: Optional parameters for pyroe idtoname
+
+  fair_genome_indexer_rsync_make_fasta_available:
+    type: str
+    description: Optional parameters for rsync
+
+  fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
     type: object
-    description: Optional parameters for this pipeline
+    description: pyfaidx optional parameters for each subtype of sequences
     
-    pyfaidx:
-      type: object
-      description: Optional parameters for pyfaidx (filter/correct fasta format)
-      dna:
-        type: string
-        description: Filter-out non canonical chromosomes
-        default: ""
+    dna:
+      type: str
+      description: pyfaidx optional parameters for DNA sequences
 
-      cdna:
-        type: string
-        description: Keep all cdna sequences
-        default: ""
+    cdna:
+      type: str
+      description: pyfaidx optional parameters for cDNA sequences
 
-      fasta_dict_to_bed:
-        type: string
-        descriptbion: Convert fasta to bed
-        default: ""
+    transcripts:
+      type: str
+      description: pyfaidx optional parameters for transcripts DNA sequences
 
-    agat:
-      type: object
-      description: Optional parameters for agat (filter/correct GTF format)
-      config:
-        type: object
-        description: Agat configuration as a key/value map
+  fair_genome_indexer_picard_create_dict:
+    type: str
+    description: Picard CreateSequenceDictionary optional parameters
 
-      gtf2gtf:
-        type: string
-        description: Optional parameters for agat_convert_sp_gff2gtf.pl
-        default: ""
+  fair_genome_indexer_gffread_transcripts:
+    type: str
+    description: GffRead optional parameters for transcripts extraction
 
-      filter_features:
-        type: string
-        description: Optional parameters for agat_sq_filter_feature_from_fasta.pl
-        default: "--attribute 'transcript_support_level' --value '\"NA\"' --test '='"
+  fair_genome_indexer_gffread_cdna:
+    type: str
+    description: GffRead optional parameters for cDNA extraction
 
-      select_feature_by_attribute_value:
-        type: string
-        descrption: Optional parameters for agat_sq_select_feature_by_attribute_value.pl
-        default: ""
+  fair_genome_indexer_wget:
+    type: str
+    description: Optional parameters for wget
 
-      agat_convert_sp_gff2tsv: 
-        type: string
-        description: Optional parameters for agat_convert_sp_gff2tsv.pl
-        default: ""
-    
-    gffread:
-      type: string
-      descrption: Optional parameters for GFFRead
-      default: ""
-    
-    bedtools:
-      type: object
-      descrption: Optional parameters for bedtools
-      filter_non_canonical_chrom:
-        type: string
-        description: Optional parameters for filtering non-canonical chromosomes over dbSNP
-        default: ""
+  fair_genome_indexer_bedtools_merge_blacklist:
+    type: str
+    description: Optional parameters for bedtools merge
 
-      merge:
-        type: string
-        description: Merge overlapping blacklist intervals
-        default: "-d 5"
+  fair_genome_indexer_bcftools_filter_non_canonical_chrom:
+    type: str
+    description: Optional parameters for bcftools filter
 
-    tabix:
-      type: string
-      description: Optional parameters for tabix index VCF
-      default: "-p vcf"
-    
-    picard:
-      type: object
-      description: Optional parameters for picard command line
-      createsequencedictionary:
-        type: string
-        description: Optional parameters for picard create sequence dictionary
-        default: ""
-    
-    samtools:
-      type: object
-      description: Optional parameters for samtools
-      faidx:
-        type: string
-        description: Optional parameters for samtools fasta index
-        default: ""
-    
-    wget:
-      type: string
-      description: Optional parameters for wget downloads
-      default: "--verbose"
-    
-    rsync:
-      type: string
-      description: Optional parameters for rsync copy
-      default: "--verbose --checksum --force --human-readable --progress"
+  fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
+    type: str
+    description: Optional parameters for pyfaidx 
 
-    pyroe:
-      type: string
-      description: Optional parameters for pyroe indexing
-      default: ""
-    
-    ucsc:
-      type: object
-      description: Optional parameters for UCSC tools
-      
-      gtf2genepred:
-        type: string
-        description: Optional parameters for conversion to genepred format
-        deafult: ""
+  fair_genome_indexer_agat_sq_filter_feature_from_fasta:
+    type: str
+    description: Optional parameters for agat_sq_filter_feature_from_fasta.pl
 
+  fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
+    type: str
+    description: Optional parameters for agat_sp_filter_feature_by_attribute_value.pl
 
-    xsv:
-      type: object
-      description: XSV reformatting parameters
+  fair_genome_indexer_agat_convert_sp_gff2gtf:
+    type: str
+    escription: Optional parameters for agat_convert_sp_gff2gtf.pl
 
-      select_t2g_columns:
-        type: string
-        description: Select column in agat table to make a t2g file
-        default: "transcript_id,gene_id,gene_name"
-
-      fmt_t2g:
-        type: string
-        description: Reformat temporary t2g file
-        default: "--out-delimiter $'\t'"
-
-
+  fair_genome_indexer_agat_config:
+    type: object
+    description: Mapping of all agat parameters

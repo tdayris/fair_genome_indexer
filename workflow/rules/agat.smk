@@ -1,18 +1,31 @@
+"""
+Create Agat configuration file, used with every single
+other agat rules.
+
+Gustave Roussy computing cluster (Flamingo) reports:
+
+* 255.82 Mb (max_vms)
+* 5.6840 seconds (wall clock)
+* 565 octets of output
+"""
+
+
 rule fair_genome_indexer_agat_config:
     output:
-        yaml=temp("tmp/fair_genome_indexer/agat_config/config.yaml"),
+        yaml=temp("tmp/fair_genome_indexer_agat_config/config.yaml"),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 468 * attempt,
+        mem_mb=lambda wildcards, attempt: 280 + (100 * attempt),
         runtime=lambda wildcards, attempt: 2 * attempt,
+        disk_mb=1,
         tmpdir=tmp,
     log:
-        "logs/fair_genome_indexer/agat_config.log",
+        "logs/fair_genome_indexer_agat_config.log",
     benchmark:
-        "benchmark/fair_genome_indexer/agat_config.tsv"
+        "benchmark/fair_genome_indexer_agat_config.tsv"
     params:
         config=lookup_config(
-            dpath="params/fair_genome_indexer/agat/config",
+            dpath="params/fair_genome_indexer_agat_config",
             default={
                 "output_format": "GTF",
                 "gff_output_version": 3,
@@ -47,61 +60,88 @@ rule fair_genome_indexer_agat_config:
         "../scripts/agat_config.py"
 
 
+"""
+Fix classical GTF/GFF format errors in Ensembl/Gencode files.
+
+
+Gustave Roussy computing cluster (Flamingo) reports:
+
+* 22 696.89 Mb (max_vms)
+* 0h27m06s (wall clock)
+
+for grch38
+"""
+
+
 rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     input:
-        gtf="tmp/fair_genome_indexer/get_genome_gtf_annotation{species}.{build}.{release}.gtf",
-        config="tmp/fair_genome_indexer/agat_config/config.yaml",
+        gtf="tmp/fair_genome_indexer_get_genome_gtf_annotation/{species}.{build}.{release}.gtf",
+        config="tmp/fair_genome_indexer_agat_config/config.yaml",
     output:
         gtf=temp(
-            "tmp/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf"
+            "tmp/fair_genome_indexer_agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf"
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: (1024 * 21) * attempt,
-        runtime=lambda wildcards, attempt: 55 * attempt,
+        mem_mb=lambda wildcards, attempt: 23_000 + (2_000 * attempt),
+        runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir=tmp,
     shadow:
         "minimal"
     log:
-        "logs/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer_agat_convert_sp_gff2gtf/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer_agat_convert_sp_gff2gtf/{species}.{build}.{release}.tsv"
     params:
-        extra=lookup_config(dpath="params/fair_genome_indexer/agat/gff2gtf", default=""),
+        extra=lookup_config(
+            dpath="params/fair_genome_indexer_agat_convert_sp_gff2gtf", default=""
+        ),
     conda:
         "../envs/agat.yaml"
     script:
         "../scripts/agat_gff2gtf.py"
 
 
+"""
+Remove transcripts with NA as transcript support level
+
+Gustave Roussy computing cluster (Flamingo) reports:
+
+* 22 292.89 Mb (max_vms)
+* 0h27m45s (wall clock)
+
+for grch38
+"""
+
+
 rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
     input:
-        gtf="tmp/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf",
-        config="tmp/fair_genome_indexer/agat_config/config.yaml",
+        gtf="tmp/fair_genome_indexer_agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf",
+        config="tmp/fair_genome_indexer_agat_config/config.yaml",
     output:
         gtf=temp(
-            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.filtered.gtf"
+            "tmp/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.filtered.gtf"
         ),
         discarded=temp(
-            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.features_discarded.txt"
+            "tmp/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.features_discarded.txt"
         ),
         report=temp(
-            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.feaures_report.txt"
+            "tmp/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.feaures_report.txt"
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 1024 * 34 * attempt,
-        runtime=lambda wildcards, attempt: 45 * attempt,
+        mem_mb=lambda wildcards, attempt: 23_000 + (1_000 * attempt),
+        runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir=tmp,
     shadow:
         "minimal"
     log:
-        "logs/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.tsv"
     params:
         extra=lookup_config(
-            dpath="params/fair_genome_indexer/agat/select_feature_by_attribute_value",
+            dpath="params/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value",
             default="--attribute 'transcript_support_level' --value '\"NA\"' --test '='",
         ),
     conda:
@@ -110,34 +150,46 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
         "../scripts/agat_filter_feature_by_attribute_value.py"
 
 
+"""
+Remove contigs present in GTF, that are not present in the fasta index file.
+
+Gustave Roussy computing cluster (Flamingo) reports:
+
+* 532.09 Mb (max_vms)
+* 0h09m29s (wall clock)
+
+for grch38
+"""
+
+
 rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     input:
         gtf=branch(
             lookup_config(
                 dpath="params/fair_genome_indexer/agat/select_feature_by_attribute_value",
             ),
-            then="tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.filtered.gtf",
-            otherwise="tmp/fair_genome_indexer/agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf",
+            then="tmp/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value/{species}.{build}.{release}.filtered.gtf",
+            otherwise="tmp/fair_genome_indexer_agat_convert_sp_gff2gtf/{species}.{build}.{release}.format.gtf",
         ),
         fasta=lambda wildcards: get_dna_fasta(wildcards),
         fasta_index=lambda wildcards: get_dna_fai(wildcards),
-        config="tmp/fair_genome_indexer/agat_config/config.yaml",
+        config="tmp/fair_genome_indexer_agat_config/config.yaml",
     output:
         gtf="reference/annotation/{species}.{build}.{release}.gtf",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 1024 * 35 * attempt,
-        runtime=lambda wildcards, attempt: 30 * attempt,
+        mem_mb=lambda wildcards, attempt: 750 + (200 * attempt),
+        runtime=lambda wildcards, attempt: 15 * attempt,
         tmpdir=tmp,
     shadow:
         "minimal"
     log:
-        "logs/fair_genome_indexer/agat_sq_filter_feature_from_fasta/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer_agat_sq_filter_feature_from_fasta/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/fair_genome_indexer/agat_sq_filter_feature_from_fasta/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer_agat_sq_filter_feature_from_fasta/{species}.{build}.{release}.tsv"
     params:
         extra=lookup_config(
-            dpath="params/fair_genome_indexer/agat/filter_features",
+            dpath="params/fair_genome_indexer_agat_sq_filter_feature_from_fasta",
             default="",
         ),
     conda:
@@ -146,26 +198,43 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
         "../scripts/agat_filter_feature_from_fasta.py"
 
 
+"""
+Remove non-coding transcripts
+
+Gustave Roussy computing cluster (Flamingo) reports:
+
+* 7 500.73 Mb (max_vms)
+* 0h8m52s (wall clock)
+
+for grch38
+"""
+
+
 use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna with:
     input:
         gtf=lambda wildcards: get_gtf(wildcards),
-        config="tmp/fair_genome_indexer/agat_config/config.yaml",
+        config="tmp/fair_genome_indexer_agat_config/config.yaml",
     output:
         gtf=temp(
-            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.cdna.gtf"
+            "tmp/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.cdna.gtf"
         ),
         discarded=temp(
             "tmp/agat/{species}.{build}.{release}.cdna.feature_discarded.txt"
         ),
         report=temp(
-            "tmp/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.cdna.feaures_report.txt"
+            "tmp/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.cdna.feaures_report.txt"
         ),
+    threads: 1
+    resources:
+        mem_mb=lambda wildcards, attempt: 8_000 + (2_000 * attempt),
+        runtime=lambda wildcards, attempt: 15 * attempt,
+        tmpdir=tmp,
     log:
-        "logs/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/fair_genome_indexer/agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.tsv"
     params:
         extra=lookup_config(
-            dpath="params/fair_genome_indexer/agat/filter_feature_by_attribute_value",
+            dpath="params/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value",
             default="--attribute transcript_biotype --value '\"protein_coding\"' --test '='",
         ),

@@ -1,3 +1,15 @@
+"""
+Creates a genepred file from a GTF
+
+Gustave Roussy computing cluster (Flamingo) reports:
+
+* 906.06 Mb (max_vms)
+* 0:00:35 (wall clock)
+
+for grch38
+"""
+
+
 rule fair_genome_indexer_ucsc_gtf_to_genepred:
     input:
         lambda wildcards: get_gtf(wildcards),
@@ -5,16 +17,16 @@ rule fair_genome_indexer_ucsc_gtf_to_genepred:
         "reference/annotation/{species}.{build}.{release}.genePred",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: attempt * 1024,
-        runtime=lambda wildcards, attempt: attempt * 10,
+        mem_mb=lambda wildcards, attempt: 1_000 + (500 * attempt),
+        runtime=lambda wildcards, attempt: attempt * 5,
         tmpdir=tmp,
     log:
-        "logs/fair_genome_indexer/ucsc_gtf_to_genepred/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer_ucsc_gtf_to_genepred/{species}.{build}.{release}.log",
     benchmark:
-        "benchmark/fair_genome_indexer/ucsc_gtf_to_genepred/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer_ucsc_gtf_to_genepred/{species}.{build}.{release}.tsv"
     params:
         extra=lookup_config(
-            dpath="params/fair_genome_indexer/ucsc/gtf2genepred",
+            dpath="params/fair_genome_indexer_ucsc_gtf_to_genepred",
             default="",
         ),
     wrapper:
