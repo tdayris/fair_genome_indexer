@@ -8,8 +8,6 @@ Gustave Roussy computing cluster (Flamingo) reports:
 
 for grch38
 """
-
-
 rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
     input:
         fasta="tmp/fair_genome_indexer_get_genome_fasta_sequence/{species}.{build}.{release}.{datatype}.fasta",
@@ -32,7 +30,7 @@ rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
         "benchmark/fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes/{species}.{build}.{release}.{datatype}.tsv"
     params:
         extra=lambda wildcards: lookup_config(
-            dpath=f"params/fair_genome_indexer/pydaidx/{wildcards.datatype}",
+            dpath=f"params/fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes/{wildcards.datatype}",
             default="",
         ),
     conda:
@@ -51,8 +49,6 @@ Gustave Roussy computing cluster (Flamingo) reports:
 
 for grch38
 """
-
-
 rule fair_genome_indexer_rsync_make_fasta_available:
     input:
         branch(
