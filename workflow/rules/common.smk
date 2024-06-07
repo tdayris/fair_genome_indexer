@@ -5,52 +5,80 @@ import snakemake.utils
 
 from typing import Any, NamedTuple
 
-snakemake.utils.min_version("8.4.8")
+snakemake_min_version: str = "8.13.0"
+snakemake.utils.min_version(snakemake_min_version)
+
+snakemake_docker_image: str = "docker://snakemake/snakemake:v8.13.0"
 
 
-container: "docker://snakemake/snakemake:v8.5.3"
+container: snakemake_docker_image
 
 
 # Load and check configuration file
-configfile: "config/config.yaml"
+default_config_file: str = "config/config.yaml"
+
+
+configfile: default_config_file
 
 
 snakemake.utils.validate(config, "../schemas/config.schema.yaml")
 
+
+def load_table(path: str) -> pandas.DataFrame:
+    """
+    Load a table in memory, automatically inferring column separators
+
+    Parameters:
+    path (str): Path to the table to be loaded
+
+    Return
+    (pandas.DataFrame): The loaded table
+    """
+    with open(path, "r") as table_stream:
+        dialect: csv.Dialect = csv.Sniffer().sniff(table_stream.readline())
+        table_stream.seek(0)
+
+    return pandas.read_csv(
+        path,
+        sep=dialect.delimiter,
+        header=0,
+        index_col=None,
+        comment="#",
+        dtype=str,
+    )
+
+
 # Load and check genomes properties table
 genomes_table_path: str = config.get("genomes", "config/genomes.csv")
-with open(genomes_table_path, "r") as genomes_table_stream:
-    dialect: csv.Dialect = csv.Sniffer().sniff(genomes_table_stream.readline())
-    genomes_table_stream.seek(0)
-
-genomes: pandas.DataFrame = pandas.read_csv(
-    filepath_or_buffer=genomes_table_path,
-    sep=dialect.delimiter,
-    header=0,
-    index_col=None,
-    comment="#",
-    dtype=str,
-)
-snakemake.utils.validate(genomes, "../schemas/genomes.schema.yaml")
-
-snakemake_wrappers_prefix: str = "v3.10.2"
+try:
+    if (genomes is None) or genomes.empty:
+        genomes: pandas.DataFrame = load_table(genomes_table_path)
+        snakemake.utils.validate(genomes, "../schemas/genomes.schema.yaml")
+except NameError:
+    genomes: pandas.DataFrame = load_table(genomes_table_path)
+    snakemake.utils.validate(genomes, "../schemas/genomes.schema.yaml")
 
 
 report: "../reports/workflow.rst"
 
 
-release_list: list[str] = list(set(genomes.release.tolist()))
-build_list: list[str] = list(set(genomes.build.tolist()))
-species_list: list[str] = list(set(genomes.species.tolist()))
-datatype_list: list[str] = ["dna", "cdna", "all", "transcripts"]
+snakemake_wrappers_prefix: str = "v3.12.0"
+release_tuple: tuple[str] = tuple(set(genomes.release.tolist()))
+build_tuple: tuple[str] = tuple(set(genomes.build.tolist()))
+species_tuple: tuple[str] = tuple(set(genomes.species.tolist()))
+datatype_tuple: tuple[str] = ("dna", "cdna", "all", "transcripts")
+gxf_tuple: tuple[str] = ("gtf", "gff3")
+id2name_tuple: tuple[str] = ("t2g", "id_to_gene")
 tmp: str = f"{os.getcwd()}/tmp"
 
 
 wildcard_constraints:
-    release=r"|".join(release_list),
-    build=r"|".join(build_list),
-    species=r"|".join(species_list),
-    datatype=r"|".join(datatype_list),
+    release=r"|".join(release_tuple),
+    build=r"|".join(build_tuple),
+    species=r"|".join(species_tuple),
+    datatype=r"|".join(datatype_tuple),
+    gxf=r"|".join(gxf_tuple),
+    id2name=r"|".join(id2name_tuple),
 
 
 def is_variation_available(genome_property: str) -> bool:
@@ -112,7 +140,7 @@ def get_dna_fasta(
     Return path to the final DNA fasta sequences
     """
     default: str = (
-        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}.dna.fasta".format(
+        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.dna.fasta".format(
             wildcards=wildcards
         )
     )
@@ -126,7 +154,7 @@ def get_cdna_fasta(
     Return path to the final cDNA fasta sequences
     """
     default: str = (
-        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}.cdna.fasta".format(
+        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.cdna.fasta".format(
             wildcards=wildcards
         )
     )
@@ -140,7 +168,7 @@ def get_transcripts_fasta(
     Return path to the final cDNA transcripts fasta sequences
     """
     default: str = (
-        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}.transcripts.fasta".format(
+        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.transcripts.fasta".format(
             wildcards=wildcards
         )
     )
@@ -172,7 +200,7 @@ def get_dna_fai(
     Return path to the final DNA fasta sequences index
     """
     default: str = (
-        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}.dna.fasta.fai".format(
+        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.dna.fasta.fai".format(
             wildcards=wildcards
         )
     )
@@ -186,7 +214,7 @@ def get_cdna_fai(
     Return path to the final cDNA fasta sequences index
     """
     default: str = (
-        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}.cdna.fasta.fai".format(
+        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.cdna.fasta.fai".format(
             wildcards=wildcards
         )
     )
@@ -200,7 +228,7 @@ def get_transcripts_fai(
     Return path to the final cDNA transcripts fasta sequences index
     """
     default: str = (
-        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}.transcripts.fasta.fai".format(
+        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.transcripts.fasta.fai".format(
             wildcards=wildcards
         )
     )
@@ -229,18 +257,50 @@ def get_gtf(
     wildcards: snakemake.io.Wildcards, genomes: pandas.DataFrame = genomes
 ) -> str:
     """
-    Return path to the final genome annotation
+    Return path to the final genome annotation (GTF formatted)
     """
     default: str = (
-        "reference/annotation/{wildcards.species}.{wildcards.build}.{wildcards.release}.gtf".format(
+        "reference/annotation/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.gtf".format(
             wildcards=wildcards
         )
     )
     return lookup_genomes(wildcards, key="gtf", default=default, genomes=genomes)
 
 
-def get_fair_genome_indexer_target(
+def get_gff(
     wildcards: snakemake.io.Wildcards, genomes: pandas.DataFrame = genomes
+) -> str:
+    """
+    Return path to the final genome annotation (GFF3 formatted)
+    """
+    default: str = (
+        "reference/annotation/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.gff3".format(
+            wildcards=wildcards
+        )
+    )
+    return lookup_genomes(wildcards, key="gff3", default=default, genomes=genomes)
+
+
+def used_genomes(
+    genomes: pandas.DataFrame = genomes, samples: pandas.DataFrame | None = None
+) -> tuple[str]:
+    """
+    Reduce the number of genomes to download to the strict minimum
+    """
+    if samples is None:
+        return genomes
+
+    return genomes.loc[
+        genomes.species.isin(samples.species.tolist())
+        & genomes.build.isin(samples.build.tolist())
+        & genomes.release.isin(samples.release.tolist())
+    ]
+
+
+def get_fair_genome_indexer_target(
+    wildcards: snakemake.io.Wildcards,
+    genomes: pandas.DataFrame = genomes,
+    samples: pandas.DataFrame | None = None,
 ) -> dict[str, list[str] | str]:
     """
     Return expected list of output files
@@ -251,7 +311,8 @@ def get_fair_genome_indexer_target(
     """
     # Filter-out genomes without basic properties
     usable_genomes: list[NamedTuple] | NamedTuple = lookup(
-        query="species != '' & build != '' & release != ''", within=genomes
+        query="species != '' & build != '' & release != ''",
+        within=used_genomes(genomes, samples),
     )
     if not isinstance(usable_genomes, list):
         usable_genomes = [usable_genomes]
@@ -265,40 +326,41 @@ def get_fair_genome_indexer_target(
     # Base datasets available for many genomes
     genome_data: dict[str, list[str]] = {
         "fasta": expand(
-            "reference/sequences/{genomes_property}.{datatype}.fasta",
+            "reference/sequences/{genomes_property}/{genomes_property}.{datatype}.fasta",
             genomes_property=genomes_properties,
             datatype=["dna", "cdna", "transcripts"],
         ),
         "fai": expand(
-            "reference/sequences/{genomes_property}.{datatype}.fasta.fai",
+            "reference/sequences/{genomes_property}/{genomes_property}.{datatype}.fasta.fai",
             genomes_property=genomes_properties,
             datatype=["dna", "cdna", "transcripts"],
         ),
         "dict": expand(
-            "reference/sequences/{genomes_property}.dna.dict",
+            "reference/sequences/{genomes_property}/{genomes_property}.dna.dict",
             genomes_property=genomes_properties,
         ),
         "gtf": expand(
-            "reference/annotation/{genomes_property}.gtf",
+            "reference/annotation/{genomes_property}/{genomes_property}.{gxfs}",
             genomes_property=genomes_properties,
+            gxfs=gxf_tuple,
         ),
         "vcf": expand(
-            "reference/variants/{genomes_property}.{datatype}.vcf.gz",
+            "reference/variants/{genomes_property}/{genomes_property}.{datatype}.vcf.gz",
             genomes_property=filter(is_variation_available, genomes_properties),
             datatype=["all"],
         ),
         "vcf_tbi": expand(
-            "reference/variants/{genomes_property}.{datatype}.vcf.gz.tbi",
+            "reference/variants/{genomes_property}/{genomes_property}.{datatype}.vcf.gz.tbi",
             genomes_property=filter(is_variation_available, genomes_properties),
             datatype=["all"],
         ),
         "id2name": expand(
-            "reference/annotation/{genomes_property}.{content}.tsv",
+            "reference/annotation/{genomes_property}/{genomes_property}.{content}.tsv",
             genomes_property=genomes_properties,
-            content=["id_to_gene", "t2g"],
+            content=id2name_tuple,
         ),
         "genepred": expand(
-            "reference/annotation/{genomes_property}.genePred",
+            "reference/annotation/{genomes_property}/{genomes_property}.genePred",
             genomes_property=genomes_properties,
         ),
     }
@@ -314,15 +376,15 @@ def get_fair_genome_indexer_target(
         blacklist_usable_genomes = [blacklist_usable_genomes]
 
     # Format genomes identifiers: species.build.release
-    blacklist_genomes_properties: list[str] = [
-        ".".join([usable_genome.species, usable_genome.build, usable_genome.release])
+    blacklist_genomes_properties: tuple[str] = tuple(
+        ".".join((usable_genome.species, usable_genome.build, usable_genome.release))
         for usable_genome in blacklist_usable_genomes
-    ]
+    )
 
     # Add only available blacklists
     if len(blacklist_genomes_properties) > 0:
         genome_data["blacklist"] = expand(
-            "reference/blacklist/{genome_property}.merged.bed",
+            "reference/blacklist/{genome_property}/{genome_property}.merged.bed",
             genome_property=blacklist_genomes_properties,
         )
 

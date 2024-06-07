@@ -61,7 +61,7 @@ rule fair_genome_indexer_rsync_make_fasta_available:
             otherwise="tmp/fair_genome_indexer_get_genome_fasta_sequence/{species}.{build}.{release}.dna.fasta",
         ),
     output:
-        "reference/sequences/{species}.{build}.{release}.dna.fasta",
+        "reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.dna.fasta",
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 500 + (attempt * 200),

@@ -13,7 +13,7 @@ for grch38
 rule fair_genome_indexer_agat_convert_sp_gff2tsv:
     input:
         gtf=lambda wildcards: get_gtf(wildcards),
-        config="tmp/fair_genome_indexer_agat_config/config.yaml",
+        config="tmp/fair_genome_indexer_agat_config/gtf.yaml",
     output:
         tsv=temp(
             "tmp/fair_genome_indexer_agat_convert_sp_gff2tsv/{species}.{build}.{release}.t2g.tsv"
@@ -87,7 +87,7 @@ use rule fair_genome_indexer_xsv_select_t2g_columns as fair_genome_indexer_xsv_f
     input:
         table="tmp/fair_genome_indexer_xsv_select_t2g_columns/{species}.{build}.{release}.t2g.tsv",
     output:
-        "reference/annotation/{species}.{build}.{release}.t2g.tsv",
+        "reference/annotation/{species}.{build}.{release}/{species}.{build}.{release}.t2g.tsv",
     log:
         "logs/fair_genome_indexer_xsv_fmt_t2g/{species}.{build}.{release}.log",
     benchmark:

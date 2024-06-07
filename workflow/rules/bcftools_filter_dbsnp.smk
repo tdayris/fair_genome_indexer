@@ -60,7 +60,7 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
             "tmp/fair_genome_indexer_pyfaidx_fasta_dict_to_bed/{species}.{build}.{release}.dna.bed"
         ),
     output:
-        "reference/variants/{species}.{build}.{release}.all.vcf.gz",
+        "reference/variants/{species}.{build}.{release}/{species}.{build}.{release}.all.vcf.gz",
     threads: 2
     resources:
         mem_mb=lambda wildcards, attempt: 750 + (250 * attempt),

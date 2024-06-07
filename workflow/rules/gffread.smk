@@ -16,7 +16,7 @@ rule fair_genome_indexer_gffread_transcripts:
         fai=lambda wildcards: get_dna_fai(wildcards),
         annotation=lambda wildcards: get_gtf(wildcards),
     output:
-        records="reference/sequences/{species}.{build}.{release}.transcripts.fasta",
+        records="reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.transcripts.fasta",
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 1000 + (500 * attempt),
@@ -40,7 +40,7 @@ use rule fair_genome_indexer_gffread_transcripts as fair_genome_indexer_gffread_
         fai=lambda wildcards: get_dna_fai(wildcards),
         annotation="tmp/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.cdna.gtf",
     output:
-        records="reference/sequences/{species}.{build}.{release}.cdna.fasta",
+        records="reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.cdna.fasta",
     log:
         "logs/ffair_genome_indexer_gffread_cdna/{species}.{build}.{release}.cdna.log",
     benchmark:

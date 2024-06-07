@@ -14,7 +14,7 @@ rule fair_genome_indexer_pyroe_id_to_name:
     input:
         lambda wildcards: get_gtf(wildcards),
     output:
-        "reference/annotation/{species}.{build}.{release}.id_to_gene.tsv",
+        "reference/annotation/{species}.{build}.{release}/{species}.{build}.{release}.id_to_gene.tsv",
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 6_000 + (1_000 * attempt),

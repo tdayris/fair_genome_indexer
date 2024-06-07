@@ -13,7 +13,7 @@ for grch38
 rule fair_genome_indexer_get_genome_gtf_annotation:
     output:
         temp(
-            "tmp/fair_genome_indexer_get_genome_gtf_annotation/{species}.{build}.{release}.gtf"
+            "tmp/fair_genome_indexer_get_genome_gtf_annotation/{species}.{build}.{release}.{gxf}"
         ),
     threads: 1
     resources:
@@ -21,9 +21,9 @@ rule fair_genome_indexer_get_genome_gtf_annotation:
         runtime=lambda wildcards, attempt: 45 * attempt,
         tmpdir=tmp,
     log:
-        "logs/fair_genome_indexer_get_genome_gtf_annotation/{species}.{build}.{release}.log",
+        "logs/fair_genome_indexer_get_genome_gtf_annotation/{species}.{build}.{release}.{gxf}.log",
     benchmark:
-        "benchmark/fair_genome_indexer_get_genome_gtf_annotation/{species}.{build}.{release}.tsv"
+        "benchmark/fair_genome_indexer_get_genome_gtf_annotation/{species}.{build}.{release}.{gxf}.tsv"
     params:
         species="{species}",
         build="{build}",

@@ -12,9 +12,9 @@ for grch38
 
 rule fair_genome_indexer_tabix_index_dbsnp:
     input:
-        "reference/variants/{species}.{build}.{release}.all.vcf.gz",
+        "reference/variants/{species}.{build}.{release}/{species}.{build}.{release}.all.vcf.gz",
     output:
-        "reference/variants/{species}.{build}.{release}.all.vcf.gz.tbi",
+        "reference/variants/{species}.{build}.{release}/{species}.{build}.{release}.all.vcf.gz.tbi",
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 500 + (300 * attempt),

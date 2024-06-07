@@ -12,9 +12,9 @@ for grch38
 
 rule fair_genome_indexer_picard_create_dict:
     input:
-        "reference/sequences/{species}.{build}.{release}.{datatype}.fasta",
+        "reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.{datatype}.fasta",
     output:
-        "reference/sequences/{species}.{build}.{release}.{datatype}.dict",
+        "reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.{datatype}.dict",
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 13_000 + (1_000 * attempt),

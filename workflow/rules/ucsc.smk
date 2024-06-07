@@ -14,7 +14,7 @@ rule fair_genome_indexer_ucsc_gtf_to_genepred:
     input:
         lambda wildcards: get_gtf(wildcards),
     output:
-        "reference/annotation/{species}.{build}.{release}.genePred",
+        "reference/annotation/{species}.{build}.{release}/{species}.{build}.{release}.genePred",
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 1_000 + (500 * attempt),

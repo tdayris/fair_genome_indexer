@@ -10,21 +10,25 @@ files are present:
 
     reference/
     ├── blacklist
-    |   └── XXX.merged.bed
+    |   └── XXX
+    |       └── XXX.merged.bed
     ├── variants
-    |   ├── XXX.all.vcf.gz
-    |   └── XXX.all.vcf.gz.tbi
+    |   └── XXX
+    |       ├── XXX.all.vcf.gz
+    |       └── XXX.all.vcf.gz.tbi
     ├── sequences
-    |   ├── XXX.cdna.fasta
-    |   ├── XXX.cdna.fasta.fai
-    |   ├── XXX.dna.dict
-    |   ├── XXX.dna.fasta
-    |   └── XXX.dna.fasta.fai
+    |   └── XXX
+    |       ├── XXX.cdna.fasta
+    |       ├── XXX.cdna.fasta.fai
+    |       ├── XXX.dna.dict
+    |       ├── XXX.dna.fasta
+    |       └── XXX.dna.fasta.fai
     └── annotation
-        ├── XXX.id_to_gene.tsv
-        ├── XXX.t2g.tsv
-        ├── XXX.genePred
-        └── XXX.gtf
+        └── XXX
+            ├── XXX.id_to_gene.tsv
+            ├── XXX.t2g.tsv
+            ├── XXX.genePred
+            └── XXX.gtf
 
 
 +-------------------+-----------------------------+

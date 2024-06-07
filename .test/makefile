@@ -42,13 +42,11 @@ all: report.txt
 	echo "Process over"
 
 report.txt: pipeline.txt
-	mamba activate test-snakemake-wrappers && \
 	snakemake -s ../workflow/Snakefile \
 		--report report.zip 2>&1 | tee report.txt
 
 
 pipeline.txt: linter_info.txt
-	mamba activate test-snakemake-wrappers && \
 	snakemake -s ../workflow/Snakefile \
 		--cores 7 --profile local \
 		--software-deployment-method apptainer conda \
@@ -56,17 +54,14 @@ pipeline.txt: linter_info.txt
 
 
 format.txt:
-	mamba activate test-snakemake-wrappers && \
 	snakefmt $(snakefiles) 2>&1 | tee format.txt
 
 
 black.txt:
-	mamba activate test-snakemake-wrappers && \
 	black $(python_scripts) 2>&1 | tee black.txt
 
 
 linter_info.txt: format.txt black.txt
-	mamba activate test-snakemake-wrappers && \
 	snakemake -s ../workflow/Snakefile --lint 2>&1 | tee linter_info.txt
 
 .PHONY: clean

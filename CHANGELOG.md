@@ -1,3 +1,11 @@
+# 3.6.0
+
+## Features:
+
+* Separate resources among subdirectories holding genome names
+* Snakemake up to 8.13.0
+* Snakemake wrappers up to 3.12.0
+
 # 3.5.0
 
 ## Features:
