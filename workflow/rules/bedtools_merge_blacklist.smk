@@ -14,7 +14,7 @@ rule fair_genome_indexer_bedtools_merge_blacklist:
     input:
         "tmp/fair_genome_indexer_blacklist/{species}.{build}.{release}.bed.gz",
     output:
-        "reference/blacklist/{species}.{build}.{release}.merged.bed",
+        "reference/blacklist/{species}.{build}.{release}/{species}.{build}.{release}.merged.bed",
     threads: 2
     resources:
         mem_mb=lambda wildcards, attempt: 450 + (150 * attempt),
