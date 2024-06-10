@@ -125,12 +125,15 @@ def lookup_genomes(
     """
     Run lookup function with default parameters in order to search user-provided sequence/annotation files
     """
-    query: str = (
-        "species == '{wildcards.species}' & build == '{wildcards.build}' & release == '{wildcards.release}'".format(
+    query: str = "species == '{wildcards.species}' & build == '{wildcards.build}' & release == '{wildcards.release}'".format(
             wildcards=wildcards
         )
-    )
-    return getattr(lookup(query=query, within=genomes), key, default)
+    
+    query_result: str | float = getattr(lookup(query=query, within=genomes), key, default)
+    if query_result != query_result:
+        # Then the result of the query is nan
+        return default
+    return query_result
 
 
 def get_dna_fasta(
@@ -139,11 +142,9 @@ def get_dna_fasta(
     """
     Return path to the final DNA fasta sequences
     """
-    default: str = (
-        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.dna.fasta".format(
+    default: str = "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.dna.fasta".format(
             wildcards=wildcards
         )
-    )
     return lookup_genomes(wildcards, key="dna_fasta", default=default, genomes=genomes)
 
 
@@ -153,11 +154,9 @@ def get_cdna_fasta(
     """
     Return path to the final cDNA fasta sequences
     """
-    default: str = (
-        "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.cdna.fasta".format(
+    default: str = "reference/sequences/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.cdna.fasta".format(
             wildcards=wildcards
         )
-    )
     return lookup_genomes(wildcards, key="cdna_fasta", default=default, genomes=genomes)
 
 

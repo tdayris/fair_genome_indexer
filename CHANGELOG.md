@@ -1,3 +1,9 @@
+# 3.6.2
+
+## Fix:
+
+* Protect against nan values in genome queries
+
 # 3.6.1
 
 ## Features:
