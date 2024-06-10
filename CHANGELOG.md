@@ -1,3 +1,9 @@
+# 3.6.1
+
+## Features:
+
+* Documentation udpate
+
 # 3.6.0
 
 ## Features:
