@@ -107,7 +107,7 @@ Fix classical GTF/GFF format errors in Ensembl/Gencode files.
 Gustave Roussy computing cluster (Flamingo) reports:
 
 * 22 696.89 Mb (max_vms)
-* 0h27m06s (wall clock)
+* 1h27m06s (wall clock)
 
 for grch38
 """
@@ -124,7 +124,7 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 23_000 + (2_000 * attempt),
-        runtime=lambda wildcards, attempt: 35 * attempt,
+        runtime=lambda wildcards, attempt: (35 * attempt) + 60,
         tmpdir=tmp,
     shadow:
         "minimal"
@@ -148,7 +148,7 @@ Remove transcripts with NA as transcript support level
 Gustave Roussy computing cluster (Flamingo) reports:
 
 * 22 292.89 Mb (max_vms)
-* 0h27m45s (wall clock)
+* 1h27m45s (wall clock)
 
 for grch38
 """
@@ -171,7 +171,7 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 23_000 + (1_000 * attempt),
-        runtime=lambda wildcards, attempt: 35 * attempt,
+        runtime=lambda wildcards, attempt: (35 * attempt) + 60,
         tmpdir=tmp,
     shadow:
         "minimal"
@@ -196,7 +196,7 @@ Remove contigs present in GTF, that are not present in the fasta index file.
 Gustave Roussy computing cluster (Flamingo) reports:
 
 * 532.09 Mb (max_vms)
-* 0h09m29s (wall clock)
+* 0h49m29s (wall clock)
 
 for grch38
 """
@@ -219,7 +219,7 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 750 + (200 * attempt),
-        runtime=lambda wildcards, attempt: 35 * attempt,
+        runtime=lambda wildcards, attempt: (35 * attempt) + 60,
         tmpdir=tmp,
     shadow:
         "minimal"
@@ -244,7 +244,7 @@ Remove non-coding transcripts
 Gustave Roussy computing cluster (Flamingo) reports:
 
 * 7 500.73 Mb (max_vms)
-* 0h8m52s (wall clock)
+* 0h38m52s (wall clock)
 
 for grch38
 """
@@ -267,7 +267,7 @@ use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_g
     threads: 1
     resources:
         mem_mb=lambda wildcards, attempt: 8_000 + (2_000 * attempt),
-        runtime=lambda wildcards, attempt: 35 * attempt,
+        runtime=lambda wildcards, attempt: (35 * attempt) + 60,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.{gxf}log",

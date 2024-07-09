@@ -1,3 +1,12 @@
+# 3.7.0
+
+## Fix:
+
+* Blacklist download link updated
+* Agat temporary file handled
+* Include bowtie2 indexes
+
+
 # 3.6.2
 
 ## Fix:

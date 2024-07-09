@@ -147,5 +147,24 @@ genomes = replace_col(
     default="reference/annotation/{species}.{build}.{release}.genePred",
 )
 
+# Bowtie2 indexes
+genomes = replace_col(
+    df=genomes,
+    column="bowtie2_dna_index",
+    default="reference/bowtie2_index/{species}.{build}.{release}.dna",
+)
+genomes = replace_col(
+    df=genomes,
+    column="bowtie2__cdna_index",
+    default="reference/bowtie2_index/{species}.{build}.{release}.cdna",
+)
+genomes = replace_col(
+    df=genomes,
+    column="bowtie2_transcripts_index",
+    default="reference/bowtie2_index/{species}.{build}.{release}.trancripts",
+)
+
+# Salmon indexes
+# STAR indexes
 
 genomes.to_csv(path_or_buf=snakemake.output[0], sep=",", header=True, index=False)

@@ -12,6 +12,7 @@ snakefiles := \
 	"../workflow/rules/bcftools_filter_dbsnp.smk" \
 	"../workflow/rules/bedtools_merge_blacklist.smk" \
 	"../workflow/rules/blacklist.smk" \
+	"../workflow/rules/bowtie2_index.smk" \
 	"../workflow/rules/common.smk" \
 	"../workflow/rules/genome_annotation.smk" \
 	"../workflow/rules/genome_sequence.smk" \

@@ -370,6 +370,19 @@ def get_fair_genome_indexer_target(
             "reference/annotation/{genomes_property}/{genomes_property}.genePred",
             genomes_property=genomes_properties,
         ),
+        "bowtie2_index": expand(
+            "reference/bowtie2_index/{genomes_property}.{datatype}/{genomes_property}.{datatype}{bt2_ext}",
+            genomes_property=genomes_properties,
+            datatype=("dna", "cdna", "transcripts"),
+            bt2_ext=(
+                ".1.bt2",
+                ".2.bt2",
+                ".3.bt2",
+                ".4.bt2",
+                ".rev.1.bt2",
+                ".rev.2.bt2",
+            ),
+        ),
     }
 
     # Public blacklist are not available for all genomes

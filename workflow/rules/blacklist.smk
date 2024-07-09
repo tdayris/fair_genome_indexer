@@ -12,7 +12,7 @@ rule fair_genome_indexer_blacklist_grch38:
     benchmark:
         "benchmark/fair_genome_indexer_blacklist/homo_sapiens.GRCh38.{release}.tsv"
     params:
-        address="https://github.com/Boyle-Lab/Blacklist/raw/master/lists/Blacklist_v1/hg38-blacklist.bed.gz",
+        address="https://raw.githubusercontent.com/Boyle-Lab/Blacklist/master/lists/Blacklist_v1/hg38-blacklist.bed.gz",
         extra=lookup_config(
             dpath="params/fair_genome_indexer_wget", default="--verbose"
         ),
@@ -31,7 +31,7 @@ use rule fair_genome_indexer_blacklist_grch38 as fair_genome_indexer_blacklist_m
     benchmark:
         "benchmark/fair_genome_indexer_blacklist/mus_musculus.GRCm38.{release}.tsv"
     params:
-        address="https://github.com/Boyle-Lab/Blacklist/raw/master/lists/Blacklist_v1/mm10-blacklist.bed.gz",
+        address="https://raw.githubusercontent.com/Boyle-Lab/Blacklist/master/lists/Blacklist_v1/mm10-blacklist.bed.gz",
         extra=lookup_config(
             dpath="params/fair_genome_indexer_wget", default="--verbose"
         ),
@@ -46,7 +46,7 @@ use rule fair_genome_indexer_blacklist_grch38 as fair_genome_indexer_blacklist_g
     log:
         "logs/fair_genome_indexer_blacklist/homo_sapiens.GRCh37.{release}.log",
     params:
-        address="https://github.com/Boyle-Lab/Blacklist/raw/master/lists/Blacklist_v1/hg19-blacklist.bed.gz",
+        address="https://raw.githubusercontent.com/Boyle-Lab/Blacklist/master/lists/Blacklist_v1/hg19-blacklist.bed.gz",
         extra=lookup_config(
             dpath="params/fair_genome_indexer_wget", default="--verbose"
         ),
@@ -61,7 +61,7 @@ use rule fair_genome_indexer_blacklist_grch38 as fair_genome_indexer_blacklist_m
     benchmark:
         "benchmark/fair_genome_indexer_blacklist/mus_musculus.NCBIM37.{release}.tsv"
     params:
-        address="https://github.com/Boyle-Lab/Blacklist/blob/master/lists/Blacklist_v1/mm9-blacklist.bed.gz",
+        address="https://raw.githubusercontent.com/Boyle-Lab/Blacklist/master/lists/Blacklist_v1/mm9-blacklist.bed.gz",
         extra=lookup_config(
             dpath="params/fair_genome_indexer_wget", default="--verbose"
         ),
