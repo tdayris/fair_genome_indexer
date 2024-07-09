@@ -13,40 +13,52 @@ params:
   type: object
   description: Optional parameters
 
+  fair_genome_indexer_star_index:
+    type: string
+    description: Optional parameters for STAR index
+
+  fair_genome_indexer_bowtie2_index:
+    type: string
+    description: Optional parameters for bowtie2 build
+
+  fair_genome_indexer_ucsc_genepred_to_bed:
+    type: string
+    description: Optional parameters for ucsc genePredToBed
+
   fair_genome_indexer_ucsc_gtf_to_genepred:
-    type: str
+    type: string
     description: Optional parameters for ucsc gtfToGenePred
 
   fair_genome_indexer_agat_convert_sp_gff2tsv:
-    type: str
+    type: string
     description: Optional parameters for agat_convert_sp_gff2tsv.pl
 
   fair_genome_indexer_xsv_select_t2g_columns:
-    type: str
+    type: string
     description: Optional parameters for xsv select
 
   fair_genome_indexer_xsv_fmt_t2g:
-    type: str
+    type: string
     description: Optional parameters for xsv fmt
 
   fair_genome_indexer_tabix_index_dbsnp:
-    type: str
+    type: string
     description: Optional parameters for tabix index
 
   fair_genome_indexer_tabix_index_dbsnp_index_raw_dbsnp:
-    type: str
+    type: string
     description: Optional parameters for tabix index
 
   fair_genome_indexer_samtools_index:
-    type: str
+    type: string
     description: Optional parameters for samtools faidx
 
   fair_genome_indexer_pyroe_id_to_name:
-    type: str
+    type: string
     description: Optional parameters for pyroe idtoname
 
   fair_genome_indexer_rsync_make_fasta_available:
-    type: str
+    type: string
     description: Optional parameters for rsync
 
   fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
@@ -54,55 +66,55 @@ params:
     description: pyfaidx optional parameters for each subtype of sequences
     
     dna:
-      type: str
+      type: string
       description: pyfaidx optional parameters for DNA sequences
 
     cdna:
-      type: str
+      type: string
       description: pyfaidx optional parameters for cDNA sequences
 
     transcripts:
-      type: str
+      type: string
       description: pyfaidx optional parameters for transcripts DNA sequences
 
   fair_genome_indexer_picard_create_dict:
-    type: str
+    type: string
     description: Picard CreateSequenceDictionary optional parameters
 
   fair_genome_indexer_gffread_transcripts:
-    type: str
+    type: string
     description: GffRead optional parameters for transcripts extraction
 
   fair_genome_indexer_gffread_cdna:
-    type: str
+    type: string
     description: GffRead optional parameters for cDNA extraction
 
   fair_genome_indexer_wget:
-    type: str
+    type: string
     description: Optional parameters for wget
 
   fair_genome_indexer_bedtools_merge_blacklist:
-    type: str
+    type: string
     description: Optional parameters for bedtools merge
 
   fair_genome_indexer_bcftools_filter_non_canonical_chrom:
-    type: str
+    type: string
     description: Optional parameters for bcftools filter
 
   fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
-    type: str
+    type: string
     description: Optional parameters for pyfaidx 
 
   fair_genome_indexer_agat_sq_filter_feature_from_fasta:
-    type: str
+    type: string
     description: Optional parameters for agat_sq_filter_feature_from_fasta.pl
 
   fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
-    type: str
+    type: string
     description: Optional parameters for agat_sp_filter_feature_by_attribute_value.pl
 
   fair_genome_indexer_agat_convert_sp_gff2gtf:
-    type: str
+    type: string
     escription: Optional parameters for agat_convert_sp_gff2gtf.pl
 
   fair_genome_indexer_agat_config:

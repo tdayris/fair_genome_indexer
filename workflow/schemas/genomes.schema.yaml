@@ -64,6 +64,38 @@ genepred:
   type: string
   description: Gene model in genepred format (bed6-like)
 
+genepred_bed:
+  type: string
+  description: Gene model in bed format (bed6-like)
+
+bowtie2_dna_index:
+  type: string
+  description: Bowtie2 index for DNA sequences
+
+bowtie2_cdna_index:
+  type: string
+  description: Bowtie2 index for cDNA sequences
+
+bowtie2_transcripts_index:
+  type: string
+  description: Bowtie2 index for cDNA sequences including non-coding
+
+star_dna_index:
+  type: string
+  description: STAR index for DNA sequences
+
+star_cdna_index:
+  type: string
+  description: STAR index for cDNA sequences
+
+star_transcript_index:
+  type: string
+  description: STAR index for cDNA sequences including non-coding
+
+salmon_index:
+  type: string
+  description: Decoy aware gentrome index
+
 required:
   - species
   - build

@@ -21,7 +21,9 @@ snakefiles := \
 	"../workflow/rules/picard_dict.smk" \
 	"../workflow/rules/pyfaidx.smk" \
 	"../workflow/rules/pyroe.smk" \
+	"../workflow/rules/salmon_index.smk" \
 	"../workflow/rules/samtools_faidx.smk" \
+	"../workflow/rules/star_index.smk" \
 	"../workflow/rules/tabix.smk" \
 	"../workflow/rules/transcript_to_gene.smk" \
 	"../workflow/rules/ucsc.smk" \

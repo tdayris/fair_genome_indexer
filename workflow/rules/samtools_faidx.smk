@@ -12,7 +12,7 @@ for grch38
 
 rule fair_genome_indexer_samtools_index:
     input:
-        "reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.{datatype}.fasta",
+        lambda wildcards: select_fasta(wildcards),
     output:
         "reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.{datatype}.fasta.fai",
     threads: 1

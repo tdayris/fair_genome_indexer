@@ -288,6 +288,20 @@ def get_gff(
     return lookup_genomes(wildcards, key="gff3", default=default, genomes=genomes)
 
 
+def get_genepred(
+    wildcards: snakemake.io.Wildcards, genomes: pandas.DataFrame = genomes
+) -> str:
+    """
+    Return correct path to genepred file
+    """
+    default: str = (
+        f"reference/annotation/{wildcards.species}.{wildcards.build}.{wildcards.release}/{wildcards.species}.{wildcards.build}.{wildcards.release}.genePred".format(
+            wildcards
+        ),
+    )
+    return lookup_genomes(wildcards, key="genepred", default=default, genomes=genomes)
+
+
 def used_genomes(
     genomes: pandas.DataFrame = genomes, samples: pandas.DataFrame | None = None
 ) -> tuple[str]:
@@ -370,6 +384,10 @@ def get_fair_genome_indexer_target(
             "reference/annotation/{genomes_property}/{genomes_property}.genePred",
             genomes_property=genomes_properties,
         ),
+        "genepred_bed": expand(
+            "reference/annotation/{genomes_property}/{genomes_property}.genePred.bed",
+            genomes_property=genomes_properties,
+        ),
         "bowtie2_index": expand(
             "reference/bowtie2_index/{genomes_property}.{datatype}/{genomes_property}.{datatype}{bt2_ext}",
             genomes_property=genomes_properties,
@@ -381,6 +399,28 @@ def get_fair_genome_indexer_target(
                 ".4.bt2",
                 ".rev.1.bt2",
                 ".rev.2.bt2",
+            ),
+        ),
+        "star_index": expand(
+            "reference/star_index/{genomes_property}.{datatype}",
+            genomes_property=genomes_properties,
+            datatype=("dna", "cdna", "transcripts"),
+        ),
+        "salmon_index": expand(
+            "reference/salmon_index/{genomes_property}/{genomes_property}/{salmon_ext}",
+            genomes_property=genomes_properties,
+            salmon_ext=(
+                "complete_ref_lens.bin",
+                "ctable.bin",
+                "ctg_offsets.bin",
+                "duplicate_clusters.tsv",
+                "info.json",
+                "mphf.bin",
+                "pos.bin",
+                "pre_indexing.log",
+                "rank.bin",
+                "refAccumLengths.bin",
+                "ref_indexing.log",
             ),
         ),
     }

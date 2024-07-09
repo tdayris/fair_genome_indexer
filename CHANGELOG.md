@@ -1,3 +1,12 @@
+# 3.8.0
+
+## Features:
+
+* STAR indexes
+* Salmon index
+* Genepred file formats
+* Re-use of indexed files
+
 # 3.7.0
 
 ## Fix:
