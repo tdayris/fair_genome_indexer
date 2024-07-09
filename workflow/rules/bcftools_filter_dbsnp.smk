@@ -53,7 +53,7 @@ for grch38
 rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
     input:
         "tmp/fair_genome_indexer_get_genome_vcf_variations/{species}.{build}.{release}.all.vcf.gz",
-        tbi=ancient(
+        index=ancient(
             "tmp/fair_genome_indexer_get_genome_vcf_variations/{species}.{build}.{release}.all.vcf.gz.tbi"
         ),
         regions=ancient(
