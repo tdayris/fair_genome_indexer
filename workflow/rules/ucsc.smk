@@ -40,7 +40,7 @@ rule fair_genome_indexer_ucsc_genepred_to_bed:
         "reference/annotation/{species}.{build}.{release}/{species}.{build}.{release}.genePred.bed",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 1_000 * (500 * attempt),
+        mem_mb=lambda wildcards, attempt: 1_000 + (500 * attempt),
         runtime=lambda wildcards, attempt: attempt * 10,
         tmpdir=tmp,
     log:
