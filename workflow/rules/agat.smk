@@ -243,7 +243,7 @@ Remove non-coding transcripts
 
 Gustave Roussy computing cluster (Flamingo) reports:
 
-* 7 500.73 Mb (max_vms)
+* 17 500.73 Mb (max_vms)
 * 0h38m52s (wall clock)
 
 for grch38
@@ -266,7 +266,7 @@ use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_g
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 8_000 + (2_000 * attempt),
+        mem_mb=lambda wildcards, attempt: 18_000 + (2_000 * attempt),
         runtime=lambda wildcards, attempt: (35 * attempt) + 60,
         tmpdir=tmp,
     log:
