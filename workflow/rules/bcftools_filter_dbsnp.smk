@@ -1,12 +1,13 @@
 """
 Format the fasta index to bed-3
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 981.45 Mb (max_vms)
-* 0h0m17s (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 985.56  Mb,
+ on average 692.3 ± 409.41 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 3.0  Mb dataset.
+## Time
+A job took 0:00:14 to proceed,
+on average 0:00:09 ± 0:00:04
 """
 
 
@@ -20,8 +21,8 @@ rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 1_100 + (500 * attempt),
-        runtime=lambda wildcards, attempt: 5 * attempt,
+        mem_mb=lambda wildcards, attempt: 600 + (500 * attempt),
+        runtime=lambda wildcards, attempt: attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_pyfaidx_fasta_dict_to_bed/{species}.{build}.{release}.{datatype}.log",
@@ -41,12 +42,13 @@ rule fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
 """
 Remove non-canonical chromosomes from a VCF file
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 513.37 Mb (max_vms)
-* 0:03:09 (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 513.73  Mb,
+ on average 385.42 ± 236.81 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 3.0  Mb dataset.
+## Time
+A job took 0:25:51 to proceed,
+on average 0:09:03 ± 0:08:43
 """
 
 
@@ -63,8 +65,8 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
         "reference/variants/{species}.{build}.{release}/{species}.{build}.{release}.all.vcf.gz",
     threads: 2
     resources:
-        mem_mb=lambda wildcards, attempt: 750 + (250 * attempt),
-        runtime=lambda wildcards, attempt: 35 * attempt,
+        mem_mb=lambda wildcards, attempt: 400 + (250 * attempt),
+        runtime=lambda wildcards, attempt: 30 * attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_bcftools_filter_non_canonical_chrom/{species}.{build}.{release}.all.log",

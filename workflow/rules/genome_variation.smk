@@ -1,12 +1,13 @@
 """
 Download VCF known variants from Ensembl
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 681.51 Mb (max_vms)
-* 0:42:28 (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 681.62  Mb,
+ on average 511.59 ± 314.83 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 3.0  Mb dataset.
+## Time
+A job took 0:12:02 to proceed,
+on average 0:04:11 ± 0:04:04
 """
 
 
@@ -17,8 +18,8 @@ rule fair_genome_indexer_get_genome_vcf_variations:
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 700 + (125 * attempt),
-        runtime=lambda wildcards, attempt: 60 * attempt,
+        mem_mb=lambda wildcards, attempt: 500 + (200 * attempt),
+        runtime=lambda wildcards, attempt: 20 * attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_get_genome_vcf_variations/{species}.{build}.{release}.{datatype}.log",

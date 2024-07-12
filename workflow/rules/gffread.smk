@@ -1,12 +1,13 @@
 """
 Extract transcripts sequences from a genome fasta file
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 968.71 Mb (max_vms)
-* 0:00:49 (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 772.03  Mb,
+ on average 506.07 ± 288.4 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:01:14 to proceed,
+on average 0:00:41 ± 0:00:22
 """
 
 
@@ -19,8 +20,8 @@ rule fair_genome_indexer_gffread_transcripts:
         records="reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.transcripts.fasta",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 1000 + (500 * attempt),
-        runtime=lambda wildcards, attempt: 5 * attempt,
+        mem_mb=lambda wildcards, attempt: 900 + (200 * attempt),
+        runtime=lambda wildcards, attempt: 3 * attempt,
         tmpdir=tmp,
     log:
         "logs/ffair_genome_indexer_gffread_transcripts/{species}.{build}.{release}.transcripts.log",
@@ -32,6 +33,17 @@ rule fair_genome_indexer_gffread_transcripts:
         ),
     wrapper:
         f"{snakemake_wrappers_prefix}/bio/gffread"
+
+
+"""
+## Memory
+Requires a job with at most 1093.69  Mb,
+ on average 619.48 ± 353.88 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:01:04 to proceed,
+on average 0:00:40 ± 0:00:22
+"""
 
 
 use rule fair_genome_indexer_gffread_transcripts as fair_genome_indexer_gffread_cdna with:

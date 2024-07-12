@@ -1,3 +1,14 @@
+"""
+## Memory
+Requires a job with at most 480.51  Mb,
+ on average 360.88 ± 221.51 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:02:56 to proceed,
+on average 0:01:18 ± 0:00:49
+"""
+
+
 rule fair_genome_indexer_salmon_decoy_sequences:
     input:
         transcriptome=lambda wildcards: get_transcripts_fasta(wildcards),
@@ -7,8 +18,8 @@ rule fair_genome_indexer_salmon_decoy_sequences:
         decoys=temp("reference/sequences/{species}.{build}.{release}.decoys.txt"),
     threads: 2
     resources:
-        mem_mb=lambda wildcards, attempt: 512 * attempt,
-        runtime=lambda wildcards, attempt: 25 * attempt,
+        mem_mb=lambda wildcards, attempt: 400 + (100 * attempt),
+        runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_salmon_decoy_sequences/{species}.{build}.{release}.log",
@@ -16,6 +27,17 @@ rule fair_genome_indexer_salmon_decoy_sequences:
         "benchmark/fair_genome_indexer_salmon_decoy_sequences/{species}.{build}.{release}.tsv"
     wrapper:
         f"{snakemake_wrappers_prefix}/bio/salmon/decoys"
+
+
+"""
+## Memory
+Requires a job with at most 67716.31  Mb,
+ on average 40355.5 ± 22908.36 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 1:17:06 to proceed,
+on average 0:44:42 ± 0:26:00
+"""
 
 
 rule fair_genome_indexer_salmon_index_gentrome:
@@ -45,8 +67,8 @@ rule fair_genome_indexer_salmon_index_gentrome:
         ),
     threads: 20
     resources:
-        mem_mb=lambda wildcards, attempt: 48 * 1024 * attempt,
-        runtime=lambda wildcards, attempt: 50 * attempt,
+        mem_mb=lambda wildcards, attempt: 60_000 + (10_000 * attempt),
+        runtime=lambda wildcards, attempt: 80 * attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_salmon_index_gentrome/{species}.{build}.{release}.log",

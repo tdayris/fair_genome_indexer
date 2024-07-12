@@ -1,12 +1,13 @@
 """
 Remove non-canonical chromosomes from a fasta file
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 759.96 Mb (max_vms)
-* 0:02:07 (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 740.5  Mb,
+ on average 550.54 ± 335.36 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 2.0  Mb dataset.
+## Time
+A job took 0:02:37 to proceed,
+on average 0:01:53 ± 0:01:05
 """
 
 
@@ -23,7 +24,7 @@ rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 800 + (100 * attempt),
+        mem_mb=lambda wildcards, attempt: 600 + (200 * attempt),
         runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir=tmp,
     log:
@@ -44,12 +45,13 @@ rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
 """
 Copy the right fasta sequence
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 439.89 Mb (max_vms)
-* 0:00:44 (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 347.95  Mb,
+ on average 261.35 ± 160.04 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:00:41 to proceed,
+on average 0:00:30 ± 0:00:16
 """
 
 
@@ -64,8 +66,8 @@ rule fair_genome_indexer_rsync_make_fasta_available:
         "reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.dna.fasta",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 500 + (attempt * 200),
-        runtime=lambda wildcards, attempt: attempt * 5,
+        mem_mb=lambda wildcards, attempt: 200 + (attempt * 200),
+        runtime=lambda wildcards, attempt: attempt * 2,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_rsync_make_fasta_available/{species}.{build}.{release}.dna.fasta.log",

@@ -1,12 +1,13 @@
 """
 Creates a genepred file from a GTF
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 906.06 Mb (max_vms)
-* 0:00:35 (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 955.93  Mb,
+ on average 567.39 ± 322.3 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:00:29 to proceed,
+on average 0:00:19 ± 0:00:09
 """
 
 
@@ -17,7 +18,7 @@ rule fair_genome_indexer_ucsc_gtf_to_genepred:
         "reference/annotation/{species}.{build}.{release}/{species}.{build}.{release}.genePred",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 1_000 + (500 * attempt),
+        mem_mb=lambda wildcards, attempt: 1_000 + (200 * attempt),
         runtime=lambda wildcards, attempt: attempt * 5,
         tmpdir=tmp,
     log:
@@ -33,6 +34,17 @@ rule fair_genome_indexer_ucsc_gtf_to_genepred:
         f"{snakemake_wrappers_prefix}/bio/ucsc/gtfToGenePred"
 
 
+"""
+## Memory
+Requires a job with at most 453.01  Mb,
+ on average 328.92 ± 198.0 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:00:04 to proceed,
+on average 0:00:02 ± 0:00:01
+"""
+
+
 rule fair_genome_indexer_ucsc_genepred_to_bed:
     input:
         lambda wildcards: get_genepred(wildcards),
@@ -40,8 +52,8 @@ rule fair_genome_indexer_ucsc_genepred_to_bed:
         "reference/annotation/{species}.{build}.{release}/{species}.{build}.{release}.genePred.bed",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 1_000 + (500 * attempt),
-        runtime=lambda wildcards, attempt: attempt * 10,
+        mem_mb=lambda wildcards, attempt: 400 + (200 * attempt),
+        runtime=lambda wildcards, attempt: attempt * 5,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_ucsc_genepred_to_bed/{species}.{build}.{release}.log",

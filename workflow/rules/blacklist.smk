@@ -1,10 +1,22 @@
+"""
+## Memory
+Requires a job with at most 347.77  Mb,
+ on average 298.23 ± 131.07 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 1.0  Mb dataset.
+## Time
+A job took 0:00:01 to proceed,
+on average 0:00:01 ± 0:00:00
+Highly dependent on bandwidth
+"""
+
+
 # WARNING: release >= 75
 rule fair_genome_indexer_blacklist_grch38:
     output:
         temp("tmp/fair_genome_indexer_blacklist/homo_sapiens.GRCh38.{release}.bed.gz"),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 500 * attempt,
+        mem_mb=lambda wildcards, attempt: 200 + (150 * attempt),
         runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir=tmp,
     log:

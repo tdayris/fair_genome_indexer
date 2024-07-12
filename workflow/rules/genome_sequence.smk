@@ -1,12 +1,13 @@
 """
 Download Fasta sequence from Ensembl
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 685.13 Mb (max_vms)
-* 0:25:41 (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 685.35  Mb,
+ on average 514.51 ± 316.33 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:05:42 to proceed,
+on average 0:02:39 ± 0:01:37
 """
 
 
@@ -17,8 +18,8 @@ rule fair_genome_indexer_get_genome_fasta_sequence:
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 750 + (125 * attempt),
-        runtime=lambda wildcards, attempt: 45 * attempt,
+        mem_mb=lambda wildcards, attempt: 500 + (200 * attempt),
+        runtime=lambda wildcards, attempt: 10 * attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_get_genome_fasta_sequence/{species}.{build}.{release}.dna.log",

@@ -1,12 +1,13 @@
 """
 Index fasta sequence file
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 415.68 Mb (max_vms)
-* 0:00:19 (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 416.68  Mb,
+ on average 300.73 ± 178.42 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 12.0  Mb dataset.
+## Time
+A job took 0:00:25 to proceed,
+on average 0:00:12 ± 0:00:07
 """
 
 
@@ -17,8 +18,8 @@ rule fair_genome_indexer_samtools_index:
         "reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.{datatype}.fasta.fai",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 500 + (200 * attempt),
-        runtime=lambda wildcards, attempt: 10 * attempt,
+        mem_mb=lambda wildcards, attempt: 400 + (100 * attempt),
+        runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_samtools_index/{species}.{build}.{release}.{datatype}.log",

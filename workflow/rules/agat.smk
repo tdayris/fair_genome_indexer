@@ -2,11 +2,14 @@
 Create Agat configuration file, used with every single
 other agat rules.
 
-Gustave Roussy computing cluster (Flamingo) reports:
+## Memory
+Requires a job with at most 256.12  Mb,
+ on average 219.67 ± 96.43 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 1.0  Mb dataset.
 
-* 255.82 Mb (max_vms)
-* 5.6840 seconds (wall clock)
-* 565 octets of output
+## Time
+A job took 0:00:05 to proceed,
+on average 0:00:05 ± 0:00:01
 """
 
 
@@ -15,9 +18,8 @@ rule fair_genome_indexer_agat_config_gtf:
         yaml=temp("tmp/fair_genome_indexer_agat_config/gtf.yaml"),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 280 + (100 * attempt),
-        runtime=lambda wildcards, attempt: 2 * attempt,
-        disk_mb=1,
+        mem_mb=lambda wildcards, attempt: 170 + (100 * attempt),
+        runtime=lambda wildcards, attempt: attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_agat_config/gtf.log",
@@ -58,6 +60,18 @@ rule fair_genome_indexer_agat_config_gtf:
         "../envs/python.yaml"
     script:
         "../scripts/agat_config.py"
+
+
+"""
+## Memory
+Requires a job with at most 255.98  Mb,
+ on average 219.55 ± 96.37 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 1.0  Mb dataset.
+
+## Time
+A job took 0:00:05 to proceed,
+on average 0:00:05 ± 0:00:01
+"""
 
 
 use rule fair_genome_indexer_agat_config_gtf as fair_genome_indexer_agat_config_gff with:
@@ -103,13 +117,13 @@ use rule fair_genome_indexer_agat_config_gtf as fair_genome_indexer_agat_config_
 """
 Fix classical GTF/GFF format errors in Ensembl/Gencode files.
 
-
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 22 696.89 Mb (max_vms)
-* 1h27m06s (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 22702.98  Mb,
+ on average 15242.8 ± 8516.47 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 3.0  Mb dataset.
+## Time
+A job took 0:33:06 to proceed,
+on average 0:22:44 ± 0:12:41
 """
 
 
@@ -123,8 +137,8 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 23_000 + (2_000 * attempt),
-        runtime=lambda wildcards, attempt: (35 * attempt) + 60,
+        mem_mb=lambda wildcards, attempt: 21_000 + (2_000 * attempt),
+        runtime=lambda wildcards, attempt: 35 * attempt,
         tmpdir=tmp,
     shadow:
         "minimal"
@@ -145,12 +159,13 @@ rule fair_genome_indexer_agat_convert_sp_gff2gtf:
 """
 Remove transcripts with NA as transcript support level
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 22 292.89 Mb (max_vms)
-* 1h27m45s (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 22761.16  Mb,
+ on average 12291.37 ± 7001.76 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:37:01 to proceed,
+on average 0:20:45 ± 0:11:54
 """
 
 
@@ -170,8 +185,8 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 23_000 + (1_000 * attempt),
-        runtime=lambda wildcards, attempt: (35 * attempt) + 60,
+        mem_mb=lambda wildcards, attempt: 21_000 + (3_000 * attempt),
+        runtime=lambda wildcards, attempt: 45 * attempt,
         tmpdir=tmp,
     shadow:
         "minimal"
@@ -193,12 +208,14 @@ rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value:
 """
 Remove contigs present in GTF, that are not present in the fasta index file.
 
-Gustave Roussy computing cluster (Flamingo) reports:
+## Memory
+Requires a job with at most 532.22  Mb,
+ on average 399.41 ± 245.55 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 3.0  Mb dataset.
 
-* 532.09 Mb (max_vms)
-* 0h49m29s (wall clock)
-
-for grch38
+## Time
+A job took 0:14:35 to proceed,
+on average 0:09:49 ± 0:05:29
 """
 
 
@@ -218,8 +235,8 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
         gtf="reference/annotation/{species}.{build}.{release}/{species}.{build}.{release}.{gxf}",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 750 + (200 * attempt),
-        runtime=lambda wildcards, attempt: (35 * attempt) + 60,
+        mem_mb=lambda wildcards, attempt: 350 + (200 * attempt),
+        runtime=lambda wildcards, attempt: 16 * attempt,
         tmpdir=tmp,
     shadow:
         "minimal"
@@ -241,12 +258,13 @@ rule fair_genome_indexer_agat_sq_filter_feature_from_fasta:
 """
 Remove non-coding transcripts
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 17 500.73 Mb (max_vms)
-* 0h38m52s (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 22761.16  Mb,
+ on average 12291.37 ± 7001.76 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:37:01 to proceed,
+on average 0:20:45 ± 0:11:54
 """
 
 
@@ -266,8 +284,8 @@ use rule fair_genome_indexer_agat_sp_filter_feature_by_attribute_value as fair_g
         ),
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 18_000 + (2_000 * attempt),
-        runtime=lambda wildcards, attempt: (35 * attempt) + 60,
+        mem_mb=lambda wildcards, attempt: 21_000 + (2_000 * attempt),
+        runtime=lambda wildcards, attempt: 45 * attempt,
         tmpdir=tmp,
     log:
         "logs/fair_genome_indexer_agat_sp_filter_feature_by_attribute_value_cdna/{species}.{build}.{release}.{gxf}log",

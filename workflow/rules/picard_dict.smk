@@ -1,12 +1,13 @@
 """
 Create a sequence dictionary from a fasta file
 
-Gustave Roussy computing cluster (Flamingo) reports:
-
-* 12 528.03 Mb (max_vms)
-* 0:01:57 (wall clock)
-
-for grch38
+## Memory
+Requires a job with at most 14754.82  Mb,
+ on average 11064.26 ± 6824.86 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:00:47 to proceed,
+on average 0:00:32 ± 0:00:17
 """
 
 
@@ -17,7 +18,7 @@ rule fair_genome_indexer_picard_create_dict:
         "reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.{datatype}.dict",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 13_000 + (1_000 * attempt),
+        mem_mb=lambda wildcards, attempt: 13_000 + (2_500 * attempt),
         runtime=lambda wildcards, attempt: 5 * attempt,
         tmpdir=tmp,
     log:
