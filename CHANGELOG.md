@@ -1,3 +1,9 @@
+# 3.8.1
+
+## Features:
+
+* Memory/Time reservation adjusted
+
 # 3.8.0
 
 ## Features:
