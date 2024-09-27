@@ -1,3 +1,10 @@
+# 3.9.0
+
+## Features:
+
+* Fasta to 2bit
+* Snakemake-wrappers up to 4.5.0
+
 # 3.8.0
 
 ## Features:

@@ -8,7 +8,7 @@ from typing import Any, NamedTuple
 snakemake_min_version: str = "8.13.0"
 snakemake.utils.min_version(snakemake_min_version)
 
-snakemake_docker_image: str = "docker://snakemake/snakemake:v8.13.0"
+snakemake_docker_image: str = "docker://snakemake/snakemake:v8.20.5"
 
 
 container: snakemake_docker_image
@@ -62,7 +62,7 @@ except NameError:
 report: "../reports/workflow.rst"
 
 
-snakemake_wrappers_prefix: str = "v3.12.0"
+snakemake_wrappers_prefix: str = "v4.5.0"
 release_tuple: tuple[str] = tuple(set(genomes.release.tolist()))
 build_tuple: tuple[str] = tuple(set(genomes.build.tolist()))
 species_tuple: tuple[str] = tuple(set(genomes.species.tolist()))
@@ -386,6 +386,10 @@ def get_fair_genome_indexer_target(
         ),
         "genepred_bed": expand(
             "reference/annotation/{genomes_property}/{genomes_property}.genePred.bed",
+            genomes_property=genomes_properties,
+        ),
+        "fa_twobit": expand(
+            "reference/sequences/{genomes_property}/{genomes_property}.2bit",
             genomes_property=genomes_properties,
         ),
         "bowtie2_index": expand(

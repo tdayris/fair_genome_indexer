@@ -6,7 +6,7 @@ Pyfaidx_ [#pyfaidxpaper]_ was used to filter non-cannonical
 chromosomes. Agat_ [#agatpaper]_ was used to correct common 
 issues found in Ensembl genome annotation files, filter non-
 cannonical chromosomes, and remove transcripts with TSL being
-equal to NA. UCSC_ tools [#genepredpaper]_ were used to
+equal to NA. UCSC_ tools [#ucscpaper]_ [#genepredpaper]_ were used to
 convert GTF to GenePred format.
 
 GFFRead_ [#gffreadpaper]_ was used to build
@@ -24,7 +24,6 @@ then indexed using Tabix_ [#tabixpaper]_.
 Blacklisted regions were downloaded from `Boyle-Lab's Github`_ page.
 Overlapping intervals were merged using BEDTools_ [#bedtoolspaper]_.
 
-
 The  whole pipeline was powered by  Snakemake_ [#snakemakepaper]_. 
 This pipeline is freely available on Github_, details about installation
 usage, and resutls can be found on the `Snakemake workflow`_ page.
@@ -33,6 +32,7 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 .. [#pyfaidxpaper] Shirley, Matthew D., et al. Efficient" pythonic" access to FASTA files using pyfaidx. No. e1196. PeerJ PrePrints, 2015.
 .. [#agatpaper] Dainat J. AGAT: Another Gff Analysis Toolkit to handle annotations in any GTF/GFF format.  (Version v0.7.0). Zenodo. https://www.doi.org/10.5281/zenodo.3552717
 .. [#genepredpaper] Hsu, Fan, et al. "The UCSC known genes." Bioinformatics 22.9 (2006): 1036-1046.
+.. [#ucscpaper] Kuhn, Robert M., David Haussler, and W. James Kent. "The UCSC genome browser and associated tools." Briefings in bioinformatics 14.2 (2013): 144-161.
 .. [#gffreadpaper] Pertea, Geo, and Mihaela Pertea. "GFF utilities: GffRead and GffCompare." F1000Research 9 (2020).
 .. [#samtoolspaper] Li, Heng, et al. "The sequence alignment/map format and SAMtools." bioinformatics 25.16 (2009): 2078-2079.
 .. [#gatkpaper] McKenna, Aaron, et al. "The Genome Analysis Toolkit: a MapReduce framework for analyzing next-generation DNA sequencing data." Genome research 20.9 (2010): 1297-1303.
@@ -46,17 +46,17 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 .. _Snakemake: https://snakemake.readthedocs.io
 .. _Github: https://github.com/tdayris/fair_genome_indexer
 .. _`Snakemake workflow`: https://snakemake.github.io/snakemake-workflow-catalog?usage=tdayris/fair_genome_indexer
-.. _Picard: https://snakemake-wrappers.readthedocs.io/en/v3.12.0/wrappers/picard/createsequencedictionary.html
-.. _Samtools: https://snakemake-wrappers.readthedocs.io/en/v3.12.0/wrappers/samtools/faidx.html
+.. _Picard: https://snakemake-wrappers.readthedocs.io/en/v4.5.0/wrappers/picard/createsequencedictionary.html
+.. _Samtools: https://snakemake-wrappers.readthedocs.io/en/v4.5.0/wrappers/samtools/faidx.html
 .. _Agat: https://agat.readthedocs.io/en/latest/index.html
-.. _Pyroe: https://snakemake-wrappers.readthedocs.io/en/v3.12.0/wrappers/pyroe/idtoname.html
+.. _Pyroe: https://snakemake-wrappers.readthedocs.io/en/v4.5.0/wrappers/pyroe/idtoname.html
 .. _Pyfaidx: https://github.com/mdshw5/pyfaidx
-.. _GFFRead: https://snakemake-wrappers.readthedocs.io/en/v3.12.0/wrappers/gffread.html
-.. _XSV: https://snakemake-wrappers.readthedocs.io/en/v3.12.0/wrappers/xsv.html
-.. _BCFTools: https://snakemake-wrappers.readthedocs.io/en/v3.12.0/wrappers/bcftools/filter.html
-.. _Tabix: https://snakemake-wrappers.readthedocs.io/en/v3.12.0/wrappers/tabix/index.html
+.. _GFFRead: https://snakemake-wrappers.readthedocs.io/en/v4.5.0/wrappers/gffread.html
+.. _XSV: https://snakemake-wrappers.readthedocs.io/en/v4.5.0/wrappers/xsv.html
+.. _BCFTools: https://snakemake-wrappers.readthedocs.io/en/v4.5.0/wrappers/bcftools/filter.html
+.. _Tabix: https://snakemake-wrappers.readthedocs.io/en/v4.5.0/wrappers/tabix/index.html
 .. _`Boyle-Lab's Github`: https://github.com/Boyle-Lab/Blacklist
-.. _BEDTools: https://snakemake-wrappers.readthedocs.io/en/v3.12.0/wrappers/bedtools/merge.html
+.. _BEDTools: https://snakemake-wrappers.readthedocs.io/en/v4.5.0/wrappers/bedtools/merge.html
 .. _UCSC: https://genome.ucsc.edu/FAQ/FAQformat.html
 
 :Authors:

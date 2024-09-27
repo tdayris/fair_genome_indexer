@@ -51,7 +51,17 @@ report.txt: pipeline.txt
 
 pipeline.txt: linter_info.txt
 	snakemake -s ../workflow/Snakefile \
-		--cores 7 --profile local \
+		--cores 7 \
+		--restart-times 0 \
+		--max-jobs-per-second 10 \
+		--max-status-checks-per-second 1 \
+		--local-cores 4 \
+		--rerun-incomplete \
+		--keep-going \
+		--printshellcmds \
+		--shadow-prefix "tmp" \
+		--rerun-triggers "mtime" \
+		--benchmark-extended \
 		--software-deployment-method apptainer conda \
 		2>&1 | tee pipeline.txt
 

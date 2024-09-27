@@ -66,3 +66,37 @@ rule fair_genome_indexer_ucsc_genepred_to_bed:
         ),
     wrapper:
         f"{snakemake_wrappers_prefix}/bio/ucsc/genePredToBed"
+
+
+"""
+## Memory
+Requires a job with at most 453.01  Mb,
+ on average 328.92 ± 198.0 Mb, 
+on Gustave Roussy's HPC Flamingo, on a 4.0  Mb dataset.
+## Time
+A job took 0:00:04 to proceed,
+on average 0:00:02 ± 0:002
+"""
+
+
+rule fair_genome_indexer_ucsc_fa_to_twobit:
+    input:
+        lambda wildcards: get_dna_fasta(wildcards),
+    output:
+        "reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.2bit",
+    threads: 1
+    resources:
+        mem_mb=lambda wildcards, attempt: 400 + (200 * attempt),
+        runtime=lambda wildcards, attempt: attempt * 5,
+        tmpdir=tmp,
+    log:
+        "logs/fair_genome_indexer_ucsc_fa_to_twobit/{species}.{build}.{release}.log",
+    benchmark:
+        "benchmark/fair_genome_indexer_ucsc_fa_to_twobit/{species}.{build}.{release}.tsv"
+    params:
+        extra=lookup_config(
+            dpath="params/fair_genome_indexer_ucsc_fa_to_twobit",
+            default="",
+        ),
+    wrapper:
+        f"{snakemake_wrappers_prefix}/bio/ucsc/faToTwoBit"
