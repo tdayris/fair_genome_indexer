@@ -5,6 +5,12 @@
 * Fasta to 2bit
 * Snakemake-wrappers up to 4.5.0
 
+# 3.8.1
+
+## Features:
+
+* Memory/Time reservation adjusted
+
 # 3.8.0
 
 ## Features:
