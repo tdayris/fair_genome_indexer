@@ -8,7 +8,6 @@ genomes:
   type: string
   description: Path to the CSV file defining genome properties
 
-
 params:
   type: object
   description: Optional parameters
@@ -28,6 +27,10 @@ params:
   fair_genome_indexer_ucsc_gtf_to_genepred:
     type: string
     description: Optional parameters for ucsc gtfToGenePred
+
+  fair_genome_indexer_ucsc_fa_to_twobit:
+    type: string
+    description: Optional parameters for ucsc faToTwoBit
 
   fair_genome_indexer_agat_convert_sp_gff2tsv:
     type: string
@@ -64,7 +67,7 @@ params:
   fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
     type: object
     description: pyfaidx optional parameters for each subtype of sequences
-    
+
     dna:
       type: string
       description: pyfaidx optional parameters for DNA sequences
@@ -103,7 +106,7 @@ params:
 
   fair_genome_indexer_pyfaidx_fasta_dict_to_bed:
     type: string
-    description: Optional parameters for pyfaidx 
+    description: Optional parameters for pyfaidx
 
   fair_genome_indexer_agat_sq_filter_feature_from_fasta:
     type: string
