@@ -4,8 +4,8 @@
 .test/reference
 .test/.snakemake
 .test/logs
-.test/resources
-.test/benchmark
+.test/resources*
+.test/benchmark.tsv
 .test/black.txt
 .test/report.txt
 .test/.*

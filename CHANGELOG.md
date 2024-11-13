@@ -1,3 +1,15 @@
+# 3.9.2
+
+## Features:
+
+* Environement pins
+
+# 3.9.1
+
+## Documentation
+
+* Update for the configuration section
+
 # 3.9.0
 
 ## Features:
@@ -130,7 +142,7 @@
 
 * Usage updated
 * DAG as ascii art
-* tempfiles, logs and benchmarks paths reorganized: 
+* tempfiles, logs and benchmarks paths reorganized:
     * `tmp/fair_fastqc_multiqc/{rule_name}/{wildcards}.{extension}`
     * `log/fair_fastqc_multiqc/{rule_name}/{wildcards}.log`
     * `benchmark/fair_fastqc_multiqc/{rule_name}/{wildcards}.tsv`
@@ -256,7 +268,7 @@ Breaking change: Non canonical chromosomes removed by default
 
 * Pyroe id-to-name
 
-## Fix: 
+## Fix:
 
 * Report main page too large
 
@@ -269,7 +281,7 @@ Breaking change: Non canonical chromosomes removed by default
 * Update to Snakemake-Wrappers version 3.0.0
 * General report available
 
-## Fix: 
+## Fix:
 
 * Snakemake workflow compliance
 * fix target rules not returning GTF correctly

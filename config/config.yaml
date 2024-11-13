@@ -1,9 +1,8 @@
 # Optional parameters
 # params:
-#    fair_genome_indexer:
-#      # Optional parameters can be given here
-#      # see each rule for the key name or
-#      # ask bigr@gustaveroussy.fr
+#  # Optional parameters can be given here
+#  # see each rule for the key name or
+#  # ask bigr@gustaveroussy.fr
 
 # Optional path to genome file
 genomes: config/genomes.csv
