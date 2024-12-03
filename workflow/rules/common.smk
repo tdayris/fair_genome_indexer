@@ -62,7 +62,7 @@ except NameError:
 report: "../reports/workflow.rst"
 
 
-snakemake_wrappers_prefix: str = "v4.5.0"
+snakemake_wrappers_prefix: str = "v5.3.0"
 release_tuple: tuple[str] = tuple(set(genomes.release.tolist()))
 build_tuple: tuple[str] = tuple(set(genomes.build.tolist()))
 species_tuple: tuple[str] = tuple(set(genomes.species.tolist()))

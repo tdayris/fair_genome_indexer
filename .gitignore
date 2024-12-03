@@ -8,8 +8,14 @@
 .test/benchmark.tsv
 .test/black.txt
 .test/report.txt
+.test/docs_update.txt
+.test/wrappers_update.txt
+.test/conda_update.txt
+.test/update_docs.txt
 .test/.*
 .snakemake
+sandbox/
+diagrams_conda/
 reference
 tmp
 logs

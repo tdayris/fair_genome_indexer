@@ -31,4 +31,4 @@ rule fair_genome_indexer_get_genome_vcf_variations:
         build="{build}",
         release="{release}",
     wrapper:
-        f"{snakemake_wrappers_prefix}/bio/reference/ensembl-variation"
+        "v5.3.0/bio/reference/ensembl-variation"

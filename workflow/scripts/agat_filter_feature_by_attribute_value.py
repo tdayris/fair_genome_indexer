@@ -39,5 +39,10 @@ with TemporaryDirectory() as tempdir:
         "{extra} {log}"
     )
 
-    shell("mv --verbose {out_discarded} {snakemake.output.discarded} {log}")
-    shell("mv --verbose {out_report} {snakemake.output.report} {log}")
+    discarded = snakemake.output.get("discarded")
+    if discarded:
+        shell("mv --verbose {out_discarded} {snakemake.output.discarded} {log}")
+
+    report = snakemake.output.get("report")
+    if report:
+        shell("mv --verbose {out_report} {snakemake.output.report} {log}")

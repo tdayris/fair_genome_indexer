@@ -23,7 +23,7 @@ https://conda.anaconda.org/conda-forge/linux-64/_openmp_mutex-4.5-2_gnu.tar.bz2#
 https://conda.anaconda.org/conda-forge/linux-64/binutils_impl_linux-64-2.43-h4bf12b8_2.conda#cf0c5521ac2a20dfa6c662a4009eeef6
 https://conda.anaconda.org/conda-forge/noarch/fonts-conda-ecosystem-1-0.tar.bz2#fee5683a3f04bd15cbd8318b096a27ab
 https://conda.anaconda.org/conda-forge/linux-64/libgcc-14.2.0-h77fa898_1.conda#3cb76c3f10d3bc7f1105b2fc9db984df
-https://conda.anaconda.org/conda-forge/linux-64/c-ares-1.34.3-heb4867d_0.conda#09a6c610d002e54e18353c06ef61a253
+https://conda.anaconda.org/conda-forge/linux-64/c-ares-1.34.3-hb9d3cd8_1.conda#ee228789a85f961d14567252a03e725f
 https://conda.anaconda.org/conda-forge/linux-64/libexpat-2.6.4-h5888daf_0.conda#db833e03127376d461e1e13e76f09b6c
 https://conda.anaconda.org/conda-forge/linux-64/libgcc-ng-14.2.0-h69a702a_1.conda#e39480b9ca41323497b05492a63bc35b
 https://conda.anaconda.org/conda-forge/linux-64/libgfortran5-14.2.0-hd5240d6_1.conda#9822b874ea29af082e5d36098d25427d
@@ -95,7 +95,7 @@ https://conda.anaconda.org/bioconda/noarch/perl-class-inspector-1.36-pl5321hdfd7
 https://conda.anaconda.org/conda-forge/linux-64/perl-compress-raw-zlib-2.202-pl5321hadc24fc_0.conda#2eecc7fe28e0342391a74e86d8c2dfec
 https://conda.anaconda.org/conda-forge/noarch/perl-constant-1.33-pl5321hd8ed1ab_0.tar.bz2#7f9fc9cfa08a3fe36ffcff820c65c3ac
 https://conda.anaconda.org/conda-forge/linux-64/perl-cpan-meta-check-0.014-pl5321ha770c72_0.conda#203aa94817f276625cf2481550caf437
-https://conda.anaconda.org/conda-forge/linux-64/perl-db_file-1.858-pl5321h166bdaf_0.tar.bz2#73e039a6ab8fbaa8b574097b4fcdd599
+https://conda.anaconda.org/conda-forge/linux-64/perl-db_file-1.858-pl5321hb9d3cd8_0.conda#2dc3e251150589a85fc4219568b12a25
 https://conda.anaconda.org/conda-forge/linux-64/perl-devel-stacktrace-2.04-pl5321ha770c72_0.conda#66856471d98bc726af849694a7f6ea0f
 https://conda.anaconda.org/bioconda/noarch/perl-digest-hmac-1.04-pl5321hdfd78af_0.tar.bz2#872d481415766335aea1abc5b4b0a16d
 https://conda.anaconda.org/conda-forge/linux-64/perl-digest-md5-2.58-pl5321h166bdaf_0.tar.bz2#734f1242a0410c2b849656295d6a909d
@@ -126,7 +126,7 @@ https://conda.anaconda.org/conda-forge/linux-64/perl-sub-exporter-progressive-0.
 https://conda.anaconda.org/conda-forge/linux-64/perl-sub-identify-0.14-pl5321h166bdaf_0.tar.bz2#042f949ae52549119535b544714df51b
 https://conda.anaconda.org/conda-forge/linux-64/perl-sub-name-0.26-pl5321h0b41bf4_1.conda#13ddf34e2dc5bd26f6228cc4bbae6508
 https://conda.anaconda.org/conda-forge/noarch/perl-test-harness-3.44-pl5321hd8ed1ab_0.tar.bz2#8a4acd1dda1520b3f7903dbe1ccb376a
-https://conda.anaconda.org/conda-forge/linux-64/perl-test-leaktrace-0.17-pl5321h166bdaf_0.conda#a57b78d6fccb3abb3bd491cba112f454
+https://conda.anaconda.org/conda-forge/linux-64/perl-test-leaktrace-0.17-pl5321h8043a1e_1.conda#cdcd8fc6e974787ee6dc6a591ab0a794
 https://conda.anaconda.org/conda-forge/linux-64/perl-test-warnings-0.031-pl5321ha770c72_0.conda#db0eb51272ea7af7213afaaf7e9967c3
 https://conda.anaconda.org/conda-forge/noarch/perl-text-wrap-2021.0814-pl5321hd8ed1ab_0.tar.bz2#5bf3675e2806454725e7e834e0b1b6d2
 https://conda.anaconda.org/bioconda/noarch/perl-timedate-2.33-pl5321hdfd78af_2.tar.bz2#c4686f71d90a9ecbaf76c6794a309843
@@ -145,7 +145,7 @@ https://conda.anaconda.org/conda-forge/linux-64/libcurl-8.8.0-hca28451_1.conda#b
 https://conda.anaconda.org/conda-forge/linux-64/liblapack-3.9.0-25_linux64_openblas.conda#4dc03a53fc69371a6158d0ed37214cd3
 https://conda.anaconda.org/bioconda/noarch/perl-bioperl-core-1.7.8-pl5321hdfd78af_1.tar.bz2#e627a38fe206468089dc73a0aafb6c8c
 https://conda.anaconda.org/conda-forge/noarch/perl-carp-1.50-pl5321hd8ed1ab_0.tar.bz2#bdddc03e28019b902da71b722f2288d7
-https://conda.anaconda.org/conda-forge/linux-64/perl-clone-0.46-pl5321h166bdaf_0.tar.bz2#3e99bcf0140bb973ffb4df10b8454d80
+https://conda.anaconda.org/conda-forge/linux-64/perl-clone-0.46-pl5321hd590300_0.conda#305e406561902ad2b9d3bf3bb882d6ff
 https://conda.anaconda.org/conda-forge/linux-64/perl-devel-globaldestruction-0.14-pl5321ha770c72_0.conda#507cbd9509c8d435faf7f1d132e47827
 https://conda.anaconda.org/conda-forge/linux-64/perl-encode-3.21-pl5321hb9d3cd8_1.conda#a418a0e7010007df65768e4e4b96dd14
 https://conda.anaconda.org/bioconda/noarch/perl-graph-0.9732-pl5321hdfd78af_0.tar.bz2#eac29928d61bc28fb3420f93f09904ca
@@ -159,13 +159,13 @@ https://conda.anaconda.org/bioconda/noarch/perl-pod-escapes-1.07-pl5321hdfd78af_
 https://conda.anaconda.org/conda-forge/noarch/perl-test-1.26-pl5321hd8ed1ab_0.tar.bz2#11946fb70c47fa38dd202d6ebf6cec64
 https://conda.anaconda.org/conda-forge/linux-64/perl-test-fatal-0.016-pl5321ha770c72_0.tar.bz2#5c397b1fd3095004f4ff149af1c0dd3c
 https://conda.anaconda.org/bioconda/noarch/perl-test-requiresinternet-0.05-pl5321hdfd78af_1.tar.bz2#715b1cf617730df28080c5c3981212e4
-https://conda.anaconda.org/conda-forge/linux-64/pyyaml-6.0.1-py312h98912ed_1.conda#e3fd78d8d490af1d84763b9fe3f2e552
-https://conda.anaconda.org/conda-forge/noarch/setuptools-75.3.0-pyhd8ed1ab_0.conda#2ce9825396daf72baabaade36cee16da
-https://conda.anaconda.org/conda-forge/noarch/wheel-0.45.0-pyhd8ed1ab_0.conda#f9751d7c71df27b2d29f5cab3378982e
+https://conda.anaconda.org/conda-forge/linux-64/pyyaml-6.0.2-py312h66e93f0_1.conda#549e5930e768548a89c23f595dac5a95
+https://conda.anaconda.org/conda-forge/noarch/setuptools-75.6.0-pyhff2d567_1.conda#fc80f7995e396cbaeabd23cf46c413dc
+https://conda.anaconda.org/conda-forge/noarch/wheel-0.45.1-pyhd8ed1ab_1.conda#75cb7132eb58d97896e173ef12ac9986
 https://conda.anaconda.org/conda-forge/linux-64/cairo-1.18.0-h3faef2a_0.conda#f907bb958910dc404647326ca80c263e
 https://conda.anaconda.org/conda-forge/linux-64/curl-8.8.0-he654da7_1.conda#78678b2ddfd9bd7c7861b8d2e3b7473b
 https://conda.anaconda.org/conda-forge/noarch/perl-business-isbn-data-20210112.006-pl5321hd8ed1ab_0.tar.bz2#a70f08650ec3919ee5e599834f1349d3
-https://conda.anaconda.org/bioconda/linux-64/perl-class-methodmaker-2.24-pl5321h031d066_5.tar.bz2#fc5072d3f568653a1352972269f82ebd
+https://conda.anaconda.org/bioconda/linux-64/perl-class-methodmaker-2.25-pl5321h031d066_0.tar.bz2#0bb56a04920d37127f0ebf2268ab1181
 https://conda.anaconda.org/bioconda/noarch/perl-encode-locale-1.05-pl5321hdfd78af_7.tar.bz2#b431fde1d115040cf39bb54280a03dc8
 https://conda.anaconda.org/conda-forge/linux-64/perl-eval-closure-0.14-pl5321ha770c72_0.conda#d4accc3fd843c55e5cca569b88b6fe1d
 https://conda.anaconda.org/bioconda/noarch/perl-file-sharedir-1.118-pl5321hdfd78af_0.tar.bz2#7a3826d5d1ffddc7c49b612d79ee7a93
@@ -212,4 +212,4 @@ https://conda.anaconda.org/bioconda/noarch/perl-libwww-perl-6.39-pl5321hdfd78af_
 https://conda.anaconda.org/conda-forge/linux-64/perl-moose-2.2207-pl5321hd590300_0.conda#be9db2b2d31088263156ddd4a23a6f0d
 https://conda.anaconda.org/bioconda/noarch/perl-lwp-protocol-https-6.10-pl5321hdfd78af_0.tar.bz2#6ad432164666124b1cd2ded4865a0e89
 https://conda.anaconda.org/bioconda/linux-64/perl-lwp-simple-6.39-pl5321h9ee0642_5.tar.bz2#6094d97adf4a3db8736c337c3406a590
-https://conda.anaconda.org/bioconda/noarch/agat-1.2.0-pl5321hdfd78af_0.tar.bz2#0ab1de3c2033f0a0b288adc61099b41f
+https://conda.anaconda.org/bioconda/noarch/agat-1.4.1-pl5321hdfd78af_0.tar.bz2#8029d5d4c558ee565db824c8ec9df88d

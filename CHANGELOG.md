@@ -1,3 +1,15 @@
+# 3.9.3
+
+## Features:
+
+* Easy snakemake-wrappers update
+* Easy conda envs update
+* New testing pipeline with additional format checks
+
+## Doc:
+
+* Citation cff file
+
 # 3.9.2
 
 ## Features:

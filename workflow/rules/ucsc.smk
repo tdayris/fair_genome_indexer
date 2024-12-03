@@ -31,7 +31,7 @@ rule fair_genome_indexer_ucsc_gtf_to_genepred:
             default="",
         ),
     wrapper:
-        f"{snakemake_wrappers_prefix}/bio/ucsc/gtfToGenePred"
+        "v5.3.0/bio/ucsc/gtfToGenePred"
 
 
 """
@@ -65,7 +65,7 @@ rule fair_genome_indexer_ucsc_genepred_to_bed:
             default="",
         ),
     wrapper:
-        f"{snakemake_wrappers_prefix}/bio/ucsc/genePredToBed"
+        "v5.3.0/bio/ucsc/genePredToBed"
 
 
 """
@@ -99,4 +99,4 @@ rule fair_genome_indexer_ucsc_fa_to_twobit:
             default="",
         ),
     wrapper:
-        f"{snakemake_wrappers_prefix}/bio/ucsc/faToTwoBit"
+        "v5.3.0/bio/ucsc/faToTwoBit"
