@@ -32,7 +32,7 @@ locations = {
     "scripts": "../workflow/scripts",
     "envs": "../workflow/envs",
     "changelog": "../CHANGELOG.md",
-    "cff": "../citation.cff",
+    "cff": "../CITATION.cff",
 }
 for location in locations.values():
     if not op.exists(location):

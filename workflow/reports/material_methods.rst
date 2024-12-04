@@ -21,11 +21,11 @@ Genome variations over non-cannonical chromosomes
 were filtered out using Pyfaidx_ and BCFTools_ [#bcftoolspaper]_,
 then indexed using Tabix_ [#tabixpaper]_.
 
-Blacklisted regions were downloaded from `Boyle-Lab's Github`_ page.
-Overlapping intervals were merged using BEDTools_ [#bedtoolspaper]_.
+Blacklisted regions were downloaded from `Boyle-Lab's Github`_ [#BoyleBlacklist]_ 
+page. Overlapping intervals were merged using BEDTools_ [#bedtoolspaper]_.
 
 The  whole pipeline was powered by  Snakemake_ [#snakemakepaper]_. 
-This pipeline is freely available on Github_, details about installation
+This pipeline [#fairgenomeindexer]_ is freely available on Github_, details about installation
 usage, and resutls can be found on the `Snakemake workflow`_ page.
 
 
@@ -40,8 +40,10 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 .. [#pyrangespaper] Stovner EB, Sætrom P. PyRanges: efficient comparison of genomic intervals in Python. Bioinformatics. 2020 Feb 1;36(3):918-919. doi: 10.1093/bioinformatics/btz615. PMID: 31373614.
 .. [#bcftoolspaper] Danecek, Petr, et al. "Twelve years of SAMtools and BCFtools." Gigascience 10.2 (2021): giab008.
 .. [#tabixpaper] Li, Heng. "Tabix: fast retrieval of sequence features from generic TAB-delimited files." Bioinformatics 27.5 (2011): 718-719.
+.. [#BoyleBlacklist] Amemiya, H.M., Kundaje, A. & Boyle, A.P. The ENCODE Blacklist: Identification of Problematic Regions of the Genome. Sci Rep 9, 9354 (2019). https://doi.org/10.1038/s41598-019-45839-z
 .. [#bedtoolspaper] Quinlan, Aaron R., and Ira M. Hall. "BEDTools: a flexible suite of utilities for comparing genomic features." Bioinformatics 26.6 (2010): 841-842.
 .. [#snakemakepaper] Köster, Johannes, and Sven Rahmann. "Snakemake—a scalable bioinformatics workflow engine." Bioinformatics 28.19 (2012): 2520-2522.
+.. [#fairgenomeindexer] ???
 
 .. _Snakemake: https://snakemake.readthedocs.io
 .. _Github: https://github.com/tdayris/fair_genome_indexer

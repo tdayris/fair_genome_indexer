@@ -5,6 +5,8 @@
 * Easy snakemake-wrappers update
 * Easy conda envs update
 * New testing pipeline with additional format checks
+* Snakemake wrappers update to 5.3.0
+* Agat, python, and Snakemake environments update
 
 ## Doc:
 
