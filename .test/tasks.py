@@ -123,7 +123,8 @@ def update_docs_cff(
 
 
 @task(update_docs_cff)
-def update_docs_wrappers(c, to: str = snakemake_wrappers_version):
+def update_docs_wrappers(c, to: str = snakemake_wrappers_version, future_version: str = future_version):
+    today = datetime.today().strftime("%Y-%m-%d")
     regex = rf"s|v[0-9]\+\.[0-9]\+\.[0-9]\+/wrappers|{to}/wrappers|g"
     print(f"Updating snakemake wrappers in README.md to {to=}")
     c.run(f"sed -i '{regex}' ../README.md >> docs_update.txt 2>&1")
@@ -132,14 +133,28 @@ def update_docs_wrappers(c, to: str = snakemake_wrappers_version):
         for file in files:
             if file.endswith(".rst"):
                 print(f"Updating snakemake wrappers in '{root}/{file}'...")
-                c.run(f"sed -i '{regex}' '{root}/{file}' >> docs_update.txt")
+                c.run(f"sed -i '{regex}' '{root}/{file}' >> docs_update.txt 2>&1")
 
     regex = (
         's|snakemake_wrappers_prefix: str = "v4.5.0"|'
         f'snakemake_wrappers_prefix: str = "{to}"|g'
     )
     print("Updating '../workflow/rules/common.smk'...")
-    c.run(f"sed -i '{regex}' '../workflow/rules/common.smk' >> update_docs.txt")
+    c.run(f"sed -i '{regex}' '../workflow/rules/common.smk' >> update_docs.txt 2>&1")
+
+    regex = (
+        r's|fair-genome-indexer (Version v\?[0-9]\+\.[0-9]\+\.[0-9]\+)'
+        f'|fair-genome-indexer (Version {future_version})|g'
+    )
+    print("Updating '../workflow/reports/material_methods.rst'...")
+    c.run(f"sed -i '{regex}' '../workflow/reports/material_methods.rst' >> update_docs.txt 2>&1")
+
+    regex = (
+        r's|\:Version\: [0-9]\+\.[0-9]\+\.[0-9]\+ of [0-9]\+\-[0-9]\+\-[0-9]\+$'
+        fr'|\:Version\: {future_version} of {today}|g'
+    )
+    c.run(f"sed -i '{regex}' '../workflow/reports/material_methods.rst' >> update_docs.txt 2>&1")
+
 
 
 @task(update_docs_wrappers)

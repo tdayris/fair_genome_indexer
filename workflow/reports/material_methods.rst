@@ -25,7 +25,7 @@ Blacklisted regions were downloaded from `Boyle-Lab's Github`_ [#BoyleBlacklist]
 page. Overlapping intervals were merged using BEDTools_ [#bedtoolspaper]_.
 
 The  whole pipeline was powered by  Snakemake_ [#snakemakepaper]_. 
-This pipeline [#fairgenomeindexer]_ is freely available on Github_, details about installation
+This pipeline_ [#fairgenomeindexer]_ is freely available on Github, details about installation
 usage, and resutls can be found on the `Snakemake workflow`_ page.
 
 
@@ -43,10 +43,10 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 .. [#BoyleBlacklist] Amemiya, H.M., Kundaje, A. & Boyle, A.P. The ENCODE Blacklist: Identification of Problematic Regions of the Genome. Sci Rep 9, 9354 (2019). https://doi.org/10.1038/s41598-019-45839-z
 .. [#bedtoolspaper] Quinlan, Aaron R., and Ira M. Hall. "BEDTools: a flexible suite of utilities for comparing genomic features." Bioinformatics 26.6 (2010): 841-842.
 .. [#snakemakepaper] Köster, Johannes, and Sven Rahmann. "Snakemake—a scalable bioinformatics workflow engine." Bioinformatics 28.19 (2012): 2520-2522.
-.. [#fairgenomeindexer] ???
+.. [#fairgenomeindexer] Dayris, T. (2024). fair-genome-indexer (Version 3.9.3) [Computer software]. https://github.com/tdayris/fair_genome_indexer
 
 .. _Snakemake: https://snakemake.readthedocs.io
-.. _Github: https://github.com/tdayris/fair_genome_indexer
+.. _pipeline: https://github.com/tdayris/fair_genome_indexer
 .. _`Snakemake workflow`: https://snakemake.github.io/snakemake-workflow-catalog?usage=tdayris/fair_genome_indexer
 .. _Picard: https://snakemake-wrappers.readthedocs.io/en/v5.3.0/wrappers/picard/createsequencedictionary.html
 .. _Samtools: https://snakemake-wrappers.readthedocs.io/en/v5.3.0/wrappers/samtools/faidx.html
@@ -64,4 +64,4 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 :Authors:
     Thibault Dayris
 
-:Version: 4.0.0 of 06/07/2024
+:Version: 3.9.3 of 2024-12-04
