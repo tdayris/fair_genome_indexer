@@ -32,7 +32,7 @@ rule fair_genome_indexer_gffread_transcripts:
             dpath="params/fair_genome_indexer_gffread_transcripts", default=""
         ),
     wrapper:
-        "v5.3.0/bio/gffread"
+        "v5.5.0/bio/gffread"
 
 
 """

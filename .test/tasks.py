@@ -26,6 +26,21 @@ if not fair_genome_indexer_version:
     print("Searching fair-genome-indexer version on the web...")
     fair_genome_indexer_version = get_latest_release("tdayris/fair_genome_indexer")
 
+fair_fastqc_multiqc_version = os.environ.get("FAIR_FASTQC_MULTIQC_VERSION")
+if not fair_fastqc_multiqc_version:
+    print("Searching fair-fastqc-multiqc version on the web...")
+    fair_fastqc_multiqc_version = get_latest_release("tdayris/fair_fastqc_multiqc")
+
+fair_bowtie2_mapping_version = os.environ.get("FAIR_BOWTIE2_MAPPING_VERSION")
+if not fair_bowtie2_mapping_version:
+    print("Searching fair-bowtie2-mapping version on the web...")
+    fair_bowtie2_mapping_version = get_latest_release("tdayris/fair_bowtie2_mapping")
+
+fair_star_mapping_version = os.environ.get("FAIR_STAR_MAPPING_VERSION")
+if not fair_star_mapping_version:
+    print("Searching fair-star-mapping version on the web...")
+    fair_star_mapping_version = get_latest_release("tdayris/fair_star_mapping")
+
 locations = {
     "snakefile": "../workflow/Snakefile",
     "rules": "../workflow/rules/",
@@ -112,10 +127,10 @@ def update_docs_cff(
                 "orcid": "https://orcid.org/0009-0009-2758-8450",
             }
         ],
-        "title": "fair-genome-indexer",
+        "title": "fair-star-mapping",
         "version": future_version,
         "date-released": today,
-        "url": "https://github.com/tdayris/fair_genome_indexer",
+        "url": "https://github.com/tdayris/fair_star_mapping",
     }
     print(cff)
     with open(cff_path, "w") as yaml_cff_stream:
@@ -129,7 +144,7 @@ def update_docs_wrappers(c, to: str = snakemake_wrappers_version, future_version
     print(f"Updating snakemake wrappers in README.md to {to=}")
     c.run(f"sed -i '{regex}' ../README.md >> docs_update.txt 2>&1")
 
-    for root, dirs, files in os.walk("../workflow/reports"):
+    for root, dirs, files in os.walk("../workflow/report"):
         for file in files:
             if file.endswith(".rst"):
                 print(f"Updating snakemake wrappers in '{root}/{file}'...")
@@ -144,16 +159,22 @@ def update_docs_wrappers(c, to: str = snakemake_wrappers_version, future_version
 
     regex = (
         r's|fair-genome-indexer (Version v\?[0-9]\+\.[0-9]\+\.[0-9]\+)'
-        f'|fair-genome-indexer (Version {future_version})|g'
+        f'|fair-genome-indexer (Version {fair_genome_indexer_version})|g;'
+        r's|fair-fastqc-multiqc (Version v\?[0-9]\+\.[0-9]\+\.[0-9]\+)'
+        f'|fair-fastqc-multiqc (Version {fair_fastqc_multiqc_version})|g;'
+        r's|fair-bowtie2-mapping (Version v\?[0-9]\+\.[0-9]\+\.[0-9]\+)'
+        f'|fair-bowtie2-mapping (Version {fair_bowtie2_mapping_version})|g;'
+        r's|fair-star-mapping (Version v\?[0-9]\+\.[0-9]\+\.[0-9]\+)'
+        f'|fair-star-mapping (Version {future_version})|g'
     )
-    print("Updating '../workflow/reports/material_methods.rst'...")
-    c.run(f"sed -i '{regex}' '../workflow/reports/material_methods.rst' >> update_docs.txt 2>&1")
+    print("Updating '../workflow/report/material_methods.rst'...")
+    c.run(f"sed -i '{regex}' '../workflow/report/material_methods.rst' >> update_docs.txt 2>&1")
 
     regex = (
         r's|\:Version\: [0-9]\+\.[0-9]\+\.[0-9]\+ of [0-9]\+\-[0-9]\+\-[0-9]\+$'
         fr'|\:Version\: {future_version} of {today}|g'
     )
-    c.run(f"sed -i '{regex}' '../workflow/reports/material_methods.rst' >> update_docs.txt 2>&1")
+    c.run(f"sed -i '{regex}' '../workflow/report/material_methods.rst' >> update_docs.txt 2>&1")
 
 
 
@@ -173,7 +194,19 @@ def update_wrappers_rules(
 
     for root, dirs, files in os.walk(rules):
         for file in files:
-            if file.endswith(".smk"):
+            if file == "fair_genome_indexer.smk":
+                print("Updating fair_genome_indexer...")
+                c.run(fr"""sed -i 's|tag="[0-9]\+\.[0-9]\+\.[0-9]\+"|tag="{fair_genome_indexer_version}"|g' '{root}/{file}' >> wrappers_update.txt 2>&1""")
+            elif file == "fair_fastqc_multiqc.smk":
+                print("Updating fair_fastq_multiqc...")
+                c.run(fr"""sed -i 's|tag="[0-9]\+\.[0-9]\+\.[0-9]\+"|tag="{fair_fastqc_multiqc_version}"|g' '{root}/{file}' >> wrappers_update.txt 2>&1""")
+            elif file == "fair_bowtie2_mapping.smk":
+                print("Updating fair_bowtie2_mapping...")
+                c.run(fr"""sed -i 's|tag="[0-9]\+\.[0-9]\+\.[0-9]\+"|tag="{fair_bowtie2_mapping_version}"|g' '{root}/{file}' >> wrappers_update.txt 2>&1""")
+            elif file == "fair_star_mapping.smk":
+                print("Updating fair_star_mapping...")
+                c.run(fr"""sed -i 's|tag="[0-9]\+\.[0-9]\+\.[0-9]\+"|tag="{fair_star_mapping_version}"|g' '{root}/{file}' >> wrappers_update.txt 2>&1""")
+            elif file.endswith(".smk"):
                 print(f"Updating '{root}/{file}'...")
                 c.run(
                     "snakedeploy update-snakemake-wrappers --git-ref "

@@ -30,4 +30,4 @@ rule fair_genome_indexer_star_index:
             default="",
         ),
     wrapper:
-        "v5.3.0/bio/star/index"
+        "v5.5.0/bio/star/index"

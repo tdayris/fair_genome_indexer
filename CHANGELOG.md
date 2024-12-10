@@ -1,3 +1,11 @@
+# 3.9.4
+
+## Features:
+
+* Snakemake wrappers up to 5.5.0
+* tasks updated
+* Agat update
+
 # 3.9.3
 
 ## Features:

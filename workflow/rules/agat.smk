@@ -27,6 +27,42 @@ rule fair_genome_indexer_agat_config_gtf:
         "benchmark/fair_genome_indexer_agat_config/gtf.tsv"
     conda:
         "../envs/python.yaml"
+    params:
+        config=lookup_config(
+            dpath="params/fair_genome_indexer_agat_config_gtf",
+            default={
+                "output_format": "gtf",
+                "gff_output_version": 3,
+                "gtf_output_version": "relax",
+                "force_gff_input_version": 3,
+                "verbose": 1,
+                "progress_bar": False,
+                "log": False,
+                "debug": False,
+                "tabix": False,
+                "merge_loci": False,
+                "throw_fasta": False,
+                "force_gff_input_version": 0,
+                "create_l3_for_l2_orphan": True,
+                "locus_tag": ["locus_tag", "gene_id"],
+                "prefix_new_id": "nbis",
+                "check_sequential": True,
+                "check_l2_linked_to_l3": True,
+                "check_l1_linked_to_l2": True,
+                "remove_orphan_l1": True,
+                "check_all_level3_locations": True,
+                "check_cds": True,
+                "check_exons": True,
+                "check_utrs": True,
+                "check_all_level2_locations": True,
+                "check_all_level1_locations": True,
+                "check_all_level3_locations": False,
+                "check_sequential": False,
+                "check_identical_isoforms": True,
+                "clean_attributes_from_template": True,
+                "deflate_attribute": True,
+            },
+        ),
     script:
         "../scripts/agat_config.py"
 
@@ -54,9 +90,10 @@ use rule fair_genome_indexer_agat_config_gtf as fair_genome_indexer_agat_config_
         config=lookup_config(
             dpath="params/fair_genome_indexer_agat_config_gff",
             default={
-                "output_format": "GFF",
+                "output_format": "gff",
                 "gff_output_version": 3,
                 "gtf_output_version": "relax",
+                "force_gff_input_version": 3,
                 "verbose": 1,
                 "progress_bar": False,
                 "log": False,
@@ -78,7 +115,11 @@ use rule fair_genome_indexer_agat_config_gtf as fair_genome_indexer_agat_config_
                 "check_utrs": True,
                 "check_all_level2_locations": True,
                 "check_all_level1_locations": True,
+                "check_all_level3_locations": False,
+                "check_sequential": False,
                 "check_identical_isoforms": True,
+                "clean_attributes_from_template": True,
+                "deflate_attribute": True,
             },
         ),
 

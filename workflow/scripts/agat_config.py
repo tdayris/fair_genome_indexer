@@ -11,7 +11,7 @@ from typing import Any
 from yaml import dump
 
 config: dict[str, Any] = {
-    "output_format": "gtf",
+    "output_format": "gtf" if "gtf" in str(snakemake.output).lower() else "gff",
     "gff_output_version": 3,
     "gtf_output_version": "relax",
     "force_gff_input_version": 3,
@@ -40,7 +40,10 @@ config: dict[str, Any] = {
     "check_sequential": False,
     "check_identical_isoforms": True,
     "clean_attributes_from_template": True,
+    "deflate_attribute": True,
 }
+
+config = snakemake.params.get("config", config)
 
 with open(file=snakemake.output.yaml, mode="w") as yaml_config:
     dump(config, yaml_config, default_flow_style=False)
