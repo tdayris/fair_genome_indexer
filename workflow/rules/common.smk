@@ -59,7 +59,7 @@ except NameError:
     snakemake.utils.validate(genomes, "../schemas/genomes.schema.yaml")
 
 
-report: "../reports/workflow.rst"
+report: "../report/workflow.rst"
 
 
 snakemake_wrappers_prefix: str = "v5.3.0"
