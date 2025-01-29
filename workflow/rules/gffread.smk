@@ -20,7 +20,7 @@ rule fair_genome_indexer_gffread_transcripts:
         transcript_fasta="reference/sequences/{species}.{build}.{release}/{species}.{build}.{release}.transcripts.fasta",
     threads: 1
     resources:
-        mem_mb=lambda wildcards, attempt: 900 + (200 * attempt),
+        mem_mb=lambda wildcards, attempt: 1_000 + (200 * attempt),
         runtime=lambda wildcards, attempt: 3 * attempt,
         tmpdir=tmp,
     log:
