@@ -6,4 +6,4 @@ dependencies:
   - wget =1.21.4
   - gzip =1.13
   - pbgzip =2016.08.04
-  - rsync =3.3.0
+  - rsync =3.4.1
