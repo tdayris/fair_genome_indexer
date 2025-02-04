@@ -78,4 +78,4 @@ rule fair_genome_indexer_bcftools_filter_non_canonical_chrom:
             default="",
         ),
     wrapper:
-        "v5.5.0/bio/bcftools/filter"
+        "v5.6.0/bio/bcftools/filter"

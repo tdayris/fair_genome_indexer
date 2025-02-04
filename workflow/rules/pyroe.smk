@@ -31,4 +31,4 @@ rule fair_genome_indexer_pyroe_id_to_name:
             default="",
         ),
     wrapper:
-        "v5.5.0/bio/pyroe/idtoname"
+        "v5.6.0/bio/pyroe/idtoname"

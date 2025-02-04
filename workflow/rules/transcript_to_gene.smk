@@ -77,7 +77,7 @@ rule fair_genome_indexer_xsv_select_t2g_columns:
             default="transcript_id,gene_id,gene_name",
         ),
     wrapper:
-        "v5.5.0/utils/xsv"
+        "v5.6.0/utils/xsv"
 
 
 """
