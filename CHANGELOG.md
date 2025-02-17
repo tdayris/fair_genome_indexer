@@ -1,6 +1,12 @@
+# 3.9.6
+
+## Features:
+
+* Automatic STAR memory specification
+
 # 3.9.5
 
-## Features
+## Features:
 
 * Snakemake wrappers up to 5.6.0
 * Agat + Bash update
