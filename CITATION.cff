@@ -3,8 +3,8 @@ authors:
   given-names: Thibault
   orcid: https://orcid.org/0009-0009-2758-8450
 cff-version: 1.2.0
-date-released: '2025-02-04'
+date-released: '2025-02-17'
 message: If you use this software, please cite it as below.
 title: fair-genome-indexer
 url: https://github.com/tdayris/fair_genome_indexer
-version: 3.9.5
+version: 3.9.6
