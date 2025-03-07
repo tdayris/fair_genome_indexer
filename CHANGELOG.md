@@ -1,3 +1,9 @@
+# 3.9.7
+
+## Features:
+
+* Pipeline update
+
 # 3.9.6
 
 ## Features:
