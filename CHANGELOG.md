@@ -2,7 +2,7 @@
 
 ## Features:
 
-* Pipeline update
+* Snakemake-wrappers update
 
 # 3.9.6
 

@@ -30,4 +30,4 @@ rule fair_genome_indexer_get_genome_gtf_annotation:
         build="{build}",
         release="{release}",
     wrapper:
-        "v5.6.0/bio/reference/ensembl-annotation"
+        "v5.8.3/bio/reference/ensembl-annotation"

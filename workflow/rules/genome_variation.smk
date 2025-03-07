@@ -31,4 +31,4 @@ rule fair_genome_indexer_get_genome_vcf_variations:
         build="{build}",
         release="{release}",
     wrapper:
-        "v5.6.0/bio/reference/ensembl-variation"
+        "v5.8.3/bio/reference/ensembl-variation"
