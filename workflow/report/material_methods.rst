@@ -48,17 +48,17 @@ usage, and resutls can be found on the `Snakemake workflow`_ page.
 .. _Snakemake: https://snakemake.readthedocs.io
 .. _pipeline: https://github.com/tdayris/fair_genome_indexer
 .. _`Snakemake workflow`: https://snakemake.github.io/snakemake-workflow-catalog?usage=tdayris/fair_genome_indexer
-.. _Picard: https://snakemake-wrappers.readthedocs.io/en/v5.8.3/wrappers/picard/createsequencedictionary.html
-.. _Samtools: https://snakemake-wrappers.readthedocs.io/en/v5.8.3/wrappers/samtools/faidx.html
+.. _Picard: https://snakemake-wrappers.readthedocs.io/en/v7.0.0/wrappers/picard/createsequencedictionary.html
+.. _Samtools: https://snakemake-wrappers.readthedocs.io/en/v7.0.0/wrappers/samtools/faidx.html
 .. _Agat: https://agat.readthedocs.io/en/latest/index.html
-.. _Pyroe: https://snakemake-wrappers.readthedocs.io/en/v5.8.3/wrappers/pyroe/idtoname.html
+.. _Pyroe: https://snakemake-wrappers.readthedocs.io/en/v7.0.0/wrappers/pyroe/idtoname.html
 .. _Pyfaidx: https://github.com/mdshw5/pyfaidx
-.. _GFFRead: https://snakemake-wrappers.readthedocs.io/en/v5.8.3/wrappers/gffread.html
-.. _XSV: https://snakemake-wrappers.readthedocs.io/en/v5.8.3/wrappers/xsv.html
-.. _BCFTools: https://snakemake-wrappers.readthedocs.io/en/v5.8.3/wrappers/bcftools/filter.html
-.. _Tabix: https://snakemake-wrappers.readthedocs.io/en/v5.8.3/wrappers/tabix/index.html
+.. _GFFRead: https://snakemake-wrappers.readthedocs.io/en/v7.0.0/wrappers/gffread.html
+.. _XSV: https://snakemake-wrappers.readthedocs.io/en/v7.0.0/wrappers/xsv.html
+.. _BCFTools: https://snakemake-wrappers.readthedocs.io/en/v7.0.0/wrappers/bcftools/filter.html
+.. _Tabix: https://snakemake-wrappers.readthedocs.io/en/v7.0.0/wrappers/tabix/index.html
 .. _`Boyle-Lab's Github`: https://github.com/Boyle-Lab/Blacklist
-.. _BEDTools: https://snakemake-wrappers.readthedocs.io/en/v5.8.3/wrappers/bedtools/merge.html
+.. _BEDTools: https://snakemake-wrappers.readthedocs.io/en/v7.0.0/wrappers/bedtools/merge.html
 .. _UCSC: https://genome.ucsc.edu/FAQ/FAQformat.html
 
 :Authors:

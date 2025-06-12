@@ -30,7 +30,7 @@ rule fair_genome_indexer_tabix_index_dbsnp:
             dpath="params/fair_genome_indexer_tabix_index_dbsnp", default="-p vcf"
         ),
     wrapper:
-        "v5.8.3/bio/tabix/index"
+        "v7.0.0/bio/tabix/index"
 
 
 use rule fair_genome_indexer_tabix_index_dbsnp as fair_genome_indexer_tabix_index_raw_dbsnp with:

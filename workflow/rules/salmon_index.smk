@@ -26,7 +26,7 @@ rule fair_genome_indexer_salmon_decoy_sequences:
     benchmark:
         "benchmark/fair_genome_indexer_salmon_decoy_sequences/{species}.{build}.{release}.tsv"
     wrapper:
-        "v5.8.3/bio/salmon/decoys"
+        "v7.0.0/bio/salmon/decoys"
 
 
 """
@@ -79,4 +79,4 @@ rule fair_genome_indexer_salmon_index_gentrome:
             dpath="params/fair_genome_indexer_salmon_index_gentromee", default=""
         ),
     wrapper:
-        "v5.8.3/bio/salmon/index"
+        "v7.0.0/bio/salmon/index"

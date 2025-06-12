@@ -30,4 +30,4 @@ rule fair_genome_indexer_star_index:
             default=lambda wildcards, resources: f"--limitGenomeGenerateRAM {resources.mem_mb*1_000_000}",
         ),
     wrapper:
-        "v5.8.3/bio/star/index"
+        "v7.0.0/bio/star/index"

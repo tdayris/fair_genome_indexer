@@ -31,4 +31,4 @@ rule fair_genome_indexer_samtools_index:
             default="",
         ),
     wrapper:
-        "v5.8.3/bio/samtools/faidx"
+        "v7.0.0/bio/samtools/faidx"

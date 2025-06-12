@@ -1,3 +1,13 @@
+# 3.9.8
+
+## Features:
+
+* Snakemake-wrappers update
+
+## Fix:
+
+* Ensure non conventionnal contigs are removed
+
 # 3.9.7
 
 ## Features:

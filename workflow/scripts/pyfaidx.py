@@ -24,4 +24,14 @@ elif out.endswith(".chrom"):
 elif out.endswith(".nuc"):
     extra += " --transform nucleotide "
 
-shell("faidx {bed} {extra} --out {out} {snakemake.input.fasta} {log}")
+regions: str = ""
+keep_cannonical_only: bool = snakemake.params.get("keep_cannonical_only", True)
+if keep_cannonical_only:
+    assembly: str = str(snakemake.wildcards.species)
+    if assembly in ("homo_sapiens"):
+        regions = " ".join(tuple(map(str, range(1, 23))) + ("X", "Y", "MT"))
+    elif assembly in ("mus_musculus"):
+        regions = " ".join(tuple(map(str, range(1, 20))) + ("X", "Y", "MT"))
+
+
+shell("faidx {bed} {extra} --out {out} {snakemake.input.fasta} {regions} {log}")

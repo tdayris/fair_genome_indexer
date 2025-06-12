@@ -37,4 +37,4 @@ rule fair_genome_indexer_bowtie2_build:
             default="",
         ),
     wrapper:
-        "v5.8.3/bio/bowtie2/build"
+        "v7.0.0/bio/bowtie2/build"

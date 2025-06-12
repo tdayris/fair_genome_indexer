@@ -2,13 +2,13 @@
 
 """Snakemake-wrapper building agat configuration file"""
 
+from typing import Any
+from yaml import dump
+
 __author__ = "Thibault Dayris"
 copyright__ = "Copyright 2024, Thibault Dayris"
 __email__ = "thibault.dayris@gustaveroussy.fr"
 __license__ = "MIT"
-
-from typing import Any
-from yaml import dump
 
 config: dict[str, Any] = {
     "output_format": "gtf" if "gtf" in str(snakemake.output).lower() else "gff",

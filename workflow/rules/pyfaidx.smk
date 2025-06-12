@@ -36,6 +36,7 @@ rule fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes:
             dpath=f"params/fair_genome_indexer_pyfaidx_filter_out_noncanonical_chromosomes/{wildcards.datatype}",
             default="",
         ),
+        keep_cannonical_only=True,
     conda:
         "../envs/pyfaidx.yaml"
     script:
