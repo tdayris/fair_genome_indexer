@@ -2,7 +2,7 @@ rule fair_genome_indexer_compute_genome_size_drop_seqnames:
     input:
         lambda wildcards: select_fasta(wildcards),
     output:
-        pipe(
+        temp(
             "tmp/fair_genome_indexer_compute_genome_size_drop_seqnames/{species}.{build}.{release}.{datatype}.txt"
         ),
     threads: 1
