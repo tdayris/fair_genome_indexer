@@ -3,7 +3,7 @@
 """Snakemake-wrapper for agat_gff2gtf.pl"""
 
 __author__ = "Thibault Dayris"
-copyright__ = "Copyright 2023, Thibault Dayris"
+__copyright__ = "Copyright 2023, Thibault Dayris"
 __email__ = "thibault.dayris@gustaveroussy.fr"
 __license__ = "MIT"
 

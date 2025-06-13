@@ -3,7 +3,7 @@
 """Snakemake-wrapper for agat_sq_filter_feature_from_fasta.pl"""
 
 __author__ = "Thibault Dayris"
-copyright__ = "Copyright 2024, Thibault Dayris"
+__copyright__ = "Copyright 2024, Thibault Dayris"
 __email__ = "thibault.dayris@gustaveroussy.fr"
 __license__ = "MIT"
 

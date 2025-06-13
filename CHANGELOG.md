@@ -1,3 +1,9 @@
+# 3.10.0
+
+## Features:
+
+* Compute genome statistics (non-n-base genome size, intron legths, ...)
+
 # 3.9.8
 
 ## Features:

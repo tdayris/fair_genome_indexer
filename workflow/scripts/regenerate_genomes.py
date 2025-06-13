@@ -3,7 +3,7 @@
 """Snakemake-wrapper for building new genome file"""
 
 __author__ = "Thibault Dayris"
-copyright__ = "Copyright 2024, Thibault Dayris"
+__copyright__ = "Copyright 2024, Thibault Dayris"
 __email__ = "thibault.dayris@gustaveroussy.fr"
 __license__ = "MIT"
 

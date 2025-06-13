@@ -1,4 +1,5 @@
 import csv
+import io
 import os
 import pandas
 import snakemake.utils
@@ -318,6 +319,17 @@ def used_genomes(
     ]
 
 
+def get_fair_genome_indexer_agat_statistics_extra(
+    gs_stream: io.TextIOWrapper,
+) -> str:
+    """
+    Return best parameters for agat_statistics
+    """
+    for line in gs_stream:
+        gs = line[:-1]
+        return f" --gs {gs} --yaml "
+
+
 def get_fair_genome_indexer_target(
     wildcards: snakemake.io.Wildcards,
     genomes: pandas.DataFrame = genomes,
@@ -346,6 +358,10 @@ def get_fair_genome_indexer_target(
 
     # Base datasets available for many genomes
     genome_data: dict[str, list[str]] = {
+        "statistics": expand(
+            "reference/genomes/{genome_property}.dna.statistics.yaml",
+            genome_property=genomes_properties,
+        ),
         "fasta": expand(
             "reference/sequences/{genomes_property}/{genomes_property}.{datatype}.fasta",
             genomes_property=genomes_properties,
