@@ -1,3 +1,9 @@
+# 3.10.1
+
+## Features:
+
+* Docker image update
+
 # 3.10.0
 
 ## Features:
