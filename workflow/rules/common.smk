@@ -9,11 +9,11 @@ from typing import Any, NamedTuple
 snakemake_min_version: str = "8.13.0"
 snakemake.utils.min_version(snakemake_min_version)
 
-snakemake_docker_image: str = "docker://snakemake/snakemake:v8.20.5"
+snakemake_docker_image: str = "docker://snakemake/snakemake:v9.6."
 
 
 container: snakemake_docker_image
-
+containerized: snakemake_docker_image
 
 # Load and check configuration file
 default_config_file: str = "config/config.yaml"
