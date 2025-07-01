@@ -11,3 +11,6 @@ dependencies:
   - mamba
   - pytest
   - apptainer
+  - squashfuse
+  - pip:
+    - snakemake-executor-plugin-slurm-gustave-roussy
